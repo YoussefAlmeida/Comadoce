@@ -1,0 +1,3382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2A0614">
+<title>Coma Doce — Confeitaria Artesanal em Feira de Santana</title>
+<meta name="description" content="Seu dia merece mais do que um doce. Merece Coma Doce. Fatias, copos, brownies, cookies e bolos artesanais em Kalilândia, Feira de Santana. Peça online ou encomende pelo WhatsApp.">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coma Doce — Confeitaria Artesanal Premium">
+<meta property="og:description" content="Seu dia merece mais do que um doce. Merece Coma Doce. Em Kalilândia, Feira de Santana, desde 2019.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&q=85">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon emoji -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧁%3C/text%3E%3C/svg%3E">
+
+<!-- Schema LocalBusiness — ajuda Google a entender o negócio -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Coma Doce",
+  "description": "Confeitaria artesanal em Feira de Santana",
+  "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Feira de Santana",
+    "addressRegion": "BA",
+    "addressCountry": "BR",
+    "streetAddress": "Kalilândia"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "200"
+  },
+  "openingHours": "Mo-Sa 12:00-19:00",
+  "telephone": "+5575999999999"
+}
+</script>
+
+<!-- Fontes — Cormorant Garamond (display editorial) + DM Sans (body limpa) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   TOKENS DE DESIGN — Luxo Artesanal Editorial
+   Paleta: creme envelhecido + vinho profundo + dourado champagne
+   Fontes: Cormorant Garamond (títulos) + DM Sans (texto)
+═══════════════════════════════════════════════════════ */
+:root {
+  /* fundos */
+  --cream:      #FBF5EC;
+  --cream-dk:   #F2E8D8;
+  --cream-md:   #E8D9C4;
+  --wine:       #3D0A1E;
+  --wine-deep:  #2A0614;
+  --wine-mid:   #5C1530;
+
+  /* dourado — refinado em direção a champagne, menos laranja */
+  --gold:       #C49A5C;
+  --gold-lt:    #DDB87A;
+  --gold-dk:    #9B7340;
+
+  /* texto */
+  --text-dark:  #1A0A0E;
+  --text-mid:   #5C3344;
+  --text-light: #8B7268;
+
+  --white:      #FFFFFF;
+  --green-wa:   #25D366;
+
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* sistema de espaçamento 8px */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-15: 120px;
+
+  --max-w: 1280px;
+  --radius: 20px;
+  --radius-lg: 28px;
+}
+
+/* ─── RESET MÍNIMO ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: var(--ff-body);
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.55;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; background: none; border: none; cursor: pointer; color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+ul { list-style: none; }
+
+/* Focus visível para acessibilidade — não some, mas é elegante */
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Seleção de texto na cor da marca */
+::selection { background: var(--gold); color: var(--wine-deep); }
+
+/* Scrollbar custom — fina e dourada */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--gold-lt); }
+
+/* ─── ANIMAÇÕES GLOBAIS ─── */
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn  { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulse    { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes float    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes shine {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Respect motion preferences — acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── REVEAL ON SCROLL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s var(--ease-smooth), transform .8s var(--ease-smooth);
+}
+.reveal.up { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .08s; }
+.reveal-d2 { transition-delay: .16s; }
+.reveal-d3 { transition-delay: .24s; }
+.reveal-d4 { transition-delay: .32s; }
+.reveal-d5 { transition-delay: .40s; }
+
+/* ─── GRAIN OVERLAY — textura cinematográfica sutil ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+  opacity: .03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px;
+  mix-blend-mode: multiply;
+}
+
+/* ─── SCROLL PROGRESS BAR ─── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; z-index: 9998;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt), var(--gold-dk));
+  background-size: 200% 100%;
+  animation: shine 3s linear infinite;
+  pointer-events: none;
+  transition: width .15s linear;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAVEGAÇÃO
+═══════════════════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 76px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--space-6);
+  transition: background .4s var(--ease-smooth), backdrop-filter .4s, box-shadow .4s, height .3s;
+}
+.nav.scrolled {
+  background: rgba(42, 6, 20, .92);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+  height: 64px;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--ff-display);
+  font-size: 22px; font-weight: 500; letter-spacing: .02em;
+  color: var(--white);
+}
+.nav-logo-mark {
+  width: 38px; height: 38px;
+  border: 1.5px solid rgba(196, 154, 92, .5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  transition: border-color .3s, transform .3s var(--ease-spring);
+}
+.nav-logo:hover .nav-logo-mark {
+  border-color: var(--gold);
+  transform: rotate(-10deg) scale(1.08);
+}
+
+.nav-links {
+  display: flex; gap: 36px;
+}
+.nav-links a {
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .72);
+  position: relative;
+  padding: 6px 0;
+  transition: color .25s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .35s var(--ease-smooth);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--wine-deep);
+  padding: 11px 22px; border-radius: 50px;
+  font-size: 13px; font-weight: 700; letter-spacing: .02em;
+  transition: background .2s, transform .25s var(--ease-spring), box-shadow .25s;
+}
+.nav-cta:hover {
+  background: var(--gold-lt);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(196, 154, 92, .4);
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  width: 32px; height: 32px;
+  align-items: center; justify-content: center;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--white);
+  transition: transform .35s, opacity .25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Menu mobile fullscreen ── */
+.mob-nav {
+  position: fixed; inset: 0; z-index: 490;
+  background: var(--wine-deep);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s var(--ease-smooth);
+}
+.mob-nav.open { opacity: 1; pointer-events: all; }
+.mob-nav a {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 8vw, 48px);
+  color: rgba(255, 255, 255, .78);
+  padding: 10px 0;
+  font-weight: 500;
+  transform: translateY(20px); opacity: 0;
+  transition: color .25s, transform .55s var(--ease-smooth), opacity .55s;
+}
+.mob-nav.open a { transform: none; opacity: 1; }
+.mob-nav.open a:nth-child(1) { transition-delay: .08s; }
+.mob-nav.open a:nth-child(2) { transition-delay: .14s; }
+.mob-nav.open a:nth-child(3) { transition-delay: .20s; }
+.mob-nav.open a:nth-child(4) { transition-delay: .26s; }
+.mob-nav.open a:nth-child(5) { transition-delay: .32s; }
+.mob-nav a:hover { color: var(--gold); }
+.mob-nav .mob-cta-link {
+  margin-top: 24px;
+  background: var(--gold); color: var(--wine-deep);
+  padding: 14px 36px; border-radius: 50px;
+  font-family: var(--ff-body); font-size: 15px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition-delay: .40s !important;
+}
+.mob-nav .mob-cta-link:hover { background: var(--gold-lt); color: var(--wine-deep); }
+
+/* ═══════════════════════════════════════════════════════
+   HERO — IMERSIVO, CONVERSIONAL
+═══════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh; /* small viewport — corrige bug do safari mobile */
+  background: var(--wine);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  padding: 100px var(--space-6) var(--space-10);
+}
+
+/* fundo em camadas — radiais + grid de pontos */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 65% 75% at 70% 50%, rgba(92, 21, 48, .6) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 12% 88%, rgba(196, 154, 92, .08) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 88% 12%, rgba(196, 154, 92, .05) 0%, transparent 60%);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(196, 154, 92, .08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: .8;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+/* linha vertical decorativa */
+.hero-line {
+  position: absolute; top: 0; right: 28%; bottom: 0; z-index: 1;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(196, 154, 92, .2) 30%,
+    rgba(196, 154, 92, .2) 70%,
+    transparent 100%
+  );
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: var(--max-w); margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-10);
+  align-items: center;
+}
+
+/* ─── lado esquerdo — texto ─── */
+.hero-text { animation: fadeUp 1s var(--ease-smooth) both; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-4);
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  display: block; width: 24px; height: 1px;
+  background: rgba(196, 154, 92, .5);
+}
+
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: clamp(40px, 5vw, 76px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -.015em;
+  margin-bottom: var(--space-4);
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-lt);
+  font-weight: 500;
+}
+.hero-title .stroke-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, .35);
+  color: transparent;
+  display: inline-block;
+}
+
+.hero-sub {
+  font-size: 17px; line-height: 1.75;
+  color: rgba(255, 255, 255, .62);
+  max-width: 460px;
+  margin-bottom: var(--space-6);
+}
+.hero-sub strong {
+  color: var(--gold-lt);
+  font-weight: 500;
+}
+
+.hero-btns {
+  display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;
+}
+
+/* ─── botões — sistema unificado ─── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold); color: var(--wine-deep);
+  padding: 16px 30px; border-radius: 50px;
+  font-size: 14px; font-weight: 700; letter-spacing: .02em;
+  box-shadow: 0 6px 24px rgba(196, 154, 92, .32);
+  transition: background .25s, transform .3s var(--ease-spring), box-shadow .3s;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--gold-lt);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(196, 154, 92, .5);
+}
+.btn-primary svg { transition: transform .3s var(--ease-spring); }
+.btn-primary:hover svg { transform: translateX(4px); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(255, 255, 255, .22);
+  padding: 16px 30px; border-radius: 50px;
+  font-size: 14px; font-weight: 500;
+  transition: border-color .25s, background .25s, color .25s, transform .25s;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  border-color: rgba(255, 255, 255, .55);
+  background: rgba(255, 255, 255, .06);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ─── lado direito — card flutuante ─── */
+.hero-visual {
+  animation: fadeUp 1s .25s var(--ease-smooth) both;
+  position: relative;
+}
+.hero-card-wrap {
+  position: relative;
+  animation: float 7s ease-in-out infinite;
+}
+.hero-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(196, 154, 92, .22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 50px 100px rgba(0, 0, 0, .45),
+    inset 0 0 0 1px rgba(196, 154, 92, .08);
+  transition: transform .5s var(--ease-smooth);
+}
+.hero-card:hover { transform: translateY(-6px); }
+
+.hero-card-img {
+  height: 320px;
+  position: relative; overflow: hidden;
+}
+.hero-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1s var(--ease-smooth);
+}
+.hero-card:hover .hero-card-img img { transform: scale(1.08); }
+.hero-card-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(42, 6, 20, .95) 0%,
+    rgba(42, 6, 20, .2) 55%,
+    transparent 100%
+  );
+}
+.hero-badge {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  background: var(--gold); color: var(--wine-deep);
+  font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 50px;
+}
+
+.hero-card-body { padding: 24px 28px; }
+.hero-card-name {
+  font-family: var(--ff-display);
+  font-size: 24px; font-weight: 500;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+.hero-card-detail {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .55);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.hero-card-meta {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.hero-stars { color: var(--gold); font-size: 13px; letter-spacing: .04em; }
+.hero-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(196, 154, 92, .14);
+  padding: 5px 12px; border-radius: 50px;
+  border: 1px solid rgba(196, 154, 92, .2);
+}
+
+/* card decorativo atrás — dá profundidade */
+.hero-card-bg {
+  position: absolute; top: -18px; right: -18px; z-index: -1;
+  width: 100%; height: 100%;
+  border-radius: var(--radius-lg);
+  background: rgba(196, 154, 92, .06);
+  border: 1px solid rgba(196, 154, 92, .14);
+}
+
+/* ─── stats bar — prova social no hero ─── */
+.hero-stats {
+  position: relative; z-index: 2;
+  margin-top: var(--space-6);
+}
+.hero-stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(255, 255, 255, .04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(196, 154, 92, .18);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.hero-stat {
+  padding: 20px 16px;
+  text-align: center;
+  border-right: 1px solid rgba(196, 154, 92, .12);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: 32px; font-weight: 500;
+  color: var(--gold);
+  letter-spacing: -.02em;
+  line-height: 1; margin-bottom: 6px;
+}
+.hero-stat-lbl {
+  font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .42);
+}
+
+/* scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: rgba(255, 255, 255, .35);
+  font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  animation: fadeIn 1s 1.5s both;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: .5; }
+  50%      { transform: translateY(8px); opacity: 1; }
+}
+.hero-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(196, 154, 92, .6));
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SOBRE — STORYTELLING
+═══════════════════════════════════════════════════════ */
+.sobre {
+  background: var(--cream);
+  padding: var(--space-15) var(--space-6);
+  position: relative; overflow: hidden;
+  border-top: 4px solid var(--wine);
+}
+.sobre-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.sobre-media { position: relative; }
+.sobre-img-wrap {
+  border-radius: 4px 28px 4px 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(61, 10, 30, .18);
+}
+.sobre-img-wrap img {
+  width: 100%; height: 540px; object-fit: cover;
+  transition: transform 1.2s var(--ease-smooth);
+}
+.sobre-img-wrap:hover img { transform: scale(1.05); }
+
+.sobre-float-card {
+  position: absolute; bottom: -32px; right: -32px;
+  background: var(--wine); color: var(--white);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  border: 1px solid rgba(196, 154, 92, .22);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+  min-width: 200px;
+  animation: float 7s 1s ease-in-out infinite;
+}
+.sfc-num {
+  font-family: var(--ff-display);
+  font-size: 44px; font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.sfc-label {
+  font-size: 12px; font-weight: 500; letter-spacing: .08em;
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.sobre-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: var(--space-3);
+}
+.sobre-eyebrow::before {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--gold-dk);
+}
+
+.sobre-title {
+  font-family: var(--ff-display);
+  font-size: clamp(36px, 4.2vw, 60px);
+  font-weight: 400; line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: var(--space-4);
+  letter-spacing: -.015em;
+}
+.sobre-title em {
+  color: var(--wine);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.sobre-text {
+  font-size: 16px; line-height: 1.85;
+  color: var(--text-mid);
+  margin-bottom: 18px;
+}
+.sobre-text strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.sobre-divider {
+  width: 48px; height: 1px;
+  background: var(--gold-dk);
+  margin: var(--space-4) 0;
+}
+
+.sobre-quote {
+  font-family: var(--ff-display);
+  font-size: 22px; font-style: italic; font-weight: 400;
+  color: var(--wine);
+  line-height: 1.55;
+  border-left: 2px solid var(--gold);
+  padding-left: 22px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SEÇÕES — TIPOGRAFIA COMUM
+═══════════════════════════════════════════════════════ */
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+.section-eyebrow::before {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--gold);
+}
+.section-eyebrow.center { justify-content: center; }
+.section-eyebrow.center::before, .section-eyebrow.center::after {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--gold);
+}
+.section-eyebrow-dark {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: var(--space-3);
+}
+.section-eyebrow-dark::before {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--gold-dk);
+}
+
+.section-title-light {
+  font-family: var(--ff-display);
+  font-size: clamp(36px, 4.2vw, 60px);
+  font-weight: 400; line-height: 1.1;
+  color: var(--white);
+  letter-spacing: -.015em;
+}
+.section-title-light em { font-style: italic; color: var(--gold-lt); font-weight: 500; }
+
+.section-title-dark {
+  font-family: var(--ff-display);
+  font-size: clamp(36px, 4.2vw, 60px);
+  font-weight: 400; line-height: 1.1;
+  color: var(--text-dark);
+  letter-spacing: -.015em;
+}
+.section-title-dark em { font-style: italic; color: var(--wine); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════
+   GALERIA — CAROUSEL
+═══════════════════════════════════════════════════════ */
+.galeria {
+  background: var(--wine);
+  padding: var(--space-15) 0;
+  position: relative; overflow: hidden;
+}
+.galeria::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(196, 154, 92, .04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.galeria-header {
+  max-width: var(--max-w); margin: 0 auto var(--space-6);
+  padding: 0 var(--space-6);
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--space-3);
+  position: relative; z-index: 2;
+}
+
+/* wrapper com fade edges */
+.galeria-carousel-wrap {
+  position: relative; overflow: hidden;
+}
+.galeria-carousel-wrap::before,
+.galeria-carousel-wrap::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; z-index: 2;
+  width: 80px; pointer-events: none;
+}
+.galeria-carousel-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--wine) 0%, transparent 100%);
+}
+.galeria-carousel-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--wine) 0%, transparent 100%);
+}
+
+.galeria-track {
+  display: flex; gap: var(--space-3);
+  padding: 16px var(--space-6) var(--space-4);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.galeria-track::-webkit-scrollbar { display: none; }
+
+.galeria-card {
+  width: 340px; flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(196, 154, 92, .14);
+  transition: transform .45s var(--ease-spring), box-shadow .4s, border-color .3s;
+}
+.galeria-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, .5);
+  border-color: rgba(196, 154, 92, .35);
+}
+.galeria-card img {
+  width: 100%; height: 280px;
+  object-fit: cover; display: block;
+  transition: transform 1s var(--ease-smooth);
+}
+.galeria-card:hover img { transform: scale(1.08); }
+.galeria-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(42, 6, 20, .92) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.galeria-glass-tag {
+  position: absolute; top: 16px; left: 16px; z-index: 3;
+  background: rgba(255, 255, 255, .12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .9);
+}
+
+.galeria-card-info {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  padding: 22px;
+  transform: translateY(4px);
+  transition: transform .4s var(--ease-smooth);
+}
+.galeria-card:hover .galeria-card-info { transform: none; }
+
+.galeria-card-cat {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.galeria-card-name {
+  font-family: var(--ff-display);
+  font-size: 24px; font-weight: 500;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  letter-spacing: -.01em;
+}
+
+.galeria-card-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(196, 154, 92, .92);
+  backdrop-filter: blur(8px);
+  color: var(--wine-deep);
+  padding: 9px 18px; border-radius: 50px;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .35s .08s, transform .4s .08s var(--ease-spring), background .25s;
+}
+.galeria-card:hover .galeria-card-cta {
+  opacity: 1; transform: none;
+}
+.galeria-card-cta:hover { background: var(--gold-lt); }
+
+/* nav arrows */
+.carousel-nav {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex; align-items: center; gap: 12px;
+  justify-content: flex-end;
+  position: relative; z-index: 2;
+}
+.carousel-nav-center { justify-content: center; }
+
+.carousel-btn {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(196, 154, 92, .25);
+  color: rgba(255, 255, 255, .8);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  transition: background .25s, border-color .25s, color .25s, transform .3s var(--ease-spring);
+}
+.carousel-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--wine-deep);
+  transform: scale(1.12);
+}
+.carousel-btn.light {
+  background: rgba(196, 154, 92, .1);
+  border-color: rgba(196, 154, 92, .3);
+  color: var(--wine);
+}
+.carousel-btn.light:hover {
+  background: var(--wine);
+  border-color: var(--wine);
+  color: var(--gold);
+}
+
+.carousel-dots {
+  display: flex; gap: 7px; align-items: center; flex: 1;
+}
+.carousel-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(196, 154, 92, .25);
+  transition: all .35s var(--ease-smooth);
+  cursor: pointer;
+  border: none; padding: 0;
+}
+.carousel-dot.active {
+  width: 22px; border-radius: 3px;
+  background: var(--gold);
+}
+.carousel-dots.light .carousel-dot { background: rgba(61, 10, 30, .18); }
+.carousel-dots.light .carousel-dot.active { background: var(--wine); }
+
+/* ═══════════════════════════════════════════════════════
+   CARDÁPIO — CAROUSEL COM FILTROS
+═══════════════════════════════════════════════════════ */
+.cardapio {
+  background: var(--wine);
+  padding: var(--space-15) 0 var(--space-15);
+  position: relative; overflow: hidden;
+  border-top: 1px solid rgba(196, 154, 92, .08);
+}
+.cardapio::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(196, 154, 92, .04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.cardapio-header {
+  max-width: var(--max-w); margin: 0 auto var(--space-6);
+  padding: 0 var(--space-6);
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--space-3);
+  position: relative; z-index: 2;
+}
+
+/* filter tabs */
+.cardapio-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+.ctab {
+  padding: 9px 22px; border-radius: 50px;
+  font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  border: 1px solid rgba(196, 154, 92, .22);
+  color: rgba(255, 255, 255, .58);
+  transition: all .3s var(--ease-spring);
+}
+.ctab.active, .ctab:hover {
+  background: var(--gold);
+  color: var(--wine-deep);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* carousel wrapper genérico */
+.carousel-wrapper {
+  position: relative; overflow: hidden;
+}
+.carousel-wrapper::before,
+.carousel-wrapper::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; z-index: 2;
+  width: 80px; pointer-events: none;
+}
+.carousel-wrapper.dark::before {
+  left: 0;
+  background: linear-gradient(to right, var(--wine) 0%, transparent 100%);
+}
+.carousel-wrapper.dark::after {
+  right: 0;
+  background: linear-gradient(to left, var(--wine) 0%, transparent 100%);
+}
+.carousel-wrapper.light::before {
+  left: 0;
+  background: linear-gradient(to right, var(--cream-dk) 0%, transparent 100%);
+}
+.carousel-wrapper.light::after {
+  right: 0;
+  background: linear-gradient(to left, var(--cream-dk) 0%, transparent 100%);
+}
+
+.carousel-track {
+  display: flex; gap: var(--space-3);
+  padding: 16px var(--space-6) var(--space-4);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* cardápio card */
+.cardapio-card {
+  width: 320px; flex-shrink: 0;
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, .04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 154, 92, .15);
+  border-radius: var(--radius-lg); overflow: hidden;
+  transition: transform .45s var(--ease-spring), box-shadow .4s, border-color .3s;
+  position: relative;
+}
+.cardapio-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, .4);
+  border-color: rgba(196, 154, 92, .35);
+}
+
+.cc-img {
+  height: 220px; position: relative; overflow: hidden;
+}
+.cc-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s var(--ease-smooth);
+}
+.cardapio-card:hover .cc-img img { transform: scale(1.1); }
+.cc-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(42, 6, 20, .9) 0%, transparent 55%);
+}
+.cc-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  background: var(--gold); color: var(--wine-deep);
+  font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 50px;
+}
+.cc-price {
+  position: absolute; bottom: 14px; right: 16px; z-index: 2;
+  font-family: var(--ff-display);
+  font-size: 16px; font-weight: 500;
+  color: var(--gold-lt);
+}
+.cc-price small {
+  font-family: var(--ff-body);
+  font-size: 10px; font-weight: 500;
+  color: rgba(255, 255, 255, .5);
+  display: block;
+  letter-spacing: .06em;
+}
+
+.cc-body { padding: 22px 24px; }
+.cc-category {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.cc-name {
+  font-family: var(--ff-display);
+  font-size: 23px; font-weight: 500;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+.cc-desc {
+  font-size: 13px; line-height: 1.6;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 18px;
+}
+
+.cc-options {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 18px;
+}
+.cc-opt {
+  padding: 6px 12px; border-radius: 50px;
+  border: 1px solid rgba(196, 154, 92, .22);
+  font-size: 11px; font-weight: 600;
+  color: rgba(255, 255, 255, .6);
+  transition: all .25s var(--ease-spring);
+}
+.cc-opt.sel, .cc-opt:hover {
+  background: rgba(196, 154, 92, .18);
+  border-color: var(--gold);
+  color: var(--gold-lt);
+  transform: scale(1.04);
+}
+
+.cc-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(196, 154, 92, .12);
+}
+.cc-stars {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: .04em;
+}
+.cc-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--gold); color: var(--wine-deep);
+  padding: 10px 20px; border-radius: 50px;
+  font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  border: none; cursor: pointer; font-family: inherit;
+  transition: background .25s, transform .3s var(--ease-spring);
+}
+.cc-cta:hover { background: var(--gold-lt); transform: scale(1.08); }
+
+/* Esgotado */
+.cardapio-card.cc-sold .cc-img img { filter: grayscale(.45) brightness(.78); }
+.cardapio-card.cc-sold .cc-img::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(42, 6, 20, .25); z-index: 1;
+}
+.cc-badge-sold {
+  background: rgba(0, 0, 0, .82) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, .25);
+}
+.cc-badge-hot {
+  background: linear-gradient(135deg, #C49A5C, #E8C892) !important;
+  color: var(--wine-deep) !important;
+}
+.cc-cta-soft {
+  background: transparent;
+  color: var(--gold-lt);
+  border: 1px solid var(--gold-lt);
+}
+.cc-cta-soft:hover {
+  background: var(--gold-lt);
+  color: var(--wine-deep);
+}
+
+/* Toast notification */
+.toast-host {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 12px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--wine-deep);
+  color: var(--white);
+  padding: 16px 22px;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+  border: 1px solid rgba(196, 154, 92, .35);
+  max-width: 340px;
+  font-size: 14px; line-height: 1.5;
+  transform: translateX(420px); opacity: 0;
+  transition: transform .45s var(--ease-spring), opacity .3s;
+  pointer-events: all;
+}
+.toast.show { transform: translateX(0); opacity: 1; }
+.toast strong { color: var(--gold-lt); font-weight: 700; }
+.toast-label {
+  display: block;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold-lt); margin-bottom: 6px; font-weight: 700;
+}
+@media (max-width: 560px) {
+  .toast-host { bottom: 80px; right: 12px; left: 12px; }
+  .toast { max-width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   DIFERENCIAIS — TIMELINE COMO FUNCIONA
+═══════════════════════════════════════════════════════ */
+.diferenciais {
+  background: var(--cream);
+  padding: var(--space-15) var(--space-6);
+  position: relative;
+}
+
+.diferenciais-header {
+  max-width: var(--max-w); margin: 0 auto var(--space-12);
+  text-align: center;
+}
+.diferenciais-sub {
+  font-size: 17px; line-height: 1.7;
+  color: var(--text-light);
+  max-width: 560px; margin: 18px auto 0;
+}
+
+/* timeline horizontal */
+.exp-timeline {
+  max-width: var(--max-w); margin: 0 auto;
+  position: relative;
+}
+.exp-timeline::before {
+  content: '';
+  position: absolute;
+  top: 66px; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(196, 154, 92, .35) 12%,
+    rgba(196, 154, 92, .6) 50%,
+    rgba(196, 154, 92, .35) 88%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+
+.exp-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+  position: relative; z-index: 1;
+}
+
+.exp-card {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+}
+
+.exp-dot {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--wine);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 26px;
+  position: relative; z-index: 2;
+  box-shadow:
+    0 0 0 8px var(--cream),
+    0 0 0 9px rgba(196, 154, 92, .14);
+  transition: transform .4s var(--ease-spring), box-shadow .4s;
+  flex-shrink: 0;
+}
+.exp-card:hover .exp-dot {
+  transform: scale(1.18);
+  box-shadow:
+    0 0 0 8px var(--cream),
+    0 0 0 10px var(--gold);
+}
+
+.exp-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 12px;
+}
+.exp-title {
+  font-family: var(--ff-display);
+  font-size: 21px; font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 12px; line-height: 1.2;
+  letter-spacing: -.01em;
+}
+.exp-desc {
+  font-size: 13px; line-height: 1.7;
+  color: var(--text-light);
+  max-width: 220px;
+}
+
+/* ─── Banner Buffet ─── */
+.buffet-banner {
+  max-width: var(--max-w); margin: var(--space-12) auto 0;
+  background: var(--wine);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 380px;
+  box-shadow: 0 28px 80px rgba(61, 10, 30, .22);
+  border: 1px solid rgba(196, 154, 92, .18);
+}
+.buffet-img {
+  position: relative; overflow: hidden;
+}
+.buffet-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1s var(--ease-smooth);
+  opacity: .9;
+}
+.buffet-banner:hover .buffet-img img { transform: scale(1.06); }
+.buffet-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(42, 6, 20, .65) 0%, transparent 65%);
+}
+
+.buffet-content {
+  padding: var(--space-6);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.buffet-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+.buffet-eyebrow::before {
+  content: '';
+  display: block; width: 28px; height: 1px;
+  background: var(--gold);
+}
+.buffet-title {
+  font-family: var(--ff-display);
+  font-size: clamp(30px, 3.4vw, 46px);
+  font-weight: 400; line-height: 1.12;
+  color: var(--white);
+  margin-bottom: 20px;
+  letter-spacing: -.015em;
+}
+.buffet-title em { font-style: italic; color: var(--gold-lt); font-weight: 500; }
+.buffet-text {
+  font-size: 15px; line-height: 1.75;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: var(--space-4);
+  max-width: 400px;
+}
+
+.buffet-features {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: var(--space-4);
+}
+.buffet-feat {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, .75);
+}
+.buffet-feat-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(196, 154, 92, .15);
+}
+.buffet-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold); color: var(--wine-deep);
+  padding: 14px 28px; border-radius: 50px;
+  font-size: 13px; font-weight: 700; letter-spacing: .04em;
+  width: fit-content;
+  transition: background .25s, transform .3s var(--ease-spring), box-shadow .25s;
+  box-shadow: 0 6px 20px rgba(196, 154, 92, .3);
+}
+.buffet-cta:hover {
+  background: var(--gold-lt);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(196, 154, 92, .5);
+}
+.buffet-cta svg { transition: transform .3s var(--ease-spring); }
+.buffet-cta:hover svg { transform: translateX(4px); }
+
+/* ═══════════════════════════════════════════════════════
+   PRODUTOS — FAVORITOS (cream background)
+═══════════════════════════════════════════════════════ */
+.produtos {
+  background: var(--cream-dk);
+  padding: var(--space-15) 0;
+  position: relative; overflow: hidden;
+}
+.produtos::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 154, 92, .1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.produtos::after {
+  content: '';
+  position: absolute;
+  bottom: -200px; left: -200px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(61, 10, 30, .04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.produtos-header {
+  max-width: var(--max-w); margin: 0 auto var(--space-6);
+  padding: 0 var(--space-6);
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--space-3);
+  position: relative; z-index: 2;
+}
+
+.prod-card {
+  width: 340px; flex-shrink: 0;
+  scroll-snap-align: start;
+  background: var(--white);
+  border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid rgba(196, 154, 92, .12);
+  transition: transform .45s var(--ease-spring), box-shadow .4s;
+}
+.prod-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 32px 64px rgba(61, 10, 30, .15);
+}
+
+.prod-img {
+  height: 250px; position: relative; overflow: hidden;
+}
+.prod-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s var(--ease-smooth);
+}
+.prod-card:hover .prod-img img { transform: scale(1.1); }
+
+.prod-ribbon {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  background: var(--wine); color: var(--gold);
+  font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 50px;
+}
+
+.prod-body { padding: 22px 26px; }
+.prod-category {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 8px;
+}
+.prod-name {
+  font-family: var(--ff-display);
+  font-size: 24px; font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  letter-spacing: -.01em;
+}
+.prod-desc {
+  font-size: 13px; line-height: 1.65;
+  color: var(--text-light);
+  margin-bottom: 18px;
+}
+.prod-options {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 18px;
+}
+.prod-opt {
+  padding: 6px 12px; border-radius: 50px;
+  border: 1px solid var(--cream-md);
+  font-size: 11px; font-weight: 600;
+  color: var(--text-light);
+  background: var(--cream);
+  transition: all .25s var(--ease-spring);
+}
+.prod-opt:hover, .prod-opt.sel {
+  background: var(--wine);
+  border-color: var(--wine);
+  color: var(--gold-lt);
+  transform: scale(1.04);
+}
+.prod-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--cream-md);
+}
+.prod-stars {
+  font-size: 11px;
+  color: var(--gold-dk);
+  letter-spacing: .04em;
+}
+.prod-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--wine); color: var(--white);
+  padding: 11px 20px; border-radius: 50px;
+  font-size: 12px; font-weight: 700;
+  transition: background .25s, transform .3s var(--ease-spring);
+}
+.prod-cta:hover {
+  background: var(--wine-mid);
+  transform: scale(1.06);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FAQ — MATA OBJEÇÕES (NOVA SEÇÃO)
+═══════════════════════════════════════════════════════ */
+.faq {
+  background: var(--cream);
+  padding: var(--space-15) var(--space-6);
+  position: relative;
+}
+.faq-inner {
+  max-width: 880px; margin: 0 auto;
+}
+.faq-header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.faq-list {
+  display: flex; flex-direction: column;
+  gap: 14px;
+}
+
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--cream-md);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+.faq-item:hover {
+  border-color: rgba(196, 154, 92, .35);
+  box-shadow: 0 12px 32px rgba(61, 10, 30, .06);
+}
+.faq-item[open] {
+  border-color: var(--gold);
+  box-shadow: 0 16px 40px rgba(61, 10, 30, .08);
+}
+
+.faq-q {
+  padding: 22px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-3);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--ff-body);
+  font-size: 16px; font-weight: 600;
+  color: var(--text-dark);
+  transition: color .25s;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-item:hover .faq-q { color: var(--wine); }
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cream);
+  border: 1px solid var(--cream-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 400;
+  color: var(--gold-dk);
+  transition: transform .35s var(--ease-spring), background .25s, color .25s;
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  background: var(--wine);
+  color: var(--gold);
+  border-color: var(--wine);
+}
+
+.faq-a {
+  padding: 0 26px 24px;
+  font-size: 15px; line-height: 1.75;
+  color: var(--text-mid);
+  max-width: 720px;
+}
+.faq-a strong { color: var(--text-dark); font-weight: 600; }
+.faq-a a {
+  color: var(--wine);
+  font-weight: 600;
+  border-bottom: 1px solid var(--gold);
+  transition: color .2s;
+}
+.faq-a a:hover { color: var(--gold-dk); }
+
+/* ═══════════════════════════════════════════════════════
+   DEPOIMENTOS — CAROUSEL
+═══════════════════════════════════════════════════════ */
+.depoimentos {
+  background: var(--wine);
+  padding: var(--space-15) 0;
+  position: relative; overflow: hidden;
+}
+.depoimentos::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 20% 50%, rgba(92, 21, 48, .55) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 80% 50%, rgba(196, 154, 92, .05) 0%, transparent 60%);
+}
+
+.depoimentos-header {
+  position: relative; z-index: 2;
+  max-width: var(--max-w); margin: 0 auto var(--space-8);
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+
+.dep-carousel-wrap {
+  position: relative; z-index: 2;
+  max-width: var(--max-w); margin: 0 auto;
+  overflow: hidden;
+}
+.dep-carousel-wrap::before,
+.dep-carousel-wrap::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; z-index: 2;
+  width: 60px; pointer-events: none;
+}
+.dep-carousel-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--wine) 0%, transparent 100%);
+}
+.dep-carousel-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--wine) 0%, transparent 100%);
+}
+
+.dep-track {
+  display: flex; gap: var(--space-3);
+  padding: 8px var(--space-6) var(--space-4);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.dep-track::-webkit-scrollbar { display: none; }
+
+.dep-card {
+  width: 360px; flex-shrink: 0;
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, .04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 154, 92, .14);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  transition: transform .45s var(--ease-spring), border-color .3s, background .3s;
+}
+.dep-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(196, 154, 92, .3);
+  background: rgba(255, 255, 255, .07);
+}
+
+.dep-quote-mark {
+  font-family: var(--ff-display);
+  font-size: 56px; font-style: italic;
+  color: rgba(196, 154, 92, .35);
+  line-height: .8;
+  margin-bottom: 8px;
+}
+
+.dep-stars {
+  display: flex; gap: 4px;
+  margin-bottom: 18px;
+}
+.dep-star {
+  color: var(--gold);
+  font-size: 14px;
+}
+
+.dep-text {
+  font-family: var(--ff-display);
+  font-size: 19px; font-style: italic; font-weight: 400;
+  color: rgba(255, 255, 255, .82);
+  line-height: 1.65;
+  margin-bottom: var(--space-4);
+  letter-spacing: .005em;
+}
+
+.dep-author {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(196, 154, 92, .12);
+}
+.dep-avatar {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dk), var(--gold-lt));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-display);
+  font-size: 19px; font-weight: 600;
+  color: var(--wine-deep);
+  flex-shrink: 0;
+  border: 2px solid rgba(196, 154, 92, .35);
+}
+.dep-avatar[data-initial="A"] { background: linear-gradient(135deg, #C49A5C, #DDB87A); }
+.dep-avatar[data-initial="C"] { background: linear-gradient(135deg, #8B4A6B, #C49A5C); }
+.dep-avatar[data-initial="R"] { background: linear-gradient(135deg, #3D0A1E, #8B4A6B); }
+.dep-avatar[data-initial="M"] { background: linear-gradient(135deg, #5C1530, #C49A5C); }
+.dep-avatar[data-initial="F"] { background: linear-gradient(135deg, #9B7340, #DDB87A); }
+
+.dep-name {
+  font-size: 14px; font-weight: 600;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+.dep-local {
+  font-size: 12px;
+  color: rgba(255, 255, 255, .4);
+  letter-spacing: .03em;
+}
+
+/* nav depoimentos */
+.dep-nav {
+  position: relative; z-index: 2;
+  max-width: var(--max-w); margin: var(--space-3) auto 0;
+  padding: 0 var(--space-6);
+  display: flex; align-items: center; gap: 12px;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CTA FINAL
+═══════════════════════════════════════════════════════ */
+.cta-final {
+  background: var(--cream);
+  padding: var(--space-15) var(--space-6);
+  position: relative; overflow: hidden;
+  border-top: 4px solid var(--wine);
+}
+.cta-final::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(196, 154, 92, .05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.cta-final::after {
+  content: '';
+  position: absolute;
+  bottom: -300px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 900px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 154, 92, .1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative; z-index: 2;
+  max-width: 760px; margin: 0 auto;
+  text-align: center;
+}
+
+.cta-eyebrow {
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: var(--space-3);
+}
+.cta-eyebrow::before, .cta-eyebrow::after {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--gold-dk);
+}
+
+.cta-title {
+  font-family: var(--ff-display);
+  font-size: clamp(40px, 5.4vw, 72px);
+  font-weight: 400; line-height: 1.05;
+  color: var(--text-dark);
+  letter-spacing: -.02em;
+  margin-bottom: var(--space-3);
+}
+.cta-title em {
+  font-style: italic;
+  color: var(--wine);
+  font-weight: 500;
+}
+
+.cta-sub {
+  font-size: 18px; line-height: 1.7;
+  color: var(--text-light);
+  margin-bottom: var(--space-6);
+  max-width: 560px;
+  margin-left: auto; margin-right: auto;
+}
+
+.cta-btns {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--green-wa); color: var(--white);
+  padding: 17px 36px; border-radius: 50px;
+  font-size: 15px; font-weight: 700;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, .35);
+  transition: filter .25s, transform .3s var(--ease-spring), box-shadow .3s;
+  animation: pulse 3s ease-in-out infinite;
+}
+.btn-wa:hover {
+  filter: brightness(1.08);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 42px rgba(37, 211, 102, .5);
+  animation: none;
+}
+
+.btn-wine {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--wine); color: var(--white);
+  padding: 17px 36px; border-radius: 50px;
+  font-size: 15px; font-weight: 700;
+  transition: background .25s, transform .3s var(--ease-spring);
+}
+.btn-wine:hover {
+  background: var(--wine-mid);
+  transform: translateY(-4px);
+}
+
+.cta-trust {
+  margin-top: var(--space-4);
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+  flex-wrap: wrap;
+}
+.cta-trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-light);
+  font-weight: 500;
+}
+.cta-trust-item span { font-size: 16px; }
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+footer {
+  background: var(--wine-deep);
+  padding: var(--space-10) var(--space-6) var(--space-4);
+  position: relative; overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196, 154, 92, .35), transparent);
+}
+
+.footer-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: var(--space-8);
+}
+
+.footer-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--ff-display);
+  font-size: 24px; font-weight: 500;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+.footer-desc {
+  font-size: 14px; line-height: 1.75;
+  color: rgba(255, 255, 255, .4);
+  max-width: 280px;
+  margin-bottom: var(--space-3);
+}
+.footer-socials {
+  display: flex; gap: 10px;
+}
+.social-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .1);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .25s, border-color .25s, transform .3s var(--ease-spring);
+}
+.social-btn svg {
+  width: 18px; height: 18px;
+  fill: rgba(255, 255, 255, .7);
+  transition: fill .25s;
+}
+.social-btn:hover {
+  background: rgba(196, 154, 92, .2);
+  border-color: rgba(196, 154, 92, .4);
+  transform: translateY(-3px);
+}
+.social-btn:hover svg { fill: var(--gold-lt); }
+
+.footer-col h4 {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .4);
+  margin-bottom: 20px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+.footer-col li, .footer-col a {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .55);
+  transition: color .25s;
+}
+.footer-col a:hover { color: var(--gold-lt); }
+
+.footer-bottom {
+  max-width: var(--max-w); margin: 0 auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-copy, .footer-made {
+  font-size: 12px;
+  color: rgba(255, 255, 255, .25);
+  letter-spacing: .04em;
+}
+.footer-made strong { color: rgba(196, 154, 92, .6); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════
+   WHATSAPP FLOAT BUTTON
+═══════════════════════════════════════════════════════ */
+.wa-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 400;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--green-wa);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, .4);
+  transition: transform .3s var(--ease-spring), box-shadow .25s;
+  animation: pulse 3s ease-in-out infinite;
+}
+.wa-float svg {
+  width: 30px; height: 30px;
+  fill: var(--white);
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 32px rgba(37, 211, 102, .6);
+  animation: none;
+}
+
+/* tooltip do WA float */
+.wa-tooltip {
+  position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+  background: var(--wine);
+  color: var(--white);
+  padding: 8px 14px; border-radius: 50px;
+  font-size: 12px; font-weight: 600;
+  white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+.wa-float:hover .wa-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVIDADE — MOBILE FIRST DEPOIS DESKTOP
+═══════════════════════════════════════════════════════ */
+
+/* tablet */
+@media (max-width: 1100px) {
+  .hero-inner { gap: var(--space-6); }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .exp-cards { grid-template-columns: repeat(5, 1fr); gap: 14px; }
+}
+
+/* mobile menu trigger */
+@media (max-width: 900px) {
+  .nav { padding: 0 var(--space-3); }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* HERO em coluna */
+  .hero {
+    padding: 100px var(--space-3) 60px;
+    min-height: auto;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    text-align: center;
+  }
+  .hero-eyebrow { justify-content: center; }
+  .hero-sub { margin: 0 auto var(--space-4); }
+  .hero-btns { justify-content: center; }
+
+  /* card visual em mobile: aparece compacto */
+  .hero-visual {
+    max-width: 380px;
+    margin: 0 auto;
+    order: 2;
+  }
+  .hero-text { order: 1; }
+  .hero-stats { order: 3; }
+  .hero-card-img { height: 240px; }
+  .hero-card-bg { display: none; }
+
+  /* stats 2x2 */
+  .hero-stats-inner { grid-template-columns: 1fr 1fr; }
+  .hero-stat {
+    padding: 16px 12px;
+    border-bottom: 1px solid rgba(196, 154, 92, .12);
+  }
+  .hero-stat:nth-child(odd) { border-right: 1px solid rgba(196, 154, 92, .12); }
+  .hero-stat:nth-child(even) { border-right: none; }
+  .hero-stat:nth-last-child(-n+2) { border-bottom: none; }
+
+  .hero-scroll { display: none; }
+  .hero-line { display: none; }
+
+  .sobre {
+    padding: var(--space-10) var(--space-3);
+  }
+  .sobre-inner { grid-template-columns: 1fr; gap: var(--space-8); }
+  .sobre-img-wrap img { height: 380px; }
+  .sobre-float-card {
+    right: 16px; bottom: -20px;
+    padding: 18px 22px;
+    min-width: 160px;
+  }
+  .sfc-num { font-size: 36px; }
+
+  .galeria { padding: var(--space-10) 0; }
+  .galeria-header {
+    padding: 0 var(--space-3);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  .galeria-track { padding: 12px var(--space-3) var(--space-3); }
+  .galeria-card { width: 280px; }
+  .galeria-card img { height: 220px; }
+  .carousel-nav { padding: 0 var(--space-3); }
+
+  .cardapio { padding: var(--space-10) 0; }
+  .cardapio-header {
+    padding: 0 var(--space-3);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .carousel-track { padding: 12px var(--space-3) var(--space-3); }
+  .cardapio-card { width: 280px; }
+
+  .diferenciais { padding: var(--space-10) var(--space-3); }
+  .exp-timeline::before { display: none; }
+  .exp-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+  .exp-card:last-child { grid-column: 1 / -1; max-width: 280px; margin: 0 auto; }
+  .exp-dot { box-shadow: 0 0 0 6px var(--cream), 0 0 0 7px rgba(196, 154, 92, .14); }
+
+  .buffet-banner { grid-template-columns: 1fr; }
+  .buffet-img { height: 240px; }
+  .buffet-content { padding: var(--space-4); }
+
+  .produtos { padding: var(--space-10) 0; }
+  .produtos-header {
+    padding: 0 var(--space-3);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .prod-card { width: 280px; }
+
+  .faq { padding: var(--space-10) var(--space-3); }
+  .faq-q { padding: 18px 20px; font-size: 15px; }
+  .faq-a { padding: 0 20px 22px; font-size: 14px; }
+
+  .depoimentos { padding: var(--space-10) 0; }
+  .depoimentos-header { padding: 0 var(--space-3); }
+  .dep-track { padding: 8px var(--space-3) var(--space-3); }
+  .dep-card { width: 300px; padding: 28px 26px; }
+  .dep-text { font-size: 17px; }
+
+  .cta-final { padding: var(--space-10) var(--space-3); }
+  .cta-trust { gap: 16px; }
+
+  footer { padding: var(--space-8) var(--space-3) var(--space-3); }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  .wa-float { width: 54px; height: 54px; bottom: 18px; right: 18px; }
+  .wa-float svg { width: 26px; height: 26px; }
+  .wa-tooltip { display: none; }
+}
+
+/* smartphones pequenos */
+@media (max-width: 560px) {
+  .hero-title { font-size: clamp(32px, 9.5vw, 50px); }
+  .hero-stat-num { font-size: 24px; }
+  .hero-stat { padding: 14px 8px; }
+  .hero-stat-lbl { font-size: 9px; letter-spacing: .1em; }
+
+  .hero-btns { flex-direction: column; width: 100%; align-items: stretch; }
+  .btn-primary, .btn-outline { justify-content: center; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: var(--space-4); }
+
+  .cta-btns { flex-direction: column; align-items: stretch; }
+  .btn-wa, .btn-wine { justify-content: center; }
+
+  .sobre-quote { font-size: 18px; padding-left: 16px; }
+
+  .exp-cards { grid-template-columns: 1fr; }
+  .exp-card:last-child { grid-column: 1; }
+  .exp-card { max-width: 320px; margin: 0 auto; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div id="scroll-progress" aria-hidden="true"></div>
+
+<!-- ════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════ -->
+<nav id="main-nav" class="nav" aria-label="Navegação principal">
+  <a href="#hero" class="nav-logo" aria-label="Coma Doce - voltar ao topo">
+    <span class="nav-logo-mark" aria-hidden="true">🧁</span>
+    Coma Doce
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Nossa história</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#cardapio">Cardápio</a></li>
+    <li><a href="#depoimentos">Avaliações</a></li>
+  </ul>
+  <a href="https://wa.me/5575999999999?text=Oi!%20Quero%20fazer%20um%20pedido%20na%20Coma%20Doce%20%F0%9F%A7%81"
+     target="_blank" rel="noopener" class="nav-cta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.299-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+    </svg>
+    Fazer pedido
+  </a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menu mobile fullscreen -->
+<div class="mob-nav" id="mob-nav" aria-hidden="true">
+  <a href="#sobre">Nossa história</a>
+  <a href="#galeria">Galeria</a>
+  <a href="#cardapio">Cardápio</a>
+  <a href="#depoimentos">Avaliações</a>
+  <a href="https://wa.me/5575999999999?text=Oi!%20Quero%20fazer%20um%20pedido%20na%20Coma%20Doce%20%F0%9F%A7%81"
+     target="_blank" rel="noopener" class="mob-cta-link">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.299-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+    </svg>
+    Fazer pedido
+  </a>
+</div>
+
+<!-- ════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-line" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Confeitaria Artesanal · Feira de Santana</div>
+      <h1 class="hero-title">
+        Seu dia merece<br>
+        mais do que <em>um doce.</em><br>
+        <span class="stroke-text">Merece Coma Doce.</span>
+      </h1>
+      <p class="hero-sub">
+        Em Kalilândia, desde 2019. Ingredientes <strong>nobres</strong>, técnica artesanal e a paciência de quem sabe que o doce certo vira lembrança.
+      </p>
+      <div class="hero-btns">
+        <a href="#cardapio" class="btn-primary">
+          Ver cardápio
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/5575999999999?text=Oi!%20Quero%20encomendar%20um%20bolo%20personalizado%20na%20Coma%20Doce%20%F0%9F%A7%81"
+           target="_blank" rel="noopener" class="btn-outline">Bolo personalizado</a>
+      </div>
+
+      <div class="hero-stats" aria-label="Indicadores de confiança">
+        <div class="hero-stats-inner">
+          <div class="hero-stat">
+            <span class="hero-stat-num" data-target="5.0">5.0</span>
+            <span class="hero-stat-lbl">★ Avaliação</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num" data-target="500+">500+</span>
+            <span class="hero-stat-lbl">Bolos entregues</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num" data-target="2019">2019</span>
+            <span class="hero-stat-lbl">Em Feira de Santana</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num" data-target="48h">48h</span>
+            <span class="hero-stat-lbl">Encomenda rápida</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card-wrap">
+        <div class="hero-card-bg" aria-hidden="true"></div>
+        <div class="hero-card">
+          <div class="hero-card-img">
+            <span class="hero-badge">★ Destaque</span>
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=900&q=85"
+                 alt="Bolo artesanal de chocolate Coma Doce"
+                 loading="eager"
+                 onerror="this.style.background='var(--wine-mid)';this.style.opacity='0'">
+          </div>
+          <div class="hero-card-body">
+            <div class="hero-card-name">Bolo Artesanal de Chocolate</div>
+            <div class="hero-card-detail">Ganache belga, massa úmida, decoração feita à mão.</div>
+            <div class="hero-card-meta">
+              <div class="hero-stars" aria-label="Cinco estrelas">★★★★★ 5.0</div>
+              <div class="hero-tag">100% Artesanal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    Role para descobrir
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SOBRE
+══════════════════════════════════════════════ -->
+<section class="sobre" id="sobre">
+  <div class="sobre-inner">
+    <div class="sobre-media reveal">
+      <div class="sobre-img-wrap">
+        <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=900&q=85"
+             alt="Confeiteira artesanal decorando um bolo com cuidado"
+             loading="lazy">
+      </div>
+      <div class="sobre-float-card">
+        <span class="sfc-num">2019</span>
+        <span class="sfc-label">Fundada em Feira de Santana</span>
+      </div>
+    </div>
+
+    <div class="sobre-content reveal reveal-d2">
+      <div class="sobre-eyebrow">Nossa história</div>
+      <h2 class="sobre-title">
+        Feito com as mãos,<br>
+        <em>entregue com o coração</em>
+      </h2>
+      <p class="sobre-text">
+        A <strong>Coma Doce</strong> nasceu de uma paixão sincera por confeitaria artesanal. Em Kalilândia, Feira de Santana, transformamos ingredientes cuidadosamente selecionados em experiências que ficam na memória.
+      </p>
+      <p class="sobre-text">
+        Cada bolo que sai daqui carrega horas de dedicação, técnica apurada e amor genuíno pelo que fazemos. <strong>Não existe linha de produção. Existe artesanato.</strong>
+      </p>
+      <div class="sobre-divider"></div>
+      <blockquote class="sobre-quote">
+        "Cada pedido é tratado como se fosse o mais especial do dia — porque pra nós, é."
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     GALERIA — CAROUSEL
+══════════════════════════════════════════════ -->
+<section class="galeria" id="galeria">
+  <div class="galeria-header reveal">
+    <div>
+      <div class="section-eyebrow">Galeria</div>
+      <h2 class="section-title-light">Arte que se <em>come</em></h2>
+    </div>
+    <a href="https://wa.me/5575999999999?text=Quero%20ver%20o%20cat%C3%A1logo%20completo%20da%20Coma%20Doce"
+       target="_blank" rel="noopener" class="btn-outline" style="flex-shrink:0">
+      Ver catálogo completo
+    </a>
+  </div>
+
+  <div class="galeria-carousel-wrap">
+    <div class="galeria-track" id="track-galeria" role="region" aria-label="Galeria de criações" tabindex="0">
+
+
+      <article class="galeria-card" data-product-name="Brownie de Chocolate Gourmet">
+        <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=700&q=85" alt="Brownie de Chocolate Gourmet" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">+ Vendido</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Brownie · R$ 10</div>
+          <h3 class="galeria-card-name">Brownie de Chocolate Gourmet</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card" data-product-name="Fatia Pudim">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=700&q=85" alt="Fatia Pudim" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Cremoso</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Fatias · R$ 25</div>
+          <h3 class="galeria-card-name">Fatia Pudim</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card" data-product-name="Copodim">
+        <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=700&q=85" alt="Copodim" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Queridinho</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Copos · R$ 23</div>
+          <h3 class="galeria-card-name">Copodim</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card" data-product-name="Cookie de Nutella">
+        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=700&q=85" alt="Cookie de Nutella" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Gourmet</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Cookie · R$ 16,50</div>
+          <h3 class="galeria-card-name">Cookie de Nutella</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card" data-product-name="Bombom no Pote de Morango">
+        <img src="https://images.unsplash.com/photo-1488477304112-4944851de03d?w=700&q=85" alt="Bombom no Pote de Morango" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Fresquinho</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Bombom no Pote · R$ 12</div>
+          <h3 class="galeria-card-name">Bombom no Pote de Morango</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card" data-product-name="Fatia Ninho, Maracujá e Frutas Vermelhas">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&q=85" alt="Fatia Ninho, Maracujá e Frutas Vermelhas" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Equilibrado</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Fatias · R$ 24</div>
+          <h3 class="galeria-card-name">Ninho, Maracujá e Frutas Vermelhas</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card" data-product-name="Bombom no Pote de Uva">
+        <img src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=700&q=85" alt="Bombom no Pote de Uva" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Clássico</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Bombom no Pote · R$ 12</div>
+          <h3 class="galeria-card-name">Bombom no Pote de Uva</h3>
+          <a href="https://instadelivery.com.br/comadoce" onclick="event.preventDefault(); pedirOnline(this);" class="galeria-card-cta">Pedir online →</a>
+        </div>
+      </article>
+
+      <article class="galeria-card">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700&q=85" alt="Bolo personalizado para festa" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        <span class="galeria-glass-tag">Sob encomenda</span>
+        <div class="galeria-card-info">
+          <div class="galeria-card-cat">Bolos · Personalizado</div>
+          <h3 class="galeria-card-name">Bolo de Festa</h3>
+          <a href="https://wa.me/5575999999999?text=Quero%20encomendar%20um%20bolo%20personalizado%20na%20Coma%20Doce%20%F0%9F%8E%82" target="_blank" rel="noopener" class="galeria-card-cta">Encomendar →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="carousel-nav">
+    <div class="carousel-dots" id="dots-galeria" aria-hidden="true"></div>
+    <button class="carousel-btn" aria-label="Anterior" onclick="scrollCarousel('track-galeria', -1, 'dots-galeria')">←</button>
+    <button class="carousel-btn" aria-label="Próximo" onclick="scrollCarousel('track-galeria', 1, 'dots-galeria')">→</button>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CARDÁPIO — CAROUSEL COM FILTROS
+══════════════════════════════════════════════ -->
+<section class="cardapio" id="cardapio">
+  <div class="cardapio-header reveal">
+    <div>
+      <div class="section-eyebrow">Cardápio</div>
+      <h2 class="section-title-light">Escolha sua <em>próxima delícia</em></h2>
+      <div class="cardapio-tabs" role="tablist" aria-label="Filtrar cardápio por categoria">
+        <button class="ctab active" onclick="filterCardapio('todos', this)" role="tab" aria-selected="true">Todos</button>
+        <button class="ctab" onclick="filterCardapio('fatias', this)" role="tab" aria-selected="false">Fatias</button>
+        <button class="ctab" onclick="filterCardapio('copos', this)" role="tab" aria-selected="false">Copos</button>
+        <button class="ctab" onclick="filterCardapio('brownie', this)" role="tab" aria-selected="false">Brownie</button>
+        <button class="ctab" onclick="filterCardapio('cookie', this)" role="tab" aria-selected="false">Cookie</button>
+        <button class="ctab" onclick="filterCardapio('bombom', this)" role="tab" aria-selected="false">Bombom</button>
+        <button class="ctab" onclick="filterCardapio('salgados', this)" role="tab" aria-selected="false">Salgados</button>
+      </div>
+    </div>
+    <a href="https://instadelivery.com.br/comadoce" target="_blank" rel="noopener" class="btn-outline" style="flex-shrink:0">Cardápio completo</a>
+  </div>
+
+  <div class="carousel-wrapper dark">
+    <div class="carousel-track" id="track-cardapio" role="region" aria-label="Cardápio" tabindex="0">
+
+      <!-- ═══ FATIAS ═══ -->
+      <article class="cardapio-card cc-sold" data-cat="fatias" data-product-name="Fatia Ferrero Rocher">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700&q=80" alt="Fatia Ferrero Rocher" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 24<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Ferrero Rocher</h3>
+          <p class="cc-desc">Camadas de chocolate, avelã e crocante. A fatia que derrete na boca.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20a%20Fatia%20Ferrero%20Rocher%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="fatias" data-product-name="Fatia Prestígio">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=700&q=80" alt="Fatia Prestígio" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 22<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Prestígio</h3>
+          <p class="cc-desc">Chocolate com recheio cremoso de coco. Clássico que nunca erra.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20a%20Fatia%20Prest%C3%ADgio%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="fatias" data-product-name="Fatia Maracujá com Chocolate">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1562440499-64b9a86a5f58?w=700&q=80" alt="Fatia Maracujá com Chocolate" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 22<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Maracujá com Chocolate</h3>
+          <p class="cc-desc">Contraste perfeito: chocolate intenso e maracujá azedinho.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20a%20Fatia%20Maracuj%C3%A1%20com%20Chocolate%20voltar" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="fatias" data-product-name="Fatia Matilda">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=700&q=80" alt="Fatia Matilda" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 22<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Matilda</h3>
+          <p class="cc-desc">Chocolate sobre chocolate. Pra quem leva cacau a sério.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20a%20Fatia%20Matilda%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="fatias" data-product-name="Fatia Ninho com Geleia de Morango">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=700&q=80" alt="Fatia Ninho com Geleia de Morango" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 22<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Ninho c/ Geleia de Morango</h3>
+          <p class="cc-desc">Creme de leite ninho e geleia artesanal de morango.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20a%20Fatia%20Ninho%20com%20Geleia%20de%20Morango%20voltar" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card" data-cat="fatias" data-product-name="Fatia Pudim">
+        <div class="cc-img">
+          <span class="cc-badge">★ Disponível</span>
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=700&q=80" alt="Fatia Pudim" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 25<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Pudim</h3>
+          <p class="cc-desc">Pudim caramelizado, cremoso e na medida certa do doce.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card" data-cat="fatias" data-product-name="Fatia Ninho, Maracujá e Frutas Vermelhas">
+        <div class="cc-img">
+          <span class="cc-badge">★ Disponível</span>
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&q=80" alt="Fatia Ninho, Maracujá e Frutas Vermelhas" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 24<small>Fatia</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Fatias</div>
+          <h3 class="cc-name">Fatia Ninho, Maracujá e Frutas Vermelhas</h3>
+          <p class="cc-desc">Trio que equilibra doce, azedinho e o frescor das frutas.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ COPOS ═══ -->
+      <article class="cardapio-card cc-sold" data-cat="copos" data-product-name="Copo Maracujá com Chocolate">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=700&q=80" alt="Copo Maracujá com Chocolate" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 20<small>Copo</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Copos</div>
+          <h3 class="cc-name">Copo Maracujá com Chocolate</h3>
+          <p class="cc-desc">Mousse de chocolate e maracujá em camadas no copo.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20o%20Copo%20Maracuj%C3%A1%20com%20Chocolate%20voltar" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="copos" data-product-name="Copo Ferrero">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1541599468348-e96984315921?w=700&q=80" alt="Copo Ferrero" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 20<small>Copo</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Copos</div>
+          <h3 class="cc-name">Copo Ferrero</h3>
+          <p class="cc-desc">Avelã, chocolate e crocância na sobremesa de colher.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20o%20Copo%20Ferrero%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="copos" data-product-name="Copo Desejo">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1488477304112-4944851de03d?w=700&q=80" alt="Copo Desejo" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 20<small>Copo</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Copos</div>
+          <h3 class="cc-name">Copo Desejo</h3>
+          <p class="cc-desc">O copo mais pedido. Camadas que somem rápido.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20o%20Copo%20Desejo%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card" data-cat="copos" data-product-name="Copodim">
+        <div class="cc-img">
+          <span class="cc-badge">★ Disponível</span>
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=700&q=80" alt="Copodim" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 23<small>Copo</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Copos</div>
+          <h3 class="cc-name">Copodim</h3>
+          <p class="cc-desc">Pudim no copo, cremoso até a última colherada.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ BROWNIE ═══ -->
+      <article class="cardapio-card" data-cat="brownie" data-product-name="Brownie de Chocolate Gourmet">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-hot">+ Vendido</span>
+          <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=700&q=80" alt="Brownie de Chocolate Gourmet" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 10<small>Unidade</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Brownie</div>
+          <h3 class="cc-name">Brownie de Chocolate Gourmet</h3>
+          <p class="cc-desc">Denso, úmido e intenso. O brownie que vicia.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card cc-sold" data-cat="brownie" data-product-name="Brownie de Ninho">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=700&q=80" alt="Brownie de Ninho" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 10<small>Unidade</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Brownie</div>
+          <h3 class="cc-name">Brownie de Ninho</h3>
+          <p class="cc-desc">Brownie com creme de ninho. Doçura na medida.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20o%20Brownie%20de%20Ninho%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ COOKIE ═══ -->
+      <article class="cardapio-card" data-cat="cookie" data-product-name="Cookie de Nutella">
+        <div class="cc-img">
+          <span class="cc-badge">★ Disponível</span>
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=700&q=80" alt="Cookie de Nutella" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 16,50<small>Unidade</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Cookie Gourmet</div>
+          <h3 class="cc-name">Cookie de Nutella</h3>
+          <p class="cc-desc">Cookie gigante com recheio generoso de Nutella.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ BOMBOM NO POTE ═══ -->
+      <article class="cardapio-card" data-cat="bombom" data-product-name="Bombom no Pote de Uva">
+        <div class="cc-img">
+          <span class="cc-badge">★ Disponível</span>
+          <img src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=700&q=80" alt="Bombom no Pote de Uva" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 12<small>Pote</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Bombom no Pote</div>
+          <h3 class="cc-name">Bombom no Pote de Uva</h3>
+          <p class="cc-desc">Bombom de colher com uva fresca e brigadeiro cremoso.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="cardapio-card" data-cat="bombom" data-product-name="Bombom no Pote de Morango">
+        <div class="cc-img">
+          <span class="cc-badge">★ Disponível</span>
+          <img src="https://images.unsplash.com/photo-1488477304112-4944851de03d?w=700&q=80" alt="Bombom no Pote de Morango" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 12<small>Pote</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Bombom no Pote</div>
+          <h3 class="cc-name">Bombom no Pote de Morango</h3>
+          <p class="cc-desc">Morango, chocolate e creme em cada colherada.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="cc-cta">Pedir online</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ═══ SALGADOS ═══ -->
+      <article class="cardapio-card cc-sold" data-cat="salgados" data-product-name="Mega Coxinha Crocante de Frango com Catupiry">
+        <div class="cc-img">
+          <span class="cc-badge cc-badge-sold">Esgotado</span>
+          <img src="https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?w=700&q=80" alt="Mega Coxinha Crocante de Frango com Catupiry" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+          <span class="cc-price">R$ 16<small>Unidade</small></span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-category">Salgados</div>
+          <h3 class="cc-name">Mega Coxinha de Frango c/ Catupiry</h3>
+          <p class="cc-desc">Coxinha crocante recheada de frango com catupiry. Generosa.</p>
+          <div class="cc-footer">
+            <span class="cc-stars">★★★★★ 5.0</span>
+            <a href="https://wa.me/5575999999999?text=Quero%20ser%20avisada%20quando%20a%20Mega%20Coxinha%20voltar%20ao%20card%C3%A1pio" target="_blank" rel="noopener" class="cc-cta cc-cta-soft">Avisar quando voltar</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="carousel-nav">
+    <div class="carousel-dots" id="dots-cardapio" aria-hidden="true"></div>
+    <button class="carousel-btn" aria-label="Anterior" onclick="scrollCarousel('track-cardapio', -1, 'dots-cardapio')">←</button>
+    <button class="carousel-btn" aria-label="Próximo" onclick="scrollCarousel('track-cardapio', 1, 'dots-cardapio')">→</button>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     DIFERENCIAIS / TIMELINE + BUFFET
+══════════════════════════════════════════════ -->
+<section class="diferenciais" id="diferenciais">
+  <div class="diferenciais-header reveal">
+    <div class="section-eyebrow-dark" style="justify-content:center">Uma experiência completa</div>
+    <h2 class="section-title-dark">Do primeiro contato<br>ao último <em>suspiro</em></h2>
+    <p class="diferenciais-sub">Cada detalhe da sua encomenda é orquestrado com o cuidado de quem transforma açúcar em memória afetiva.</p>
+  </div>
+
+  <div class="exp-timeline">
+    <div class="exp-cards">
+      <div class="exp-card reveal reveal-d1">
+        <div class="exp-dot" aria-hidden="true">💬</div>
+        <div class="exp-label">Passo 01</div>
+        <h3 class="exp-title">Atendimento Personalizado</h3>
+        <p class="exp-desc">Você fala diretamente com a confeiteira. Cada pedido é único — ouvimos tudo.</p>
+      </div>
+
+      <div class="exp-card reveal reveal-d2">
+        <div class="exp-dot" aria-hidden="true">✏️</div>
+        <div class="exp-label">Passo 02</div>
+        <h3 class="exp-title">Criação Exclusiva</h3>
+        <p class="exp-desc">Desenvolvemos receita, sabor e decoração para o seu momento.</p>
+      </div>
+
+      <div class="exp-card reveal reveal-d3">
+        <div class="exp-dot" aria-hidden="true">🌾</div>
+        <div class="exp-label">Passo 03</div>
+        <h3 class="exp-title">Ingredientes Nobres</h3>
+        <p class="exp-desc">Chocolate belga, frutas frescas, manteiga real. Sem atalhos.</p>
+      </div>
+
+      <div class="exp-card reveal reveal-d4">
+        <div class="exp-dot" aria-hidden="true">🤲</div>
+        <div class="exp-label">Passo 04</div>
+        <h3 class="exp-title">Feito à Mão</h3>
+        <p class="exp-desc">Cada camada e detalhe decorado com técnica artesanal e tempo.</p>
+      </div>
+
+      <div class="exp-card reveal reveal-d5">
+        <div class="exp-dot" aria-hidden="true">🎁</div>
+        <div class="exp-label">Passo 05</div>
+        <h3 class="exp-title">Entrega Premium</h3>
+        <p class="exp-desc">Embalagem cuidadosa, apresentação impecável. A caixa também encanta.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner Buffet -->
+  <div class="buffet-banner reveal">
+    <div class="buffet-img">
+      <img src="https://images.unsplash.com/photo-1607478900766-efe13248b125?w=900&q=85" alt="Mesa de doces artesanais para evento" loading="lazy">
+    </div>
+    <div class="buffet-content">
+      <div class="buffet-eyebrow">Serviço especial</div>
+      <h3 class="buffet-title">Buffet de doces<br><em>para o seu evento</em></h3>
+      <p class="buffet-text">Transformamos qualquer celebração em experiência sensorial. Mesa de doces personalizada para o tema e paladar dos seus convidados.</p>
+      <div class="buffet-features">
+        <div class="buffet-feat"><div class="buffet-feat-dot"></div>Mesa decorada e montada no local</div>
+        <div class="buffet-feat"><div class="buffet-feat-dot"></div>Doces exclusivos e personalizados</div>
+        <div class="buffet-feat"><div class="buffet-feat-dot"></div>Bolos, bombons, bem-casados e mais</div>
+        <div class="buffet-feat"><div class="buffet-feat-dot"></div>Casamentos, aniversários, corporativo</div>
+      </div>
+      <a href="https://wa.me/5575999999999?text=Quero%20or%C3%A7amento%20do%20Buffet%20de%20Doces%20para%20meu%20evento%20%F0%9F%8E%89"
+         target="_blank" rel="noopener" class="buffet-cta">
+        Solicitar orçamento
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     PRODUTOS DESTAQUE — CAROUSEL
+══════════════════════════════════════════════ -->
+<section class="produtos" id="produtos">
+  <div class="produtos-header reveal">
+    <div>
+      <div class="section-eyebrow-dark">Mais pedidos</div>
+      <h2 class="section-title-dark">Nossos <em>favoritos</em></h2>
+    </div>
+    <a href="#cardapio" class="btn-outline" style="border-color:rgba(61,10,30,.25);color:var(--wine);flex-shrink:0">Ver cardápio completo</a>
+  </div>
+
+  <div class="carousel-wrapper light">
+    <div class="carousel-track" id="track-prod" role="region" aria-label="Produtos favoritos" tabindex="0">
+
+
+      <article class="prod-card" data-product-name="Brownie de Chocolate Gourmet">
+        <div class="prod-img">
+          <span class="prod-ribbon">+ Vendido</span>
+          <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&q=85" alt="Brownie de Chocolate Gourmet" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Brownie · R$ 10</div>
+          <h3 class="prod-name">Brownie de Chocolate Gourmet</h3>
+          <p class="prod-desc">Denso, úmido e intenso. O campeão de pedidos da casa.</p>
+          <div class="prod-footer">
+            <span class="prod-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="prod-cta">Pedir online →</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="prod-card" data-product-name="Copodim">
+        <div class="prod-img">
+          <span class="prod-ribbon">✨ Especial</span>
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=800&q=85" alt="Copodim" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Copos · R$ 23</div>
+          <h3 class="prod-name">Copodim</h3>
+          <p class="prod-desc">Pudim no copo, cremoso até a última colherada.</p>
+          <div class="prod-footer">
+            <span class="prod-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="prod-cta">Pedir online →</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="prod-card" data-product-name="Cookie de Nutella">
+        <div class="prod-img">
+          <span class="prod-ribbon">🍪 Gourmet</span>
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&q=85" alt="Cookie de Nutella" loading="lazy"><!-- TROCAR POR FOTO REAL -->
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Cookie · R$ 16,50</div>
+          <h3 class="prod-name">Cookie de Nutella</h3>
+          <p class="prod-desc">Cookie gigante com recheio generoso de Nutella.</p>
+          <div class="prod-footer">
+            <span class="prod-stars">★★★★★ 5.0</span>
+            <button onclick="pedirOnline(this)" class="prod-cta">Pedir online →</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="carousel-nav">
+    <div class="carousel-dots light" id="dots-prod" aria-hidden="true"></div>
+    <button class="carousel-btn light" aria-label="Anterior" onclick="scrollCarousel('track-prod', -1, 'dots-prod')">←</button>
+    <button class="carousel-btn light" aria-label="Próximo" onclick="scrollCarousel('track-prod', 1, 'dots-prod')">→</button>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FAQ — MATA OBJEÇÕES (nova seção)
+══════════════════════════════════════════════ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <div class="section-eyebrow-dark" style="justify-content:center">Dúvidas frequentes</div>
+      <h2 class="section-title-dark">Pequenas dúvidas,<br><em>grandes respostas</em></h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          Com quanto tempo de antecedência preciso encomendar?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          O ideal é <strong>48 horas de antecedência</strong> para bolos e doces. Para encomendas grandes, mesas de doces e eventos, recomendamos <strong>5 a 7 dias</strong> para garantir a melhor experiência. Em casos de urgência, fale conosco — sempre tentamos ajudar.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          Como funciona o pagamento?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          Aceitamos <strong>PIX, dinheiro e cartão</strong> (crédito e débito). Para encomendas, pedimos um sinal de 50% na confirmação e o restante na entrega. Mesas de doces e eventos: combinamos as condições no orçamento.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          Vocês fazem entrega? Para quais bairros?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          Sim! Entregamos em <strong>toda Feira de Santana</strong>. A taxa de entrega varia conforme o bairro e é informada no momento do pedido. Você também pode retirar diretamente em Kalilândia, sem custo adicional.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          Posso personalizar sabor, recheio e decoração?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          <strong>Com certeza.</strong> Cada bolo é feito sob encomenda. Você escolhe sabor, recheio, tamanho e decoração. Trabalhamos com temas personalizados — me chama no WhatsApp com a sua ideia e a gente cria juntos.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          Os preços do cardápio são finais?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          Os preços marcados são <strong>"a partir de"</strong>, considerando os tamanhos e versões base. Personalizações (recheios especiais, decorações temáticas, ingredientes premium) podem ajustar o valor — sempre transparente, sempre combinado antes.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          Vocês atendem eventos corporativos e casamentos?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a">
+          Atendemos! Mesas de doces para <strong>casamentos, aniversários, formaturas e eventos corporativos</strong> são uma das nossas especialidades. Montamos tudo no local com decoração personalizada. <a href="https://wa.me/5575999999999?text=Quero%20or%C3%A7amento%20para%20evento" target="_blank" rel="noopener">Peça um orçamento aqui</a>.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     DEPOIMENTOS
+══════════════════════════════════════════════ -->
+<section class="depoimentos" id="depoimentos">
+  <div class="depoimentos-header reveal">
+    <div class="section-eyebrow center">Avaliações reais</div>
+    <h2 class="section-title-light">Quem já <em>provou</em>, voltou</h2>
+  </div>
+
+  <div class="dep-carousel-wrap">
+    <div class="dep-track" id="track-dep" role="region" aria-label="Depoimentos de clientes" tabindex="0">
+
+      <article class="dep-card">
+        <div class="dep-quote-mark" aria-hidden="true">"</div>
+        <div class="dep-stars" aria-label="Cinco estrelas">
+          <span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span>
+        </div>
+        <p class="dep-text">O bolo de chocolate da Coma Doce é o melhor que já comi em Feira de Santana. Peço toda semana — nunca decepciona.</p>
+        <div class="dep-author">
+          <div class="dep-avatar" data-initial="A" aria-hidden="true">A</div>
+          <div>
+            <div class="dep-name">Ana Paula Souza</div>
+            <div class="dep-local">Kalilândia, Feira de Santana</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dep-card">
+        <div class="dep-quote-mark" aria-hidden="true">"</div>
+        <div class="dep-stars" aria-label="Cinco estrelas">
+          <span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span>
+        </div>
+        <p class="dep-text">Encomendei o bolo de aniversário da minha filha e superou todas as expectativas. Lindo, delicioso, entregue na hora certa.</p>
+        <div class="dep-author">
+          <div class="dep-avatar" data-initial="C" aria-hidden="true">C</div>
+          <div>
+            <div class="dep-name">Carla Mendonça</div>
+            <div class="dep-local">Feira de Santana, BA</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dep-card">
+        <div class="dep-quote-mark" aria-hidden="true">"</div>
+        <div class="dep-stars" aria-label="Cinco estrelas">
+          <span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span>
+        </div>
+        <p class="dep-text">O brownie é viciante. Textura perfeita, sabor incrível. Já indiquei pra todo mundo e vou continuar indicando sem hesitar.</p>
+        <div class="dep-author">
+          <div class="dep-avatar" data-initial="R" aria-hidden="true">R</div>
+          <div>
+            <div class="dep-name">Roberto Lima</div>
+            <div class="dep-local">Feira de Santana, BA</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dep-card">
+        <div class="dep-quote-mark" aria-hidden="true">"</div>
+        <div class="dep-stars" aria-label="Cinco estrelas">
+          <span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span>
+        </div>
+        <p class="dep-text">Contratei o buffet de doces pro casamento e foi tudo impecável. A mesa ficou linda, os convidados não paravam de elogiar.</p>
+        <div class="dep-author">
+          <div class="dep-avatar" data-initial="M" aria-hidden="true">M</div>
+          <div>
+            <div class="dep-name">Mariana Costa</div>
+            <div class="dep-local">Feira de Santana, BA</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dep-card">
+        <div class="dep-quote-mark" aria-hidden="true">"</div>
+        <div class="dep-stars" aria-label="Cinco estrelas">
+          <span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span><span class="dep-star">★</span>
+        </div>
+        <p class="dep-text">O Copodim é perfeito. Cremoso, na medida certa do doce, e some rapidinho lá em casa. Minha família inteira apaixonou.</p>
+        <div class="dep-author">
+          <div class="dep-avatar" data-initial="F" aria-hidden="true">F</div>
+          <div>
+            <div class="dep-name">Fernanda Alves</div>
+            <div class="dep-local">Kalilândia, FSA</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="dep-nav">
+    <div class="carousel-dots" id="dots-dep" aria-hidden="true" style="flex:none"></div>
+    <button class="carousel-btn" aria-label="Anterior" onclick="scrollCarousel('track-dep', -1, 'dots-dep')">←</button>
+    <button class="carousel-btn" aria-label="Próximo" onclick="scrollCarousel('track-dep', 1, 'dots-dep')">→</button>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CTA FINAL
+══════════════════════════════════════════════ -->
+<section class="cta-final" id="cta-final">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Pronto para encantar?</div>
+    <h2 class="cta-title">
+      Seu próximo momento<br>
+      <em>inesquecível</em> começa aqui
+    </h2>
+    <p class="cta-sub">
+      Doces prontos pra pedir no nosso cardápio online. Bolo personalizado pra festa? Chama a gente no WhatsApp — você fala, a gente cria.
+    </p>
+    <div class="cta-btns">
+      <a href="https://instadelivery.com.br/comadoce" target="_blank" rel="noopener" class="btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        Pedir online agora
+      </a>
+      <a href="https://wa.me/5575999999999?text=Oi!%20Quero%20encomendar%20um%20bolo%20personalizado%20na%20Coma%20Doce%20%F0%9F%A7%81"
+         target="_blank" rel="noopener" class="btn-wine">Bolo personalizado no WhatsApp</a>
+    </div>
+    <div class="cta-trust">
+      <div class="cta-trust-item"><span>★</span> Avaliação 5.0</div>
+      <div class="cta-trust-item"><span>🤲</span> 100% Artesanal</div>
+      <div class="cta-trust-item"><span>📦</span> Embalagem premium</div>
+      <div class="cta-trust-item"><span>💬</span> Resposta rápida</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <span aria-hidden="true">🧁</span>
+        Coma Doce
+      </div>
+      <p class="footer-desc">Confeitaria artesanal em Kalilândia, Feira de Santana. Ingredientes selecionados e muito amor em cada receita desde 2019.</p>
+      <div class="footer-socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://wa.me/5575999999999" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.299-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Cardápio</h4>
+      <ul>
+        <li><a href="#cardapio">Bolos inteiros</a></li>
+        <li><a href="#cardapio">Fatias</a></li>
+        <li><a href="#cardapio">Brownie</a></li>
+        <li><a href="#cardapio">Copos gourmet</a></li>
+        <li><a href="#diferenciais">Buffet de doces</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Informações</h4>
+      <ul>
+        <li>Seg–Sáb · 12h às 19h</li>
+        <li>Kalilândia, FSA</li>
+        <li>★ Avaliação 5.0</li>
+        <li>Encomendas em 48h</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5575999999999" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="#sobre">Nossa história</a></li>
+        <li><a href="#faq">Dúvidas</a></li>
+        <li><a href="#depoimentos">Avaliações</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Coma Doce · Todos os direitos reservados</span>
+    <span class="footer-made">Feito com <strong>amor</strong> em Feira de Santana</span>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/5575999999999?text=Oi!%20Quero%20fazer%20um%20pedido%20na%20Coma%20Doce%20%F0%9F%A7%81"
+   target="_blank" rel="noopener" class="wa-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.299-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+  </svg>
+  <span class="wa-tooltip">Fale com a Coma Doce</span>
+</a>
+
+<!-- Toast host -->
+<div class="toast-host" id="toast-host" aria-live="polite"></div>
+
+
+<script>
+(() => {
+  'use strict';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Scroll progress bar ---------- */
+  const progress = document.getElementById('scroll-progress');
+  const updateProgress = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    if (progress) progress.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ---------- Nav scrolled state ---------- */
+  const nav = document.querySelector('.nav');
+  const onScrollNav = () => {
+    if (!nav) return;
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScrollNav, { passive: true });
+  onScrollNav();
+
+  /* ---------- Mobile menu ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const mobNav = document.getElementById('mob-nav');
+  const toggleMob = (force) => {
+    if (!hamburger || !mobNav) return;
+    const open = typeof force === 'boolean' ? force : !mobNav.classList.contains('open');
+    mobNav.classList.toggle('open', open);
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    mobNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  if (hamburger) hamburger.addEventListener('click', () => toggleMob());
+  if (mobNav) mobNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMob(false)));
+
+  /* ---------- Smooth scroll ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('up');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('up'));
+  }
+
+  /* ---------- Hero parallax ---------- */
+  const heroBg = document.querySelector('.hero-bg');
+  if (heroBg && !reduceMotion) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 800) heroBg.style.transform = `translateY(${y * 0.25}px)`;
+    }, { passive: true });
+  }
+
+  /* ---------- Counter animation ---------- */
+  const animateNum = (el) => {
+    const target = el.dataset.target || el.textContent;
+    const numMatch = target.match(/^([\d.]+)([+a-zA-Z]*)$/);
+    if (!numMatch || reduceMotion) { el.textContent = target; return; }
+    const finalVal = parseFloat(numMatch[1]);
+    const suffix = numMatch[2] || '';
+    const isFloat = numMatch[1].includes('.');
+    const duration = 1400;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = finalVal * eased;
+      el.textContent = (isFloat ? v.toFixed(1) : Math.floor(v)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  };
+  if ('IntersectionObserver' in window) {
+    const numIo = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateNum(entry.target);
+          numIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.hero-stat-num').forEach(el => numIo.observe(el));
+  }
+
+  /* ---------- Magnetic buttons ---------- */
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.btn-primary, .btn-wa, .btn-wine, .nav-cta').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px) translateY(-3px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Option toggles (.cc-opt, .prod-opt) ---------- */
+  const wireOptions = (selector, groupSelector) => {
+    document.querySelectorAll(selector).forEach(opt => {
+      opt.addEventListener('click', () => {
+        const group = opt.closest(groupSelector);
+        if (!group) return;
+        group.querySelectorAll(selector).forEach(s => s.classList.remove('sel'));
+        opt.classList.add('sel');
+      });
+    });
+  };
+  wireOptions('.cc-opt', '.cc-options');
+  wireOptions('.prod-opt', '.prod-options');
+
+  /* ---------- Pedido online (InstaDelivery) ---------- */
+  const INSTA_URL = 'https://instadelivery.com.br/comadoce';
+  const toastHost = document.getElementById('toast-host');
+
+  const showToast = (productName) => {
+    if (!toastHost) return;
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.innerHTML = `<span class="toast-label">Abrindo o cardápio</span>No InstaDelivery, busque por <strong>${productName}</strong> para finalizar seu pedido. 🧁`;
+    toastHost.appendChild(t);
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+    setTimeout(() => {
+      t.classList.remove('show');
+      setTimeout(() => t.remove(), 500);
+    }, 6000);
+  };
+
+  window.pedirOnline = (btn) => {
+    const card = btn.closest('[data-product-name]');
+    const name = card ? card.dataset.productName : '';
+    if (name) showToast(name);
+    setTimeout(() => window.open(INSTA_URL, '_blank', 'noopener'), 500);
+  };
+
+  /* ---------- Carousel engine ---------- */
+  const carouselState = new Map();
+
+  const getCardStep = (track) => {
+    const first = track.children[0];
+    if (!first) return track.clientWidth;
+    const cs = getComputedStyle(track);
+    const gap = parseFloat(cs.gap || cs.columnGap || '24') || 24;
+    return first.offsetWidth + gap;
+  };
+
+  const buildDots = (track, dotsEl) => {
+    if (!dotsEl) return 0;
+    const step = getCardStep(track);
+    const visible = Math.max(1, Math.round(track.clientWidth / step));
+    const totalCards = Array.from(track.children).filter(c => c.offsetParent !== null || c.classList.contains('cardapio-card') || c.classList.contains('gal-item') || c.classList.contains('prod-card') || c.classList.contains('dep-card')).length;
+    const pages = Math.max(1, Math.ceil(totalCards / visible));
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < pages; i++) {
+      const d = document.createElement('button');
+      d.className = 'cdot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Página ${i + 1}`);
+      d.addEventListener('click', () => {
+        track.scrollTo({ left: i * step * visible, behavior: 'smooth' });
+      });
+      dotsEl.appendChild(d);
+    }
+    return pages;
+  };
+
+  const updateActiveDot = (track, dotsEl) => {
+    if (!dotsEl) return;
+    const step = getCardStep(track);
+    const visible = Math.max(1, Math.round(track.clientWidth / step));
+    const page = Math.round(track.scrollLeft / (step * visible));
+    dotsEl.querySelectorAll('.cdot').forEach((d, i) => d.classList.toggle('active', i === page));
+  };
+
+  const initCarousel = (trackId, dotsId) => {
+    const track = document.getElementById(trackId);
+    const dotsEl = dotsId ? document.getElementById(dotsId) : null;
+    if (!track) return;
+    buildDots(track, dotsEl);
+    track.addEventListener('scroll', () => updateActiveDot(track, dotsEl), { passive: true });
+    carouselState.set(trackId, { track, dotsEl });
+  };
+
+  window.scrollCarousel = (trackId, dir, dotsId) => {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    const step = getCardStep(track);
+    const visible = Math.max(1, Math.round(track.clientWidth / step));
+    const delta = dir * step * visible;
+    track.scrollBy({ left: delta, behavior: 'smooth' });
+  };
+
+  ['track-galeria', 'track-cardapio', 'track-prod', 'track-dep'].forEach(id => {
+    const dotsId = id.replace('track-', 'dots-');
+    initCarousel(id, dotsId);
+  });
+
+  window.addEventListener('resize', () => {
+    carouselState.forEach(({ track, dotsEl }) => {
+      buildDots(track, dotsEl);
+      updateActiveDot(track, dotsEl);
+    });
+  });
+
+  /* ---------- Cardápio filter ---------- */
+  window.filterCardapio = (cat, btn) => {
+    document.querySelectorAll('.cardapio-tabs .ctab').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    if (btn) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+    }
+    const track = document.getElementById('track-cardapio');
+    if (!track) return;
+    track.querySelectorAll('.cardapio-card').forEach(card => {
+      const show = cat === 'todos' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+    });
+    track.scrollTo({ left: 0, behavior: 'smooth' });
+    const dotsEl = document.getElementById('dots-cardapio');
+    buildDots(track, dotsEl);
+    updateActiveDot(track, dotsEl);
+  };
+
+  /* ---------- Nav active section ---------- */
+  if ('IntersectionObserver' in window) {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = ['sobre', 'galeria', 'cardapio', 'diferenciais', 'produtos', 'faq', 'depoimentos']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    if (sections.length && navLinks.length) {
+      const navIo = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sections.forEach(s => navIo.observe(s));
+    }
+  }
+})();
+</script>
+</body>
+</html>
