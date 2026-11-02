@@ -281,6 +281,12 @@ details[open] > summary{color:var(--g)}
   <div class="more-grid" id="moreGrid"></div>
 </dialog>
 
+<!-- Confirmação dentro da página (substitui confirm(), bloqueado em alguns visualizadores) -->
+<dialog id="confirmDialog" aria-labelledby="confirmMsg">
+  <div class="dlg-head"><h2 id="confirmMsg" style="font-size:1.05rem">Confirmar?</h2></div>
+  <div class="dlg-foot"><button type="button" class="btn ghost" id="confirmNo">Cancelar</button><button type="button" class="btn" id="confirmYes">Confirmar</button></div>
+</dialog>
+
 <input type="file" id="importFile" accept="application/json,.json" hidden>
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -623,11 +629,25 @@ function toast(msg) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
 }
 
+/* ---------- Confirmação em diálogo (Promise<boolean>) ---------- */
+function askConfirm(msg) {
+  return new Promise(resolve => {
+    const d = $('#confirmDialog');
+    $('#confirmMsg').textContent = msg;
+    const done = v => { d.removeEventListener('close', onClose); $('#confirmYes').onclick = $('#confirmNo').onclick = null; if (d.open) d.close(); resolve(v); };
+    const onClose = () => done(false);
+    $('#confirmYes').onclick = () => done(true);
+    $('#confirmNo').onclick = () => done(false);
+    d.addEventListener('close', onClose);
+    d.showModal(); $('#confirmNo').focus();
+  });
+}
+
 /* ---------- Formulário genérico em diálogo ----------
    fields: [{key, label, type:'text'|'textarea'|'number'|'date'|'month'|'url'|'select'|'checkbox', options, required, value, hint}] */
 let formCtx = null;
-function openForm({ title, fields, onSave, onDelete, saveLabel = 'Salvar' }) {
-  formCtx = { fields, onSave, onDelete };
+function openForm({ title, fields, onSave, onDelete, saveLabel = 'Salvar', doneMsg = 'Salvo.' }) {
+  formCtx = { fields, onSave, onDelete, doneMsg };
   $('#formTitle').textContent = title;
   $('#formSave').textContent = saveLabel;
   $('#formDelete').hidden = !onDelete;
@@ -664,7 +684,7 @@ function submitForm(e) {
     vals[f.key] = v;
   }
   formCtx.onSave(vals);
-  save(); $('#formDialog').close(); render(); toast('Salvo.');
+  save(); $('#formDialog').close(); render(); toast(formCtx.doneMsg);
 }
 /** Atalho: editar/criar item de uma lista com o formulário genérico. */
 function editItem(arr, item, title, fields, extraNew = {}) {
@@ -1283,8 +1303,8 @@ const ACT = {
   },
   pomoReset: () => { pomoStop(); POMO.remaining = POMO_DUR[POMO.mode]; render(); pomoPaint(); },
   pomoSkip: () => { pomoStop(); POMO.mode = POMO.mode === 'foco' ? 'pausa' : 'foco'; POMO.remaining = POMO_DUR[POMO.mode]; render(); pomoPaint(); },
-  courseDone: el => { const c = find(S.study.trilha, el.dataset.id); if (c && confirm(`Concluir “${c.title}”? O próximo curso será liberado.`)) { c.done = true; c.doneAt = todayKey(); save(); render(); toast('Curso concluído. Próximo liberado.'); } },
-  courseUndo: el => { const c = find(S.study.trilha, el.dataset.id); if (c && confirm('Desfazer a conclusão deste curso?')) { c.done = false; c.doneAt = ''; save(); render(); } },
+  courseDone: async el => { const c = find(S.study.trilha, el.dataset.id); if (c && await askConfirm(`Concluir “${c.title}”? O próximo curso será liberado.`)) { c.done = true; c.doneAt = todayKey(); save(); render(); toast('Curso concluído. Próximo liberado.'); } },
+  courseUndo: async el => { const c = find(S.study.trilha, el.dataset.id); if (c && await askConfirm('Desfazer a conclusão deste curso?')) { c.done = false; c.doneAt = ''; save(); render(); } },
   courseEdit: el => editItem(S.study.trilha, find(S.study.trilha, el.dataset.id), 'curso', F_COURSE),
   courseAdd: () => editItem(S.study.trilha, null, 'curso', F_COURSE, { done: false, doneAt: '', startedAt: '' }),
   courseUp: el => { const cur = currentCourse(); move(S.study.trilha, el.dataset.id, -1, x => !x.done && x !== cur); save(); render(); },
@@ -1293,10 +1313,10 @@ const ACT = {
   bookAdd: () => editItem(S.study.leituras, null, 'livro', [{ key: 'title', label: 'Título', required: true }, { key: 'author', label: 'Autor' }], { done: false, doneAt: '' }),
   subjAdd: () => editItem(S.study.concurso.subjects, null, 'matéria', [{ key: 'name', label: 'Matéria', required: true }], { topics: [], done: false, doneAt: '' }),
   subjEdit: el => editItem(S.study.concurso.subjects, find(S.study.concurso.subjects, el.dataset.id), 'matéria', [{ key: 'name', label: 'Matéria', required: true }]),
-  subjDone: el => {
+  subjDone: async el => {
     const s = find(S.study.concurso.subjects, el.dataset.id); if (!s) return;
     const pend = s.topics.filter(t => !t.done).length;
-    if (confirm(pend ? `Ainda há ${pend} tópico(s) pendente(s). Concluir “${s.name}” mesmo assim?` : `Concluir “${s.name}” e liberar a próxima matéria?`)) { s.done = true; s.doneAt = todayKey(); save(); render(); toast('Matéria concluída.'); }
+    if (await askConfirm(pend ? `Ainda há ${pend} tópico(s) pendente(s). Concluir “${s.name}” mesmo assim?` : `Concluir “${s.name}” e liberar a próxima matéria?`)) { s.done = true; s.doneAt = todayKey(); save(); render(); toast('Matéria concluída.'); }
   },
   subjUndo: el => { const s = find(S.study.concurso.subjects, el.dataset.id); if (s) { s.done = false; s.doneAt = ''; save(); render(); } },
   subjUp: el => { const cur = currentSubject(); move(S.study.concurso.subjects, el.dataset.id, -1, x => !x.done && x !== cur); save(); render(); },
@@ -1352,7 +1372,7 @@ const ACT = {
     { key: 'date', label: 'Data', type: 'date', required: true, value: todayKey() },
     { key: 'nota', label: 'Como foi (1 = ruim, 5 = ótimo)', type: 'select', options: ['1', '2', '3', '4', '5'], value: '3' },
     { key: 'texto', label: 'Observação', type: 'textarea', rows: 3 }]); },
-  impLogDel: el => { const m = find(S.dev.melhorias, el.dataset.id); if (m && confirm('Remover este registro?')) { m.logs = m.logs.filter(x => x.id !== el.dataset.log); save(); render(); } },
+  impLogDel: async el => { const m = find(S.dev.melhorias, el.dataset.id); if (m && await askConfirm('Remover este registro?')) { m.logs = m.logs.filter(x => x.id !== el.dataset.log); save(); render(); } },
   saveReview: () => {
     const k = todayKey(), v = {}; ['learned', 'done', 'stuck', 'next'].forEach(f => { v[f] = ($('#rv_' + f)?.value || '').trim(); });
     if (!Object.values(v).some(Boolean)) { toast('Preencha pelo menos um campo.'); return; }
@@ -1391,12 +1411,16 @@ const ACT = {
     const blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `central-youssef-backup-${todayKey()}.json`;
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    toast('Backup exportado.');
+    // Se o download for bloqueado (ex.: visualizador embutido), o JSON fica disponível para copiar.
+    const json = JSON.stringify(S);
+    openForm({ title: 'Backup (JSON)', saveLabel: 'Copiar', doneMsg: 'Backup copiado. Cole num arquivo .json.',
+      fields: [{ key: 'json', label: 'Se o download não começou, copie o texto e salve como .json', type: 'textarea', rows: 8, value: json }],
+      onSave: () => { navigator.clipboard.writeText(json).catch(() => { const t = $('#f_json'); if (t) t.select(); }); } });
   },
   import: () => $('#importFile').click(),
-  resetAll: () => {
-    if (!confirm('Apagar TODOS os dados e voltar ao padrão? Exporte um backup antes.')) return;
-    if (!confirm('Tem certeza? Isso não pode ser desfeito.')) return;
+  resetAll: async () => {
+    if (!await askConfirm('Apagar TODOS os dados e voltar ao padrão? Exporte um backup antes.')) return;
+    if (!await askConfirm('Tem certeza? Isso não pode ser desfeito.')) return;
     S = defaults(); save(); render(); toast('Dados reiniciados.');
   },
   hideGuide: () => { S.settings.showGuide = false; save(); location.hash = 'painel'; toast('Guia oculto. Reative em Meus dados.'); },
@@ -1490,18 +1514,18 @@ document.addEventListener('input', e => {
   if (el && INPUT[el.dataset.input]) INPUT[el.dataset.input](el, e);
 });
 $('#formEl').addEventListener('submit', submitForm);
-$('#formDelete').addEventListener('click', () => {
-  if (formCtx && formCtx.onDelete && confirm('Remover este item?')) { formCtx.onDelete(); save(); $('#formDialog').close(); render(); toast('Removido.'); }
+$('#formDelete').addEventListener('click', async () => {
+  if (formCtx && formCtx.onDelete && await askConfirm('Remover este item?')) { formCtx.onDelete(); save(); $('#formDialog').close(); render(); toast('Removido.'); }
 });
 $('#moreDialog').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); }); // toque fora fecha
 $('#importFile').addEventListener('change', e => {
   const file = e.target.files[0]; if (!file) return;
   const reader = new FileReader();
-  reader.onload = () => {
+  reader.onload = async () => {
     try {
       const data = JSON.parse(reader.result);
       if (!isObj(data) || !data.routines || !data.settings) throw new Error('formato');
-      if (!confirm('Importar este backup? Os dados atuais serão substituídos.')) return;
+      if (!await askConfirm('Importar este backup? Os dados atuais serão substituídos.')) return;
       S = deepMerge(defaults(), data); save(); render(); toast('Backup importado.');
     } catch (err) { toast('Arquivo inválido. Use um backup exportado pela Central.'); }
     finally { e.target.value = ''; }
