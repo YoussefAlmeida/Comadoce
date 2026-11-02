@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0F7A4A">
+<meta name="description" content="Central Youssef — rotina, estudo, finanças e treino.">
+<title>Central Youssef</title>
+<!-- Fontes: se estiver offline, o app usa as fontes do sistema automaticamente. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. TOKENS DE DESIGN
+   ========================================================= */
+:root{
+  --g:#0F7A4A;          /* verde principal */
+  --g-dark:#0B5E39;     /* verde para hover/pressionado */
+  --gl:#E6F4EC;         /* verde claro */
+  --w:#FFFFFF;          /* branco */
+  --t:#14231B;          /* texto */
+  --m:#6B7C72;          /* cinza de apoio */
+  --bg:#F4F9F6;         /* fundo levemente esverdeado */
+  --line:#D6E5DC;       /* bordas */
+  --red:#B42318; --red-bg:#FEF3F2;   /* alertas */
+  --amb:#93370D; --amb-bg:#FFFAEB;   /* avisos */
+  --r:18px; --r-sm:12px;
+  --shadow:0 1px 2px rgba(20,35,27,.05),0 6px 20px rgba(20,35,27,.05);
+  --f-title:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-text:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --nav-h:68px;
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--t);font:400 16px/1.5 var(--f-text);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-title);line-height:1.2;margin:0;letter-spacing:-.01em}
+h1{font-size:1.65rem;font-weight:800}
+h2{font-size:1.15rem;font-weight:700}
+h3{font-size:1rem;font-weight:700}
+p{margin:0}
+a{color:var(--g)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--g);outline-offset:2px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.muted{color:var(--m)}
+.small{font-size:.86rem}
+.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--g)}
+.skip{position:absolute;left:8px;top:-60px;background:var(--g);color:#fff;padding:10px 14px;border-radius:10px;z-index:100}
+.skip:focus{top:8px}
+
+/* =========================================================
+   3. LAYOUT + NAVEGAÇÃO (barra inferior no celular, lateral no desktop)
+   ========================================================= */
+.sidebar{display:none}
+main{padding:20px 16px calc(var(--nav-h) + 28px + env(safe-area-inset-bottom));max-width:1080px;margin:0 auto}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--w);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav button{flex:1;min-height:var(--nav-h);border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:.72rem;font-weight:600;color:var(--m);cursor:pointer}
+.bottom-nav button[aria-current="page"]{color:var(--g)}
+.bottom-nav button[aria-current="page"] .ic{background:var(--gl);border-radius:999px;width:52px;padding:3px 0}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+@media (min-width:900px){
+  .bottom-nav{display:none}
+  .layout{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+  .sidebar{display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;padding:24px 14px;background:var(--w);border-right:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:10px;padding:4px 10px 20px;font:800 1.1rem var(--f-title)}
+  .brand-mark{width:34px;height:34px;border-radius:10px;background:var(--g);color:#fff;display:grid;place-items:center;font-size:1rem}
+  .sidebar button{display:flex;align-items:center;gap:12px;border:0;background:none;padding:11px 12px;border-radius:12px;font-weight:600;color:var(--t);cursor:pointer;text-align:left}
+  .sidebar button:hover{background:var(--bg)}
+  .sidebar button[aria-current="page"]{background:var(--gl);color:var(--g)}
+  main{padding:36px 36px 60px;width:100%}
+  h1{font-size:2rem}
+}
+
+/* =========================================================
+   4. COMPONENTES
+   ========================================================= */
+.page-head{margin-bottom:18px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px}
+.page-head p{margin-top:4px}
+.card{background:var(--w);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.card + .card,.stack > * + *{margin-top:16px}
+.grid > .card,.grid > *{margin-top:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.card.hl{border:2px solid var(--g)}
+.grid{display:grid;gap:14px}
+@media (min-width:620px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.grid-4{grid-template-columns:repeat(4,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}}
+.section{margin-top:22px}
+.section > h2{margin-bottom:12px}
+
+/* Cartões-resumo */
+.stat{display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;font:inherit;color:inherit;width:100%}
+.stat:hover{border-color:var(--g)}
+.stat .big{font:800 1.4rem var(--f-title);color:var(--t)}
+.stat .ic-wrap{width:38px;height:38px;border-radius:12px;background:var(--gl);color:var(--g);display:grid;place-items:center}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:12px;border:1.5px solid var(--g);background:var(--g);color:#fff;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--g-dark);border-color:var(--g-dark)}
+.btn.ghost{background:var(--w);color:var(--g)}
+.btn.ghost:hover{background:var(--gl)}
+.btn.danger{background:var(--w);color:var(--red);border-color:var(--red)}
+.btn.sm{min-height:38px;padding:6px 12px;font-size:.9rem}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px}
+.ibtn{width:40px;height:40px;border-radius:10px;border:1px solid transparent;background:none;color:var(--m);display:inline-grid;place-items:center;cursor:pointer;flex:none}
+.ibtn:hover{background:var(--gl);color:var(--g)}
+.ibtn .ic{width:19px;height:19px}
+
+/* Checklist com caixas grandes */
+.clist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.crow-wrap{display:flex;align-items:center;gap:4px;border-radius:var(--r-sm)}
+.crow-wrap.now{background:var(--gl);box-shadow:inset 3px 0 0 var(--g)}
+.crow{flex:1;display:flex;align-items:center;gap:14px;min-height:54px;padding:8px 10px;border-radius:var(--r-sm);cursor:pointer}
+.crow:hover{background:var(--bg)}
+.crow-txt{display:flex;flex-direction:column;min-width:0}
+.crow-title{font-weight:500;overflow-wrap:anywhere}
+.crow-sub{font-size:.84rem;color:var(--m)}
+.is-done .crow-title{text-decoration:line-through;color:var(--m)}
+.is-locked{cursor:not-allowed;opacity:.75}
+.chk{appearance:none;-webkit-appearance:none;margin:0;width:30px;height:30px;border:2px solid var(--g);border-radius:9px;background:var(--w);display:grid;place-content:center;cursor:pointer;flex:none;transition:background .15s}
+.chk::before{content:"";width:14px;height:8px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:translate(0,-2px) rotate(-45deg);opacity:0}
+.chk:checked{background:var(--g)}
+.chk:checked::before{opacity:1}
+.chk:disabled{border-color:var(--m);cursor:not-allowed}
+
+/* Barras de progresso */
+.bar{height:10px;background:var(--gl);border-radius:999px;overflow:hidden}
+.bar > span{display:block;height:100%;background:var(--g);border-radius:999px;transition:width .3s}
+.bar.warn > span{background:var(--amb)}
+.bar.bad > span{background:var(--red)}
+.prog-label{display:flex;justify-content:space-between;font-size:.86rem;color:var(--m);margin:6px 0 4px}
+
+/* Alertas */
+.alert{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--r-sm);background:var(--gl);color:var(--t);margin-bottom:12px;border:1px solid #BFE0CC}
+.alert .ic{color:var(--g);margin-top:1px}
+.alert.warn{background:var(--amb-bg);border-color:#FEDF89}
+.alert.warn .ic{color:var(--amb)}
+.alert.err{background:var(--red-bg);border-color:#FECDCA}
+.alert.err .ic{color:var(--red)}
+.alert strong{display:block}
+
+/* Etiquetas e chips */
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--gl);color:var(--g);white-space:nowrap}
+.tag.gray{background:#EEF2EF;color:var(--m)}
+.tag.warn{background:var(--amb-bg);color:var(--amb)}
+.tag.err{background:var(--red-bg);color:var(--red)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chip{border:1.5px solid var(--line);background:var(--w);border-radius:999px;padding:8px 14px;font-weight:600;font-size:.9rem;cursor:pointer;white-space:nowrap;min-height:40px}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--g);border-color:var(--g);color:#fff}
+
+/* Sub-abas */
+.tabs{display:flex;gap:6px;background:var(--w);border:1px solid var(--line);padding:5px;border-radius:14px;margin:18px 0}
+.tabs button{flex:1;border:0;background:none;padding:10px 8px;border-radius:10px;font-weight:600;cursor:pointer;color:var(--m);min-height:44px}
+.tabs button[aria-selected="true"]{background:var(--g);color:#fff}
+
+/* Listas simples */
+.list{list-style:none;margin:0;padding:0}
+.list > li{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
+.list > li:first-child{border-top:0}
+.list .grow{flex:1;min-width:0}
+.list .num{width:30px;height:30px;border-radius:9px;background:#EEF2EF;color:var(--m);display:grid;place-items:center;font-weight:700;font-size:.85rem;flex:none}
+.actions{display:flex;gap:2px;flex:none}
+
+/* Formulários */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field > span{font-size:.88rem;font-weight:600}
+.field input,.field select,.field textarea,.inp{width:100%;min-height:46px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--w)}
+.field textarea{resize:vertical;min-height:90px}
+.field input:focus,.field select:focus,.field textarea:focus,.inp:focus{border-color:var(--g);outline:none;box-shadow:0 0 0 3px var(--gl)}
+.field.check{flex-direction:row;align-items:center;gap:12px}
+.field .invalid{border-color:var(--red)}
+.inline-inputs{display:flex;gap:8px;flex-wrap:wrap}
+.inline-inputs .inp{width:92px;min-height:40px;padding:6px 10px}
+
+/* Diálogos */
+dialog{border:0;border-radius:22px;padding:0;width:min(560px,calc(100% - 24px));max-height:calc(100vh - 40px);box-shadow:0 20px 60px rgba(20,35,27,.25);color:var(--t)}
+dialog::backdrop{background:rgba(20,35,27,.45)}
+.dlg-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 8px}
+.dlg-body{padding:8px 20px;overflow:auto;max-height:calc(100vh - 200px)}
+.dlg-foot{display:flex;gap:8px;justify-content:flex-end;padding:12px 20px 20px;flex-wrap:wrap}
+.dlg-foot .spacer{flex:1}
+#moreDialog{margin:auto auto 0;width:100%;max-width:100%;border-radius:22px 22px 0 0}
+#moreDialog .more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px 20px calc(24px + env(safe-area-inset-bottom))}
+#moreDialog .more-grid button{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--w);font-weight:600;cursor:pointer;min-height:84px;color:var(--t)}
+#moreDialog .more-grid button[aria-current="page"]{border-color:var(--g);background:var(--gl);color:var(--g)}
+
+/* Toast */
+#toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--t);color:#fff;padding:12px 18px;border-radius:12px;font-weight:500;opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:calc(100% - 32px)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (min-width:900px){#toast{bottom:24px}}
+
+/* Painel */
+.hello{font-size:1.65rem}
+.week-strip{display:flex;gap:6px;margin-top:10px}
+.week-strip .d{flex:1;text-align:center;font-size:.7rem;color:var(--m)}
+.week-strip .d i{display:block;height:28px;border-radius:8px;background:#EEF2EF;margin-bottom:4px}
+.week-strip .d.ok i{background:var(--g)}
+.week-strip .d.part i{background:#9CCFB2}
+.week-strip .d.rest i{background:repeating-linear-gradient(45deg,var(--gl),var(--gl) 4px,#fff 4px,#fff 8px);border:1px solid var(--line)}
+.week-strip .d.today{color:var(--t);font-weight:700}
+.pct-big{font:800 2.2rem var(--f-title);color:var(--g)}
+.firm{font-weight:600;margin-top:4px}
+
+/* Pomodoro */
+.pomo-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.pomo-time{font:800 2.6rem var(--f-title);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pomo.pause .pomo-time{color:var(--m)}
+
+/* Linha do tempo */
+.tl{list-style:none;margin:0;padding:0 0 0 8px;position:relative}
+.tl::before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tl li{position:relative;display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+.tl .dot{width:28px;height:28px;border-radius:50%;background:var(--w);border:2px solid var(--line);display:grid;place-items:center;flex:none;z-index:1;color:#fff}
+.tl .done .dot{background:var(--g);border-color:var(--g)}
+.tl .next .dot{border-color:var(--g);box-shadow:0 0 0 5px var(--gl)}
+.tl .card{flex:1;margin:0}
+.tl .done .card h3{color:var(--m)}
+
+/* Gráfico financeiro */
+.chart{display:flex;align-items:flex-end;gap:10px;height:180px;padding-top:10px}
+.chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%}
+.chart .bars{flex:1;display:flex;align-items:flex-end;gap:3px;width:100%;justify-content:center}
+.chart .bars span{width:42%;max-width:26px;border-radius:6px 6px 0 0;min-height:2px}
+.chart .in{background:var(--g)}
+.chart .out{background:#A9C4B4}
+.chart .lbl{font-size:.72rem;color:var(--m)}
+.chart .col.sel .lbl{color:var(--t);font-weight:700}
+.legend{display:flex;gap:16px;font-size:.84rem;color:var(--m);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.money-in{color:var(--g);font-weight:600}
+.money-out{color:var(--red);font-weight:600}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:6px 0}
+
+/* Evolução (pontos a melhorar) */
+.spark{display:flex;align-items:flex-end;gap:4px;height:40px}
+.spark span{width:12px;background:var(--g);border-radius:3px 3px 0 0;opacity:.85}
+
+details > summary{cursor:pointer;font-weight:600;padding:8px 0;list-style-position:inside}
+details[open] > summary{color:var(--g)}
+.pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{color:var(--m);text-align:center;padding:18px;border:1.5px dashed var(--line);border-radius:var(--r-sm)}
+.guide-item{display:flex;gap:14px;align-items:flex-start}
+.guide-item .ic-wrap{width:40px;height:40px;border-radius:12px;background:var(--gl);color:var(--g);display:grid;place-items:center;flex:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#view">Pular para o conteúdo</a>
+<noscript><p style="padding:20px">Ative o JavaScript para usar a Central Youssef.</p></noscript>
+
+<div class="layout">
+  <nav class="sidebar" id="sideNav" aria-label="Navegação principal"></nav>
+  <main id="view" tabindex="-1"></main>
+</div>
+<nav class="bottom-nav" id="bottomNav" aria-label="Navegação principal"></nav>
+
+<!-- Diálogo genérico de formulário (adicionar/editar) -->
+<dialog id="formDialog" aria-labelledby="formTitle">
+  <form id="formEl" novalidate>
+    <div class="dlg-head"><h2 id="formTitle">Editar</h2>
+      <button type="button" class="ibtn" data-close aria-label="Fechar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="dlg-body" id="formBody"></div>
+    <div class="dlg-foot">
+      <button type="button" class="btn danger" id="formDelete">Remover</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" data-close>Cancelar</button>
+      <button type="submit" class="btn" id="formSave">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Menu "Mais" (celular) -->
+<dialog id="moreDialog" aria-labelledby="moreTitle">
+  <div class="dlg-head"><h2 id="moreTitle">Mais</h2>
+    <button type="button" class="ibtn" data-close aria-label="Fechar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="more-grid" id="moreGrid"></div>
+</dialog>
+
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+/* =====================================================================
+   CENTRAL YOUSSEF
+   App de página única. Todos os dados ficam no localStorage do navegador.
+   Estrutura do script:
+     1. Utilitários (DOM, datas, formatação)
+     2. Dados padrão (rotinas, trilha, treino, finanças...)
+     3. Estado: carregar / salvar / mesclar
+     4. Componentes de UI reutilizáveis (ícones, botões, formulário)
+     5. Regras de negócio (rotina do dia, sequência, finanças...)
+     6. Telas (uma função por aba)
+     7. Guia "Como usar" (componente isolado — fácil de remover)
+     8. Ações (eventos de clique/alteração)
+     9. Navegação e inicialização
+   Dica de teste: abra com ?data=2027-03-05 para simular outra data.
+   ===================================================================== */
+
+/* =========================================================
+   1. UTILITÁRIOS
+   ========================================================= */
+const $ = (s, r = document) => r.querySelector(s);
+const pad = n => String(n).padStart(2, '0');
+const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const brl = v => (Number(v) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const sum = (arr, f = x => x.valor) => arr.reduce((a, x) => a + (Number(f(x)) || 0), 0);
+const isObj = o => o && typeof o === 'object' && !Array.isArray(o);
+const safeUrl = u => /^https?:\/\//i.test(String(u || '')) ? u : '';
+
+/** Data "agora". Aceita ?data=AAAA-MM-DD na URL para simular outro dia. */
+function now() {
+  const q = new URLSearchParams(location.search).get('data');
+  const n = new Date();
+  if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) {
+    const [y, m, d] = q.split('-').map(Number);
+    return new Date(y, m - 1, d, n.getHours(), n.getMinutes(), n.getSeconds());
+  }
+  return n;
+}
+const dkey = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const todayKey = () => dkey(now());
+const fromKey = k => { const [y, m, d] = String(k).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1); };
+const addDays = (k, n) => { const d = fromKey(k); d.setDate(d.getDate() + n); return dkey(d); };
+const daysBetween = (a, b) => Math.round((fromKey(b) - fromKey(a)) / 86400000);
+const monthOf = k => String(k).slice(0, 7);
+const addMonths = (mk, n) => { const [y, m] = mk.split('-').map(Number); const d = new Date(y, m - 1 + n, 1); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
+const weekStart = k => { const d = fromKey(k); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return dkey(d); }; // segunda-feira
+const DOW = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+const DOW_S = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const fmtDate = k => { if (!k) return ''; const d = fromKey(k); return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`; };
+const fmtMonth = mk => { if (!mk) return ''; const [y, m] = mk.split('-'); return `${MESES[+m - 1]}/${y}`; };
+const find = (arr, id) => arr.find(x => x.id === id);
+/** Move item dentro do array (dir = -1 sobe, +1 desce), opcionalmente só entre itens que passam no filtro. */
+function move(arr, id, dir, filter = () => true) {
+  const i = arr.findIndex(x => x.id === id);
+  if (i < 0) return;
+  let j = i + dir;
+  while (j >= 0 && j < arr.length && !filter(arr[j])) j += dir;
+  if (j < 0 || j >= arr.length) return;
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+}
+
+/* =========================================================
+   2. DADOS PADRÃO
+   ========================================================= */
+function buildRoutines() {
+  const r = (time, text, tag = '') => ({ id: uid(), time, text, tag });
+  const semana = quinta => [
+    r('05:00', 'Acordar'),
+    r('05:00–05:20', 'Devocional', 'fe'),
+    r('05:30–07:20', 'Academia — treino do dia', 'treino'),
+    r('08:00–10:00', 'Sebrae (trabalho)', 'trabalho'),
+    r('10:00–12:00', 'Sebrae — estudo da trilha de administração', 'estudo'),
+    r('12:00–13:00', 'Trajeto — inglês', 'ingles'),
+    r('13:00–17:00', 'Petrópolis', 'trabalho'),
+    r('17:00–18:50', 'Trajeto — inglês', 'ingles'),
+    r('18:50–22:00', 'Faculdade (UNEX)', 'faculdade'),
+    r('21:30', 'Sem telas'),
+    quinta ? r('22:30', 'Chegar em casa e deitar') : r('22:00', 'Deitar'),
+  ];
+  const atual = {
+    1: semana(false), 2: semana(false), 3: semana(false), 4: semana(true),
+    5: [
+      r('06:00', 'Acordar'),
+      r('06:00–06:20', 'Devocional', 'fe'),
+      r('06:30–07:20', 'Treino curto — peito e tríceps', 'treino'),
+      r('08:00–10:00', 'Sebrae (trabalho)', 'trabalho'),
+      r('10:00–12:00', 'Sebrae — estudo da trilha de administração', 'estudo'),
+      r('12:00', 'Enviar resumo semanal ao Claude (revisão semanal)', 'revisao'),
+      r('13:00–17:00', 'Petrópolis', 'trabalho'),
+      r('Fim de tarde', 'Preparação para o sábado', 'fe'),
+    ],
+    6: [
+      r('Dia todo', 'Dia de guarda — sem tarefas de trabalho ou estudo', 'fe'),
+      r('Após o pôr do sol', 'Freelas (opcional)', 'freela'),
+    ],
+    0: [
+      r('Manhã', 'Cardio', 'treino'),
+      r('Dia', 'Freelas — meta mín. 8h (sábado à noite + domingo)', 'freela'),
+      r('Tarde/noite', 'Descanso e lazer'),
+    ],
+  };
+  // Rotina a partir de março: igual, mas Petrópolis vira estudo para concurso.
+  const marco = {};
+  for (const d in atual) {
+    marco[d] = atual[d].map(it => it.text === 'Petrópolis'
+      ? { ...it, id: uid(), text: 'Estudo para concurso', tag: 'concurso' }
+      : { ...it, id: uid() });
+  }
+  return { atual, marco };
+}
+
+function buildTrilha() {
+  const EST = 'https://www.napratica.org.br', EV = 'https://www.ev.org.br', FGV = 'https://educacao-executiva.fgv.br/cursos/gratuitos';
+  return [
+    ['Produtividade Na Prática', 'Fundação Estudar', EST, 'Gestão de tempo — base de tudo.'],
+    ['Processos Seletivos Na Prática', 'Fundação Estudar', EST, 'Currículo e entrevistas (Neoenergia).'],
+    ['Comunicação Empresarial', 'Escola Virtual Fundação Bradesco', EV, 'Comunicação assertiva.'],
+    ['Excel intermediário', 'Escola Virtual Fundação Bradesco', EV, 'Ferramenta nº 1 e pré-requisito do Power BI.'],
+    ['Contabilidade Empresarial', 'Escola Virtual Fundação Bradesco', EV, 'Ler DRE e balanço para decidir.'],
+    ['Gestão Financeira + Fluxo de caixa + Preço de venda', 'Sebrae', 'https://sebrae.com.br/sites/PortalSebrae/cursosonline', 'Finanças práticas.'],
+    ['Curso de Economia e Finanças', 'FGV Educação Executiva', FGV, 'Aprofundamento e nome FGV.'],
+    ['Introdução à Análise de Dados com Power BI', 'Escola Virtual Fundação Bradesco', EV, 'Ferramenta mais pedida.'],
+    ['Trilha oficial Power BI (base PL-300)', 'Microsoft Learn', 'https://learn.microsoft.com/pt-br/training/', 'Conteúdo oficial.'],
+    ['Introdução à Gestão de Processos', 'Enap', 'https://www.escolavirtual.gov.br/curso/106', 'Mapear e melhorar processos.'],
+    ['Gestão de Projetos (USP + UC Irvine)', 'Coursera', 'https://www.coursera.org/specializations/gestao-de-projetos-introducao-usp', 'Universidade de ponta, em português.'],
+    ['Certificado de Gestão de Projetos do Google', 'Coursera', 'https://www.coursera.org/professional-certificates/gestao-de-projetos-do-google', 'Reconhecido internacionalmente (pedir auxílio financeiro).'],
+    ['Gestão Estratégica com BSC', 'Enap', 'https://www.escolavirtual.gov.br/curso/103', 'Estratégia em indicadores.'],
+    ['Gestão Pessoal: Base da Liderança', 'Enap', 'https://www.escolavirtual.gov.br/curso/163', 'Liderança.'],
+    ['Curso de Liderança e Pessoas', 'FGV', FGV, 'Gestão de pessoas.'],
+  ].map(([title, provider, url, why]) => ({ id: uid(), title, provider, url, why, done: false, doneAt: '', startedAt: '' }));
+}
+
+function buildTreino() {
+  const ex = list => list.map(([group, name]) => ({ id: uid(), group, name }));
+  return {
+    1: { title: 'Peito, tríceps e ombro', exercises: ex([
+      ['Peito', 'Supino reto'], ['Peito', 'Supino inclinado'], ['Peito', 'Crossover polia baixa'], ['Peito', 'Crossover polia alta'], ['Peito', 'Crucifixo'],
+      ['Tríceps', 'Tríceps corda'], ['Tríceps', 'Tríceps barra'], ['Tríceps', 'Tríceps testa'],
+      ['Ombro', 'Elevação lateral'], ['Ombro', 'Elevação frontal']]) },
+    2: { title: 'Quadríceps', exercises: ex([
+      ['Quadríceps', 'Agachamento'], ['Quadríceps', 'Leg press'], ['Quadríceps', 'Afundo'], ['Quadríceps', 'Cadeira extensora'], ['Panturrilha', 'Panturrilha']]) },
+    3: { title: 'Costas e bíceps', exercises: ex([
+      ['Costas', 'Remada alta'], ['Costas', 'Remada baixa'], ['Costas', 'Pulldown'], ['Costas', 'Face pull'],
+      ['Bíceps', 'Rosca direta'], ['Bíceps', 'Rosca martelo'], ['Bíceps', 'Rosca concentrada']]) },
+    4: { title: 'Posteriores', exercises: ex([
+      ['Posteriores', 'Stiff'], ['Posteriores', 'Mesa flexora'], ['Posteriores', 'Cadeira flexora'], ['Glúteo', 'Abdutor'], ['Adutores', 'Adutor'], ['Panturrilha', 'Panturrilha']]) },
+    5: { title: 'Peito e tríceps (curto)', exercises: ex([
+      ['Peito', 'Supino reto'], ['Peito', 'Supino inclinado'], ['Peito', 'Crossover polia alta'], ['Tríceps', 'Tríceps corda'], ['Tríceps', 'Tríceps testa']]) },
+    6: { title: 'Descanso', exercises: [] },
+    0: { title: 'Cardio', exercises: ex([['Cardio', 'Cardio 30–40 min']]) },
+  };
+}
+
+function defaults() {
+  return {
+    version: 1,
+    settings: { showGuide: true, switchDate: '2027-03-01', provasMes: '2026-11' },
+    profile: [
+      ['Nome', 'Youssef'], ['Cidade', 'Feira de Santana (BA)'],
+      ['Graduação', 'Administração — UNEX, 6º semestre'], ['Provas', 'Novembro/2026'],
+      ['TCC', '2027'], ['Formatura prevista', 'Dezembro/2027'],
+      ['Sebrae', 'Estagiário (até nov/2027)'], ['Grupo Petrópolis', 'Jovem aprendiz (até mar/2027)'],
+      ['Candidatura', 'Estágio Neoenergia — aguardando processo seletivo'],
+      ['Preferência de cobrança', 'Direta e firme'],
+    ].map(([label, value]) => ({ id: uid(), label, value })),
+    routines: buildRoutines(),
+    history: {},              // { 'AAAA-MM-DD': { routine, items, done:[ids], total } }
+    freela: {},               // { 'sábado AAAA-MM-DD': { sab, dom } } horas de freela no fim de semana
+    dev: {
+      visao: 'Em 3 a 5 anos: concursado, casado, com negócio próprio, estudando pós/mestrado e ajudando a família — sem abrir mão da fé.',
+      pilares: [
+        ['Família', 'Casado, construindo família.'],
+        ['Fé', 'Cristão adventista, fiel a Deus e aos princípios.'],
+        ['Carreira pública', 'Concursado.'],
+        ['Negócio próprio', 'Empreendedor e administrador.'],
+        ['Estudo contínuo', 'Pós-graduação e mestrado.'],
+      ].map(([title, desc]) => ({ id: uid(), title, desc })),
+      metas: ['Casa', 'Carro', 'Moto', 'Condomínio', 'Ajudar a família'].map(text => ({ id: uid(), text, done: false })),
+      melhorias: [
+        ['Cansaço / energia', 'Dormir no horário, alimentação e treino em dia.'],
+        ['Cumprir horários', 'Respeitar os blocos da rotina.'],
+        ['Oratória', 'Falar com clareza e segurança.'],
+      ].map(([title, desc]) => ({ id: uid(), title, desc, logs: [] })),
+      reviews: [],
+    },
+    timeline: [
+      ['2026-11-30', 'nov/2026', 'Provas da faculdade', ''],
+      ['2026-12-31', 'dez/2026', 'Cartão de crédito zerado', 'R$ 3.500 quitados usando 13º e salários.'],
+      ['2027-03-01', 'mar/2027', 'Saída da Petrópolis', 'Início do estudo para concurso à tarde.'],
+      ['2027-10-31', '2027', 'TCC', ''],
+      ['2027-12-15', 'dez/2027', 'Formatura', 'Trilha de administração concluída.'],
+      ['2031-12-31', '3–5 anos', 'Aprovado em concurso, casado, negócio próprio, pós/mestrado', ''],
+    ].map(([date, label, title, desc]) => ({ id: uid(), date, label, title, desc, done: false })),
+    notes: [],
+    study: {
+      trilha: buildTrilha(),
+      leiturasInicio: '2026-11-01',
+      leituras: [
+        ['O Gestor Eficaz', 'Peter Drucker'], ['Essencialismo', 'Greg McKeown'], ['Gerenciamento da Rotina', 'Vicente Falconi'],
+        ['Finanças Corporativas', 'Alexandre Assaf Neto'], ['A Meta', 'Eliyahu Goldratt'], ['Os 7 Hábitos das Pessoas Altamente Eficazes', 'Stephen Covey'],
+      ].map(([title, author]) => ({ id: uid(), title, author, done: false, doneAt: '' })),
+      concurso: {
+        subjects: ['Português', 'Raciocínio Lógico', 'Informática', 'Direito Constitucional', 'Direito Administrativo', 'Administração Pública']
+          .map(name => ({ id: uid(), name, topics: [], done: false, doneAt: '' })),
+        tardes: { 1: 'Teoria da apostila + resumo', 2: 'Questões do tópico', 3: 'Teoria da apostila + resumo', 4: 'Questões + revisão', 5: 'Revisão da semana' },
+      },
+      ingles: {
+        nivel: 'Leitura razoável; fala, escuta e escrita básicas. Foco: conversação, pronúncia e escuta.',
+        daily: [
+          ['Duolingo — 10 min', 'Hábito e vocabulário'],
+          ['6 Minute English (BBC Learning English) — 1 episódio', 'Escuta'],
+          ['Shadowing — 10 min', 'Ouvir uma frase e repetir imitando ritmo e entonação'],
+          ['Música em inglês acompanhando a letra', 'Cantar junto'],
+        ].map(([text, detail]) => ({ id: uid(), text, detail })),
+        weekly: [
+          ['Conversa em inglês com o Claude (modo de voz) — terça', ''],
+          ['Conversa em inglês com o Claude (modo de voz) — quinta', ''],
+          ['Série/filme com legenda em inglês (fim de semana)', ''],
+        ].map(([text, detail]) => ({ id: uid(), text, detail })),
+        dailyLog: {},   // { data: [ids] }
+        weeklyLog: {},  // { segunda-feira da semana: [ids] }
+        tools: [
+          ['Duolingo', 'https://www.duolingo.com', 'Todo dia no trajeto: hábito e vocabulário.'],
+          ['BBC Learning English', 'https://www.bbc.co.uk/learningenglish', '6 Minute English: 1 episódio por dia.'],
+          ['YouGlish', 'https://youglish.com', 'Ouvir a pronúncia real de uma palavra em vídeos.'],
+          ['italki', 'https://www.italki.com', 'Professor nativo — etapa futura.'],
+        ].map(([name, url, when]) => ({ id: uid(), name, url, when })),
+        words: [],
+      },
+    },
+    pomodoro: {},             // { data: número de focos concluídos }
+    treino: { plan: buildTreino(), log: {} }, // log: { data: { exId: {done, carga, reps} } }
+    fin: {
+      receitas: [
+        { id: uid(), label: 'Sebrae (estágio)', valor: 2000, de: '2026-01', ate: '2027-11' },
+        { id: uid(), label: 'Grupo Petrópolis (jovem aprendiz)', valor: 1500, de: '2026-01', ate: '2027-02' },
+      ],
+      fixos: [
+        { id: uid(), label: 'Consórcio da moto', valor: 922, de: '2026-01', ate: '', cartao: false },
+        { id: uid(), label: 'Câmera', valor: 400, de: '2026-01', ate: '', cartao: false },
+        { id: uid(), label: 'Cartão de crédito (limite de gasto)', valor: 500, de: '2027-01', ate: '', cartao: true },
+      ],
+      lancamentos: [],
+      catReceita: ['Salário', 'Freela', '13º salário', 'Outros'],
+      catDespesa: ['Alimentação', 'Transporte', 'Cartão de crédito', 'Quitação do cartão', 'Família', 'Dízimo e ofertas', 'Estudo', 'Lazer', 'Saúde', 'Outros'],
+      quitacao: { meta: 3500, prazo: '2026-12-31', categoria: 'Quitação do cartão' },
+    },
+  };
+}
+
+/* =========================================================
+   3. ESTADO
+   ========================================================= */
+const STORE_KEY = 'centralYoussef.v1';
+let S;
+
+/** Mescla dados salvos sobre os padrões (objetos são mesclados, arrays substituídos). */
+function deepMerge(base, over) {
+  if (!isObj(base) || !isObj(over)) return over === undefined ? base : over;
+  const out = { ...base };
+  for (const k of Object.keys(over)) out[k] = isObj(base[k]) && isObj(over[k]) ? deepMerge(base[k], over[k]) : over[k];
+  return out;
+}
+function load() {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { saved = null; }
+  S = isObj(saved) ? deepMerge(defaults(), saved) : defaults();
+}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); }
+  catch (e) { toast('Não foi possível salvar no navegador. Exporte um backup.'); }
+}
+
+/** Estado de interface (não precisa ser salvo). */
+const UI = { estudoSub: 'trilha', treinoDow: null, treinoDate: null, finMonth: null, noteTag: 'Todas', noteQ: '', wordQ: '', rotRk: null, rotDow: 1 };
+
+/* =========================================================
+   4. COMPONENTES DE UI
+   ========================================================= */
+const ICONS = {
+  home: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  book: '<path d="M4 19V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M9 7h7"/>',
+  dumbbell: '<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>',
+  wallet: '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M16 15h2"/><path d="M6 6l10-3 1 3"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+  flag: '<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>',
+  note: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h5"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4V14"/><path d="M12 17.5h.01"/>',
+  more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  trash: '<path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/>',
+  up: '<path d="M6 15l6-6 6 6"/>',
+  down: '<path d="M6 9l6 6 6-6"/>',
+  check: '<path d="M5 12l5 5L20 7"/>',
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  link: '<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  flame: '<path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-8.5z"/>',
+  play: '<path d="M7 5l12 7-12 7z"/>',
+  pause: '<path d="M8 5v14M16 5v14"/>',
+  reset: '<path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4h4"/>',
+  skip: '<path d="M6 5l9 7-9 7z"/><path d="M18 5v14"/>',
+  alert: '<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4"/><path d="M12 17.5h.01"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5h.01"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  download: '<path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/>',
+  upload: '<path d="M12 20V8"/><path d="M7 13l5-5 5 5"/><path d="M4 4h16"/>',
+  copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>',
+  timer: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M9 2h6"/>',
+};
+const icon = (n, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
+const btn = (act, label, attrs = '', cls = 'btn') => `<button type="button" class="${cls}" data-act="${act}" ${attrs}>${label}</button>`;
+const iconBtn = (act, ic, label, attrs = '') => `<button type="button" class="ibtn" data-act="${act}" aria-label="${esc(label)}" title="${esc(label)}" ${attrs}>${icon(ic)}</button>`;
+const bar = (pct, label, cls = '') => {
+  const p = Math.max(0, Math.min(100, Math.round(pct || 0)));
+  return `<div class="bar ${cls}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="${esc(label)}"><span style="width:${p}%"></span></div>`;
+};
+const alertBox = (type, title, text = '', ic) => `<div class="alert ${type}" role="${type === 'err' ? 'alert' : 'note'}">${icon(ic || (type ? 'alert' : 'info'))}<div><strong>${title}</strong>${text ? `<span class="small">${text}</span>` : ''}</div></div>`;
+const empty = t => `<p class="empty">${t}</p>`;
+/** Linha de checklist com caixa grande. `extra` = botões fora do <label>. */
+function checkRow({ k, change, attrs = '', checked, title, sub = '', disabled = false, extra = '', cls = '', dataTime = '' }) {
+  return `<li class="crow-wrap ${cls}" ${dataTime ? `data-time="${esc(dataTime)}"` : ''}>
+    <label class="crow ${checked ? 'is-done' : ''} ${disabled ? 'is-locked' : ''}">
+      <input type="checkbox" class="chk" data-change="${change}" ${attrs} data-k="${esc(k)}" ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''}>
+      <span class="crow-txt"><span class="crow-title">${title}</span>${sub ? `<span class="crow-sub">${sub}</span>` : ''}</span>
+    </label>${extra ? `<span class="actions">${extra}</span>` : ''}</li>`;
+}
+
+/* ---------- Toast ---------- */
+let toastTimer;
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ---------- Formulário genérico em diálogo ----------
+   fields: [{key, label, type:'text'|'textarea'|'number'|'date'|'month'|'url'|'select'|'checkbox', options, required, value, hint}] */
+let formCtx = null;
+function openForm({ title, fields, onSave, onDelete, saveLabel = 'Salvar' }) {
+  formCtx = { fields, onSave, onDelete };
+  $('#formTitle').textContent = title;
+  $('#formSave').textContent = saveLabel;
+  $('#formDelete').hidden = !onDelete;
+  $('#formBody').innerHTML = fields.map(f => {
+    const id = 'f_' + f.key, v = f.value ?? '';
+    const req = f.required ? ' required aria-required="true"' : '';
+    const hint = f.hint ? `<small class="muted">${esc(f.hint)}</small>` : '';
+    if (f.type === 'checkbox') return `<label class="field check"><input type="checkbox" class="chk" id="${id}" name="${f.key}" ${v ? 'checked' : ''}><span>${esc(f.label)}</span></label>`;
+    let control;
+    if (f.type === 'textarea') control = `<textarea id="${id}" name="${f.key}" rows="${f.rows || 4}"${req}>${esc(v)}</textarea>`;
+    else if (f.type === 'select') control = `<select id="${id}" name="${f.key}"${req}>${f.options.map(o => {
+      const ov = typeof o === 'object' ? o.v : o, ol = typeof o === 'object' ? o.l : o;
+      return `<option value="${esc(ov)}" ${String(ov) === String(v) ? 'selected' : ''}>${esc(ol)}</option>`;
+    }).join('')}</select>`;
+    else control = `<input id="${id}" name="${f.key}" type="${f.type || 'text'}" value="${esc(v)}"${f.type === 'number' ? ' inputmode="decimal" step="any"' : ''}${req}>`;
+    return `<label class="field" for="${id}"><span>${esc(f.label)}${f.required ? ' *' : ''}</span>${control}${hint}</label>`;
+  }).join('');
+  const dlg = $('#formDialog');
+  dlg.showModal();
+  const first = $('#formBody input, #formBody textarea, #formBody select');
+  if (first) first.focus();
+}
+function submitForm(e) {
+  e.preventDefault();
+  if (!formCtx) return;
+  const vals = {};
+  for (const f of formCtx.fields) {
+    const el = $('#f_' + f.key);
+    if (!el) continue;
+    let v = f.type === 'checkbox' ? el.checked : el.value.trim();
+    if (f.type === 'number') v = v === '' ? 0 : Number(String(v).replace(',', '.'));
+    el.classList.remove('invalid');
+    if (f.required && (v === '' || (f.type === 'number' && isNaN(v)))) { el.classList.add('invalid'); el.focus(); toast(`Preencha: ${f.label}`); return; }
+    vals[f.key] = v;
+  }
+  formCtx.onSave(vals);
+  save(); $('#formDialog').close(); render(); toast('Salvo.');
+}
+/** Atalho: editar/criar item de uma lista com o formulário genérico. */
+function editItem(arr, item, title, fields, extraNew = {}) {
+  openForm({
+    title: (item ? 'Editar ' : 'Adicionar ') + title,
+    fields: fields.map(f => ({ ...f, value: item ? item[f.key] : f.value })),
+    onSave: v => { if (item) Object.assign(item, v); else arr.push({ id: uid(), ...extraNew, ...v }); },
+    onDelete: item ? () => { const i = arr.indexOf(item); if (i >= 0) arr.splice(i, 1); } : null,
+  });
+}
+
+/* =========================================================
+   5. REGRAS DE NEGÓCIO
+   ========================================================= */
+/** Qual rotina vale numa data: 'atual' até 28/02/2027, 'marco' a partir de 01/03/2027. */
+const routineKey = k => (k >= S.settings.switchDate ? 'marco' : 'atual');
+const routineName = rk => (rk === 'marco' ? 'Rotina a partir de março' : 'Rotina atual');
+const isSaturday = k => fromKey(k).getDay() === 6;
+
+/** Sincroniza o checklist de hoje com a rotina (dias passados ficam congelados no histórico). */
+function ensureDay(k) {
+  const rk = routineKey(k);
+  const items = S.routines[rk][fromKey(k).getDay()] || [];
+  const h = S.history[k] || { done: [] };
+  const ids = new Set(items.map(i => i.id));
+  h.routine = rk;
+  h.items = items.map(i => ({ id: i.id, time: i.time, text: i.text }));
+  h.done = (h.done || []).filter(id => ids.has(id));
+  h.total = items.length;
+  S.history[k] = h;
+  return h;
+}
+const dayPct = k => { const h = S.history[k]; return h && h.total ? h.done.length / h.total : null; };
+
+/** Sequência: dias seguidos com ≥ 80% do checklist. Sábado (dia de guarda) não conta nem quebra. */
+function streak() {
+  const t = todayKey();
+  let n = 0;
+  if (!isSaturday(t) && (dayPct(t) ?? 0) >= 0.8) n++;
+  let k = addDays(t, -1);
+  for (let i = 0; i < 3660; i++, k = addDays(k, -1)) {
+    if (isSaturday(k)) continue;
+    const p = dayPct(k);
+    if (p === null || p < 0.8) break;
+    n++;
+  }
+  return n;
+}
+
+/** Retorna se o horário "HH:MM–HH:MM" contém o momento atual. */
+function isNow(time) {
+  const m = String(time).match(/(\d{1,2}):(\d{2})\s*[–-]\s*(\d{1,2}):(\d{2})/);
+  if (!m) return false;
+  const n = now(), cur = n.getHours() * 60 + n.getMinutes();
+  return cur >= +m[1] * 60 + +m[2] && cur < +m[3] * 60 + +m[4];
+}
+
+const currentCourse = () => S.study.trilha.find(c => !c.done);
+const currentBook = () => S.study.leituras.find(b => !b.done);
+const currentSubject = () => S.study.concurso.subjects.find(s => !s.done);
+const nextMilestone = () => [...S.timeline].sort((a, b) => a.date.localeCompare(b.date)).find(m => !m.done);
+const isProvasMonth = () => monthOf(todayKey()) === S.settings.provasMes;
+
+/* ---------- Finanças ---------- */
+const inRange = (mk, de, ate) => (!de || mk >= de) && (!ate || mk <= ate);
+function monthSummary(mk) {
+  const F = S.fin;
+  const rec = F.receitas.filter(r => inRange(mk, r.de, r.ate));
+  const fix = F.fixos.filter(r => inRange(mk, r.de, r.ate));
+  const lanc = F.lancamentos.filter(l => monthOf(l.date) === mk).sort((a, b) => b.date.localeCompare(a.date));
+  const cardBudget = fix.some(f => f.cartao); // se o limite do cartão já está nos fixos, compras no cartão não contam duas vezes
+  const lr = sum(lanc.filter(l => l.tipo === 'receita'));
+  const ld = sum(lanc.filter(l => l.tipo === 'despesa' && !(cardBudget && l.cat === 'Cartão de crédito')));
+  const cardSpent = sum(lanc.filter(l => l.tipo === 'despesa' && l.cat === 'Cartão de crédito'));
+  const recFix = sum(rec), fixT = sum(fix);
+  const entradas = recFix + lr, saidas = fixT + ld;
+  return { rec, fix, lanc, recFix, fixT, lr, ld, entradas, saidas, saldo: entradas - saidas, comprometido: recFix ? fixT / recFix : 0, cardSpent, cardBudget, cardLimit: sum(fix.filter(f => f.cartao)) };
+}
+const quitPago = () => sum(S.fin.lancamentos.filter(l => l.tipo === 'despesa' && l.cat === S.fin.quitacao.categoria));
+
+/* ---------- Inglês ---------- */
+function engDayDone(k) { const ids = new Set(S.study.ingles.dailyLog[k] || []); return S.study.ingles.daily.length > 0 && S.study.ingles.daily.every(i => ids.has(i.id)); }
+function engStreak() {
+  const t = todayKey(); let n = engDayDone(t) ? 1 : 0; let k = addDays(t, -1);
+  for (let i = 0; i < 3660 && engDayDone(k); i++, k = addDays(k, -1)) n++;
+  return n;
+}
+
+/** Monta o texto do resumo semanal (para colar na conversa com o Claude). */
+function weeklySummary() {
+  const t = todayKey(), ini = weekStart(t);
+  const dias = []; for (let i = 0; i < 7; i++) { const k = addDays(ini, i); if (k > t) break; dias.push(k); }
+  const pcts = dias.filter(k => !isSaturday(k)).map(k => dayPct(k) ?? 0);
+  const media = pcts.length ? Math.round(pcts.reduce((a, b) => a + b, 0) / pcts.length * 100) : 0;
+  const bons = pcts.filter(p => p >= 0.8).length;
+  const treinos = dias.filter(k => Object.values(S.treino.log[k] || {}).some(e => e.done)).length;
+  const pomos = dias.reduce((a, k) => a + (S.pomodoro[k] || 0), 0);
+  const ing = dias.filter(engDayDone).length;
+  const c = currentCourse(), feitos = S.study.trilha.filter(x => x.done).length;
+  const r = S.dev.reviews.find(x => x.date === t) || {};
+  return [
+    `RESUMO SEMANAL — ${fmtDate(ini)} a ${fmtDate(t)}`,
+    `Checklist: média ${media}% | ${bons}/${pcts.length} dias com ≥ 80% | sequência atual: ${streak()} dias`,
+    `Treinos feitos: ${treinos} | Pomodoros: ${pomos} | Dias de inglês completos: ${ing}`,
+    `Trilha: ${feitos}/${S.study.trilha.length} concluídos | Curso atual: ${c ? c.title + ' (' + c.provider + ')' : 'trilha concluída'}`,
+    r.learned ? `O que aprendi: ${r.learned}` : '', r.done ? `O que concluí: ${r.done}` : '',
+    r.stuck ? `O que travou: ${r.stuck}` : '', r.next ? `Meta da próxima semana: ${r.next}` : '',
+    'Cobrança: direta e firme.',
+  ].filter(Boolean).join('\n');
+}
+
+/* =========================================================
+   6. TELAS
+   ========================================================= */
+
+/* ---------- 6.1 PAINEL ---------- */
+function viewPainel() {
+  const n = now(), k = dkey(n), dow = n.getDay(), rk = routineKey(k);
+  const h = ensureDay(k); save();
+  const done = h.done.length, total = h.total, pct = total ? done / total * 100 : 0;
+  const hr = n.getHours();
+  const saud = hr < 12 ? 'Bom dia' : hr < 18 ? 'Boa tarde' : 'Boa noite';
+  const nome = (S.profile.find(p => p.label === 'Nome') || {}).value || 'Youssef';
+  const dataStr = n.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+  // Mensagem de cobrança direta e firme
+  let firm;
+  if (dow === 6) firm = 'Dia de guarda. Descanse — sábado não conta na sequência.';
+  else if (!total) firm = 'Nenhum item na rotina de hoje. Ajuste em Meus dados → Rotinas.';
+  else if (done === total) firm = 'Dia fechado. Amanhã, mesmo padrão.';
+  else if (pct >= 80) firm = 'Meta de 80% batida. Fecha o resto se der.';
+  else { const falta = Math.ceil(total * 0.8) - done; firm = `Faltam ${falta} ${falta === 1 ? 'item' : 'itens'} para os 80%. Sem negociar: executa.`; }
+
+  // Avisos
+  let alerts = '';
+  if (isProvasMonth()) alerts += alertBox('warn', 'Mês de provas: ritmo leve', 'Prioridade é a faculdade. Trilha e extras em ritmo reduzido.');
+  if (dow === 5 && !S.dev.reviews.some(r => r.date === k)) alerts += alertBox('', 'Hoje às 12:00: revisão semanal', `Preencha a revisão e envie o resumo ao Claude. <a href="#desenvolvimento">Ir para a revisão</a>`, 'calendar');
+  const dSwitch = daysBetween(k, S.settings.switchDate);
+  if (rk === 'atual' && dSwitch > 0 && dSwitch <= 30) alerts += alertBox('', `Faltam ${dSwitch} dias para a rotina de março`, 'Saída da Petrópolis; tardes viram estudo para concurso.', 'calendar');
+
+  // Últimos 7 dias
+  let strip = '';
+  for (let i = 6; i >= 0; i--) {
+    const dk = addDays(k, -i), p = dayPct(dk), sat = isSaturday(dk);
+    const cls = sat ? 'rest' : p === null ? '' : p >= 0.8 ? 'ok' : p > 0 ? 'part' : '';
+    const lbl = `${DOW[fromKey(dk).getDay()]}: ${sat ? 'dia de guarda' : p === null ? 'sem registro' : Math.round(p * 100) + '%'}`;
+    strip += `<div class="d ${cls} ${i === 0 ? 'today' : ''}" title="${lbl}"><i></i><span class="sr-only">${lbl}</span><span aria-hidden="true">${DOW_S[fromKey(dk).getDay()]}</span></div>`;
+  }
+
+  // Cartões-resumo
+  const c = currentCourse(), cDone = S.study.trilha.filter(x => x.done).length, cTot = S.study.trilha.length;
+  const plan = S.treino.plan[dow] || { title: '—', exercises: [] };
+  const tLog = S.treino.log[k] || {};
+  const tDone = plan.exercises.filter(e => tLog[e.id]?.done).length;
+  const ms = monthSummary(monthOf(k));
+  const nm = nextMilestone();
+  const card = (tab, ic, label, big, sub, extra = '') => `<button type="button" class="card stat" data-act="go" data-tab="${tab}">
+      <span class="ic-wrap">${icon(ic)}</span><span class="eyebrow">${label}</span><span class="big">${big}</span><span class="small muted">${sub}</span>${extra}</button>`;
+
+  const items = S.routines[rk][dow] || [];
+  const done0 = new Set(h.done);
+  const rows = items.map(it => checkRow({
+    k: 'day:' + it.id, change: 'dayToggle', attrs: `data-id="${it.id}"`, checked: done0.has(it.id),
+    title: esc(it.text), sub: esc(it.time) + (it.tag === 'treino' ? ' · ' + esc(plan.title) : ''),
+    cls: isNow(it.time) ? 'now' : '', dataTime: it.time,
+  })).join('');
+
+  // Freelas no fim de semana (meta 8h)
+  let freela = '';
+  if (dow === 6 || dow === 0) {
+    const sk = dow === 6 ? k : addDays(k, -1);
+    const f = S.freela[sk] || { sab: 0, dom: 0 };
+    const tot = (Number(f.sab) || 0) + (Number(f.dom) || 0);
+    freela = `<section class="card" aria-labelledby="frTitle"><div class="card-head"><h2 id="frTitle">Freelas do fim de semana</h2><span class="tag ${tot >= 8 ? '' : 'warn'}">${tot}h / 8h</span></div>
+      ${bar(tot / 8 * 100, 'Horas de freela')}
+      <div class="grid grid-2" style="margin-top:12px">
+        <label class="field"><span>Sábado à noite (h)</span><input type="number" min="0" step="0.5" inputmode="decimal" value="${esc(f.sab)}" data-change="freela" data-sk="${sk}" data-f="sab" data-k="fr:sab"></label>
+        <label class="field"><span>Domingo (h)</span><input type="number" min="0" step="0.5" inputmode="decimal" value="${esc(f.dom)}" data-change="freela" data-sk="${sk}" data-f="dom" data-k="fr:dom"></label>
+      </div></section>`;
+  }
+
+  return `
+  <header class="page-head"><div>
+    <p class="eyebrow">${esc(dataStr)}</p>
+    <h1 class="hello" tabindex="-1">${saud}, ${esc(nome)}.</h1>
+    <p class="muted">${routineName(rk)} · ${DOW[dow]}</p></div>
+  </header>
+  ${alerts}
+  <div class="grid grid-4">
+    <div class="card stat"><span class="ic-wrap">${icon('flame')}</span><span class="eyebrow">Sequência</span><span class="big">${streak()} ${streak() === 1 ? 'dia' : 'dias'}</span><span class="small muted">Dias com ≥ 80% do checklist</span><div class="week-strip" aria-label="Últimos 7 dias">${strip}</div></div>
+    ${card('estudo', 'book', 'Curso atual', c ? `${cDone + 1}/${cTot}` : 'Concluída', c ? esc(c.title) : 'Trilha de administração concluída', bar(cDone / cTot * 100, 'Progresso da trilha'))}
+    ${card('treino', 'dumbbell', 'Treino do dia', esc(plan.title), plan.exercises.length ? `${tDone}/${plan.exercises.length} exercícios feitos` : 'Sem exercícios hoje')}
+    ${card('financas', 'wallet', 'Saldo do mês', `<span class="${ms.saldo < 0 ? 'money-out' : ''}">${brl(ms.saldo)}</span>`, `Entradas ${brl(ms.entradas)} · Saídas ${brl(ms.saidas)}`)}
+  </div>
+  ${nm ? `<div style="margin-top:14px">${card('linha', 'flag', 'Próximo marco', esc(nm.title), `${esc(nm.label)}${daysBetween(k, nm.date) >= 0 ? ` · faltam ${daysBetween(k, nm.date)} dias` : ' · atrasado'}`)}</div>` : ''}
+
+  <section class="card section" aria-labelledby="ckTitle">
+    <div class="card-head"><div><h2 id="ckTitle">Checklist de hoje</h2><p class="small muted">${done} de ${total} feitos · zera automaticamente amanhã</p></div>
+      <span class="pct-big" aria-label="${Math.round(pct)} por cento">${Math.round(pct)}%</span></div>
+    ${bar(pct, 'Progresso do checklist', pct >= 80 ? '' : 'warn')}
+    <p class="firm">${firm}</p>
+    <ul class="clist" style="margin-top:12px">${rows || '<li>' + empty('Sem itens para hoje.') + '</li>'}</ul>
+  </section>
+  ${freela}`;
+}
+
+/* ---------- 6.2 ESTUDO ---------- */
+const POMO = { mode: 'foco', remaining: 25 * 60, running: false, endAt: 0, timer: null };
+const POMO_DUR = { foco: 25 * 60, pausa: 5 * 60 };
+const mmss = s => `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+function pomoCard() {
+  return `<section class="card pomo ${POMO.mode === 'pausa' ? 'pause' : ''}" id="pomoCard" aria-labelledby="pomoMode">
+    <div class="pomo-row"><div>
+      <p class="eyebrow" id="pomoMode">${POMO.mode === 'foco' ? 'Foco · 25 min' : 'Pausa · 5 min'}</p>
+      <p class="pomo-time" id="pomoTime">${mmss(POMO.remaining)}</p>
+      <p class="small muted" id="pomoCount">Hoje: ${S.pomodoro[todayKey()] || 0} pomodoro(s) de foco</p></div>
+      <div class="btn-row">
+        <button type="button" class="btn" data-act="pomoStart" id="pomoStartBtn">${icon(POMO.running ? 'pause' : 'play')}<span>${POMO.running ? 'Pausar' : 'Iniciar'}</span></button>
+        ${iconBtn('pomoReset', 'reset', 'Reiniciar')}${iconBtn('pomoSkip', 'skip', 'Pular para a próxima etapa')}
+      </div></div></section>`;
+}
+function pomoPaint() {
+  const t = $('#pomoTime'); if (t) t.textContent = mmss(POMO.remaining);
+  document.title = POMO.running ? `${mmss(POMO.remaining)} · ${POMO.mode === 'foco' ? 'Foco' : 'Pausa'} — Central Youssef` : 'Central Youssef';
+}
+function pomoTick() {
+  if (!POMO.running) return;
+  POMO.remaining = Math.max(0, Math.round((POMO.endAt - Date.now()) / 1000));
+  if (POMO.remaining === 0) pomoFinish();
+  pomoPaint();
+}
+function pomoStop() { POMO.running = false; clearInterval(POMO.timer); POMO.timer = null; }
+function pomoFinish() {
+  pomoStop(); beep();
+  if (POMO.mode === 'foco') {
+    const k = todayKey(); S.pomodoro[k] = (S.pomodoro[k] || 0) + 1; save();
+    POMO.mode = 'pausa'; toast('Foco concluído. Pausa de 5 minutos.');
+  } else { POMO.mode = 'foco'; toast('Pausa encerrada. Volta para o foco.'); }
+  POMO.remaining = POMO_DUR[POMO.mode];
+  if (currentTab() === 'estudo') render(); else pomoPaint();
+}
+function beep() {
+  try {
+    const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
+    const ctx = new C(), o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = 880; o.connect(g); g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.25, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1);
+    o.start(); o.stop(ctx.currentTime + 1);
+  } catch (e) { /* sem áudio disponível */ }
+}
+
+function viewEstudo() {
+  const subs = [['trilha', 'Administração'], ['concurso', 'Concurso'], ['ingles', 'Inglês']];
+  const body = UI.estudoSub === 'concurso' ? viewConcurso() : UI.estudoSub === 'ingles' ? viewIngles() : viewTrilha();
+  return `<header class="page-head"><div><h1 tabindex="-1">Estudo</h1><p class="muted">Um curso por vez. Termina, depois avança.</p></div></header>
+  ${isProvasMonth() ? alertBox('warn', 'Mês de provas: ritmo leve', 'Faculdade em primeiro lugar. Mantenha só o mínimo da trilha.') : ''}
+  ${pomoCard()}
+  <div class="tabs" role="tablist" aria-label="Áreas de estudo">${subs.map(([id, l]) =>
+    `<button type="button" role="tab" id="tab-${id}" aria-controls="estudoPanel" aria-selected="${UI.estudoSub === id}" data-act="sub" data-sub="${id}" data-k="sub:${id}">${l}</button>`).join('')}</div>
+  <div id="estudoPanel" role="tabpanel" aria-labelledby="tab-${UI.estudoSub}">${body}</div>`;
+}
+
+const F_COURSE = [
+  { key: 'title', label: 'Curso', required: true }, { key: 'provider', label: 'Instituição' },
+  { key: 'url', label: 'Link', type: 'url' }, { key: 'why', label: 'Por que fazer', type: 'textarea', rows: 2 },
+];
+function viewTrilha() {
+  const T = S.study.trilha, cur = currentCourse();
+  const done = T.filter(c => c.done), queue = T.filter(c => !c.done && c !== cur);
+  if (cur && !cur.startedAt) { cur.startedAt = todayKey(); save(); }
+  const pos = id => T.findIndex(x => x.id === id) + 1;
+  const link = c => safeUrl(c.url) ? `<a class="btn ghost sm" href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${icon('link')}Abrir curso<span class="sr-only"> (abre em nova aba)</span></a>` : '';
+
+  const curHTML = cur ? `<section class="card hl" aria-labelledby="curTitle">
+      <p class="eyebrow">Curso atual · ${pos(cur.id)} de ${T.length}</p>
+      <h2 id="curTitle" style="margin:6px 0 2px;font-size:1.3rem">${esc(cur.title)}</h2>
+      <p class="muted">${esc(cur.provider)}</p>
+      ${cur.why ? `<p style="margin-top:10px"><strong>Por que fazer:</strong> ${esc(cur.why)}</p>` : ''}
+      <p class="small muted" style="margin-top:6px">Em andamento desde ${fmtDate(cur.startedAt)}</p>
+      <div class="btn-row" style="margin-top:14px">${btn('courseDone', icon('check') + 'Marcar como concluído', `data-id="${cur.id}"`)}${link(cur)}${btn('courseEdit', icon('edit') + 'Editar', `data-id="${cur.id}"`, 'btn ghost sm')}</div>
+    </section>` : `<section class="card hl">${alertBox('', 'Trilha concluída!', 'Todos os cursos foram finalizados. Adicione novos se quiser continuar.', 'check')}</section>`;
+
+  const leit = viewLeituras();
+  return `<div class="stack">
+    <div><div class="prog-label"><span>Progresso da trilha</span><span>${done.length}/${T.length}</span></div>${bar(done.length / T.length * 100, 'Progresso da trilha')}</div>
+    ${curHTML}
+    <section class="card" aria-labelledby="qTitle"><div class="card-head"><h2 id="qTitle">Fila (bloqueada)</h2>${btn('courseAdd', icon('plus') + 'Curso', '', 'btn ghost sm')}</div>
+      <p class="small muted" style="margin-bottom:6px">Liberado só quando o atual for concluído.</p>
+      ${queue.length ? `<ul class="list">${queue.map(c => `<li><span class="num">${pos(c.id)}</span><div class="grow"><strong>${esc(c.title)}</strong><div class="small muted">${esc(c.provider)}${c.why ? ' — ' + esc(c.why) : ''}</div></div>
+        <span class="actions">${icon('lock', 'muted')}${iconBtn('courseUp', 'up', 'Subir na fila', `data-id="${c.id}"`)}${iconBtn('courseDown', 'down', 'Descer na fila', `data-id="${c.id}"`)}${iconBtn('courseEdit', 'edit', 'Editar curso', `data-id="${c.id}"`)}</span></li>`).join('')}</ul>` : empty('Fila vazia.')}
+    </section>
+    <section class="card" aria-labelledby="dTitle"><h2 id="dTitle" style="margin-bottom:8px">Concluídos</h2>
+      ${done.length ? `<ul class="list">${done.map(c => `<li><span class="num" style="background:var(--g);color:#fff">${icon('check')}</span><div class="grow"><strong>${esc(c.title)}</strong><div class="small muted">${esc(c.provider)} · concluído em ${fmtDate(c.doneAt)}</div></div>
+        <span class="actions">${iconBtn('courseUndo', 'reset', 'Desfazer conclusão', `data-id="${c.id}"`)}${iconBtn('courseEdit', 'edit', 'Editar curso', `data-id="${c.id}"`)}</span></li>`).join('')}</ul>` : empty('Nenhum curso concluído ainda. Foco no atual.')}
+    </section>
+    ${leit}</div>`;
+}
+function viewLeituras() {
+  const L = S.study.leituras, cur = currentBook();
+  const lastDone = L.filter(b => b.done && b.doneAt).map(b => b.doneAt).sort().pop();
+  const prazo = cur ? addDays(lastDone || S.study.leiturasInicio, 60) : '';
+  return `<section class="card" aria-labelledby="lTitle"><div class="card-head"><div><h2 id="lTitle">Leituras</h2><p class="small muted">Um livro a cada 2 meses.</p></div>${btn('bookAdd', icon('plus') + 'Livro', '', 'btn ghost sm')}</div>
+    ${cur ? `<p style="margin-bottom:8px">Lendo agora: <strong>${esc(cur.title)}</strong> — prazo ${fmtDate(prazo)}${prazo < todayKey() ? ' <span class="tag err">atrasado</span>' : ''}</p>` : ''}
+    <ul class="clist">${L.map(b => checkRow({
+      k: 'book:' + b.id, change: 'bookToggle', attrs: `data-id="${b.id}"`, checked: b.done,
+      title: esc(b.title), sub: esc(b.author) + (b.done ? ` · lido em ${fmtDate(b.doneAt)}` : b === cur ? ' · atual' : ' · na fila'),
+      disabled: !b.done && b !== cur, extra: iconBtn('bookEdit', 'edit', 'Editar livro', `data-id="${b.id}"`),
+    })).join('')}</ul></section>`;
+}
+
+function viewConcurso() {
+  const C = S.study.concurso, cur = currentSubject();
+  const active = todayKey() >= S.settings.switchDate;
+  const prog = s => s.topics.length ? s.topics.filter(t => t.done).length / s.topics.length * 100 : 0;
+  const topicList = (s, enabled) => s.topics.length ? `<ul class="clist">${s.topics.map(t => checkRow({
+    k: 'top:' + t.id, change: 'topicToggle', attrs: `data-sid="${s.id}" data-id="${t.id}"`, checked: t.done, title: esc(t.text),
+    disabled: !enabled, extra: iconBtn('topicEdit', 'edit', 'Editar tópico', `data-sid="${s.id}" data-id="${t.id}"`),
+  })).join('')}</ul>` : empty('Sem tópicos ainda. Adicione o conteúdo da apostila.');
+
+  const subjHead = (s, i) => `<div class="card-head"><div><p class="eyebrow">Matéria ${i + 1} de ${C.subjects.length}${s === cur ? ' · atual' : s.done ? ' · concluída' : ''}</p><h3 style="font-size:1.1rem">${esc(s.name)}</h3></div>
+    <span class="actions">${!s.done && s !== cur ? icon('lock', 'muted') + iconBtn('subjUp', 'up', 'Subir', `data-id="${s.id}"`) + iconBtn('subjDown', 'down', 'Descer', `data-id="${s.id}"`) : ''}${iconBtn('subjEdit', 'edit', 'Editar matéria', `data-id="${s.id}"`)}</span></div>
+    <div class="prog-label"><span>${s.topics.filter(t => t.done).length}/${s.topics.length} tópicos</span><span>${Math.round(prog(s))}%</span></div>${bar(prog(s), 'Progresso de ' + s.name)}`;
+
+  const tardes = [1, 2, 3, 4, 5].map(d => `<li><span class="num">${DOW_S[d]}</span><div class="grow"><input class="inp" style="width:100%" aria-label="Foco da tarde de ${DOW[d]}" value="${esc(C.tardes[d] || '')}" data-change="tarde" data-d="${d}" data-k="tarde:${d}"></div></li>`).join('');
+
+  return `<div class="stack">
+    ${active ? '' : alertBox('', `Ativa a partir de ${fmtDate(S.settings.switchDate)}`, 'Até lá, monte a estrutura: cadastre matérias e tópicos das apostilas.', 'calendar')}
+    <section class="card" aria-labelledby="tdTitle"><h2 id="tdTitle">Distribuição semanal das tardes</h2>
+      <p class="small muted" style="margin:4px 0 6px">13:00–17:00 · matéria da vez: <strong>${cur ? esc(cur.name) : '—'}</strong></p>
+      <ul class="list">${tardes}</ul></section>
+    ${cur ? `<section class="card hl">${subjHead(cur, C.subjects.indexOf(cur))}
+      <div style="margin-top:12px">${topicList(cur, true)}</div>
+      <div class="btn-row" style="margin-top:12px">${btn('topicAdd', icon('plus') + 'Tópicos', `data-sid="${cur.id}"`, 'btn ghost sm')}${btn('subjDone', icon('check') + 'Concluir matéria', `data-id="${cur.id}"`, 'btn sm')}</div></section>`
+      : `<section class="card hl">${alertBox('', 'Todas as matérias concluídas.', 'Revise e faça simulados.', 'check')}</section>`}
+    <section class="card"><div class="card-head"><h2>Próximas matérias (bloqueadas)</h2>${btn('subjAdd', icon('plus') + 'Matéria', '', 'btn ghost sm')}</div>
+      ${C.subjects.filter(s => !s.done && s !== cur).map(s => `<div class="card" style="box-shadow:none">${subjHead(s, C.subjects.indexOf(s))}
+        <details style="margin-top:8px"><summary>Tópicos (${s.topics.length})</summary>${topicList(s, false)}
+        <div style="margin-top:8px">${btn('topicAdd', icon('plus') + 'Tópicos', `data-sid="${s.id}"`, 'btn ghost sm')}</div></details></div>`).join('') || empty('Nenhuma matéria na fila.')}
+    </section>
+    ${C.subjects.some(s => s.done) ? `<section class="card"><h2 style="margin-bottom:8px">Concluídas</h2><ul class="list">${C.subjects.filter(s => s.done).map(s => `<li><span class="num" style="background:var(--g);color:#fff">${icon('check')}</span><div class="grow"><strong>${esc(s.name)}</strong><div class="small muted">Concluída em ${fmtDate(s.doneAt)}</div></div>${iconBtn('subjUndo', 'reset', 'Reabrir matéria', `data-id="${s.id}"`)}</li>`).join('')}</ul></section>` : ''}
+  </div>`;
+}
+
+function viewIngles() {
+  const E = S.study.ingles, k = todayKey(), wk = weekStart(k);
+  const dl = new Set(E.dailyLog[k] || []), wl = new Set(E.weeklyLog[wk] || []);
+  const dDone = E.daily.filter(i => dl.has(i.id)).length;
+  return `<div class="stack">
+    <section class="card"><div class="card-head"><h2>Nível</h2>${iconBtn('nivelEdit', 'edit', 'Editar nível')}</div><p>${esc(E.nivel)}</p></section>
+    <section class="card" aria-labelledby="edTitle"><div class="card-head"><div><h2 id="edTitle">Roteiro diário (trajetos de ônibus)</h2><p class="small muted">${dDone}/${E.daily.length} hoje · sequência: ${engStreak()} dia(s)</p></div>${btn('engAdd', icon('plus') + 'Item', 'data-list="daily"', 'btn ghost sm')}</div>
+      ${bar(E.daily.length ? dDone / E.daily.length * 100 : 0, 'Roteiro diário de inglês')}
+      <ul class="clist" style="margin-top:10px">${E.daily.map(i => checkRow({ k: 'ed:' + i.id, change: 'engDaily', attrs: `data-id="${i.id}"`, checked: dl.has(i.id), title: esc(i.text), sub: esc(i.detail), extra: iconBtn('engEdit', 'edit', 'Editar', `data-list="daily" data-id="${i.id}"`) })).join('')}</ul></section>
+    <section class="card" aria-labelledby="ewTitle"><div class="card-head"><div><h2 id="ewTitle">Semanal</h2><p class="small muted">Semana de ${fmtDate(wk)}</p></div>${btn('engAdd', icon('plus') + 'Item', 'data-list="weekly"', 'btn ghost sm')}</div>
+      <ul class="clist">${E.weekly.map(i => checkRow({ k: 'ew:' + i.id, change: 'engWeekly', attrs: `data-id="${i.id}"`, checked: wl.has(i.id), title: esc(i.text), sub: esc(i.detail), extra: iconBtn('engEdit', 'edit', 'Editar', `data-list="weekly" data-id="${i.id}"`) })).join('')}</ul></section>
+    <section class="card"><div class="card-head"><h2>Ferramentas</h2>${btn('toolAdd', icon('plus') + 'Ferramenta', '', 'btn ghost sm')}</div>
+      <ul class="list">${E.tools.map(t => `<li><div class="grow"><strong>${safeUrl(t.url) ? `<a href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${esc(t.name)}<span class="sr-only"> (abre em nova aba)</span></a>` : esc(t.name)}</strong><div class="small muted">${esc(t.when)}</div></div>${iconBtn('toolEdit', 'edit', 'Editar ferramenta', `data-id="${t.id}"`)}</li>`).join('')}</ul></section>
+    <section class="card" aria-labelledby="wTitle"><div class="card-head"><h2 id="wTitle">Palavras e frases novas</h2>${btn('wordAdd', icon('plus') + 'Registrar', '', 'btn sm')}</div>
+      <label class="field"><span class="sr-only">Buscar palavra</span><input type="search" placeholder="Buscar palavra ou frase…" value="${esc(UI.wordQ)}" data-input="wordSearch" data-k="wordSearch"></label>
+      <div id="wordsList">${wordsList()}</div></section>
+  </div>`;
+}
+function wordsList() {
+  const q = UI.wordQ.toLowerCase();
+  const W = S.study.ingles.words.filter(w => !q || `${w.term} ${w.meaning} ${w.example}`.toLowerCase().includes(q)).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  if (!W.length) return empty(S.study.ingles.words.length ? 'Nada encontrado.' : 'Nenhuma palavra registrada. Anote o que ouvir no trajeto.');
+  return `<ul class="list">${W.map(w => `<li><div class="grow"><strong lang="en">${esc(w.term)}</strong> — ${esc(w.meaning)}${w.example ? `<div class="small muted" lang="en">“${esc(w.example)}”</div>` : ''}<div class="small muted">${fmtDate(w.date)}</div></div>${iconBtn('wordEdit', 'edit', 'Editar palavra', `data-id="${w.id}"`)}</li>`).join('')}</ul>`;
+}
+
+/* ---------- 6.3 TREINO ---------- */
+function viewTreino() {
+  const k = UI.treinoDate || todayKey();
+  const dow = UI.treinoDow ?? fromKey(k).getDay();
+  const plan = S.treino.plan[dow];
+  const log = S.treino.log[k] || {};
+  const lastOf = exId => {
+    const ds = Object.keys(S.treino.log).filter(d => d < k && S.treino.log[d][exId] && (S.treino.log[d][exId].carga || S.treino.log[d][exId].reps)).sort();
+    const d = ds.pop(); if (!d) return '';
+    const e = S.treino.log[d][exId]; return `Última (${fmtDate(d)}): ${e.carga ? esc(e.carga) + ' kg' : '—'} × ${e.reps ? esc(e.reps) : '—'}`;
+  };
+  const doneN = plan.exercises.filter(e => log[e.id]?.done).length;
+  const rows = plan.exercises.map(e => {
+    const l = log[e.id] || {};
+    return `<li class="crow-wrap" style="flex-wrap:wrap;border-top:1px solid var(--line);padding:4px 0">
+      <label class="crow ${l.done ? 'is-done' : ''}"><input type="checkbox" class="chk" data-change="treinoDone" data-id="${e.id}" data-k="tr:${e.id}" ${l.done ? 'checked' : ''}>
+        <span class="crow-txt"><span class="crow-title">${esc(e.name)}</span><span class="crow-sub">${esc(e.group)}${lastOf(e.id) ? ' · ' + lastOf(e.id) : ''}</span></span></label>
+      <span class="inline-inputs" style="padding:0 0 8px 54px">
+        <label><span class="sr-only">Carga de ${esc(e.name)} em kg</span><input class="inp" type="text" inputmode="decimal" placeholder="kg" value="${esc(l.carga || '')}" data-change="treinoField" data-id="${e.id}" data-f="carga" data-k="trc:${e.id}"></label>
+        <label><span class="sr-only">Repetições de ${esc(e.name)}</span><input class="inp" type="text" placeholder="reps" value="${esc(l.reps || '')}" data-change="treinoField" data-id="${e.id}" data-f="reps" data-k="trr:${e.id}"></label>
+        ${iconBtn('exUp', 'up', 'Subir exercício', `data-id="${e.id}"`)}${iconBtn('exDown', 'down', 'Descer exercício', `data-id="${e.id}"`)}${iconBtn('exEdit', 'edit', 'Editar exercício', `data-id="${e.id}"`)}
+      </span></li>`;
+  }).join('');
+
+  const hist = Object.keys(S.treino.log).filter(d => Object.values(S.treino.log[d]).some(x => x.done || x.carga || x.reps)).sort().reverse().slice(0, 30);
+  const allEx = {}; Object.values(S.treino.plan).forEach(p => p.exercises.forEach(e => { allEx[e.id] = e.name; }));
+  return `<header class="page-head"><div><h1 tabindex="-1">Treino</h1><p class="muted">Divisão semanal · registre carga e repetições.</p></div></header>
+  <div class="chips" role="group" aria-label="Dia da divisão">${[1, 2, 3, 4, 5, 6, 0].map(d => `<button type="button" class="chip" aria-pressed="${d === dow}" data-act="treinoDay" data-d="${d}" data-k="td:${d}">${DOW_S[d]}</button>`).join('')}</div>
+  <section class="card section" aria-labelledby="trTitle">
+    <div class="card-head"><div><p class="eyebrow">${DOW[dow]}</p><h2 id="trTitle">${esc(plan.title)}</h2></div>
+      <label class="field" style="margin:0"><span class="small">Data do registro</span><input type="date" value="${k}" data-change="treinoDate" data-k="trDate"></label></div>
+    ${plan.exercises.length ? `<div class="prog-label"><span>${doneN}/${plan.exercises.length} feitos</span><span>${fmtDate(k)}</span></div>${bar(doneN / plan.exercises.length * 100, 'Progresso do treino')}
+      <ul class="clist" style="margin-top:8px">${rows}</ul>` : empty('Dia de descanso. Recupera para a semana.')}
+    <div class="btn-row" style="margin-top:14px">${btn('exAdd', icon('plus') + 'Exercício', '', 'btn ghost sm')}${btn('planTitle', icon('edit') + 'Nome do dia', '', 'btn ghost sm')}</div>
+  </section>
+  <section class="card section" aria-labelledby="thTitle"><h2 id="thTitle" style="margin-bottom:8px">Histórico</h2>
+    ${hist.length ? hist.map(d => {
+      const L = S.treino.log[d], ids = Object.keys(L).filter(id => L[id].done || L[id].carga || L[id].reps);
+      const p = S.treino.plan[fromKey(d).getDay()];
+      return `<details><summary>${fmtDate(d)} · ${esc(p ? p.title : '')} · ${ids.filter(id => L[id].done).length} feito(s)</summary>
+        <ul class="list">${ids.map(id => `<li><div class="grow">${L[id].done ? '✓ ' : ''}${esc(allEx[id] || 'Exercício removido')}</div><span class="small muted">${L[id].carga ? esc(L[id].carga) + ' kg' : ''} ${L[id].reps ? '× ' + esc(L[id].reps) : ''}</span></li>`).join('')}</ul></details>`;
+    }).join('') : empty('Nenhum treino registrado ainda.')}
+  </section>`;
+}
+
+/* ---------- 6.4 FINANÇAS ---------- */
+function viewFinancas() {
+  const mk = UI.finMonth || monthOf(todayKey());
+  const m = monthSummary(mk), F = S.fin, Q = F.quitacao;
+  const pago = quitPago(), qPct = Q.meta ? pago / Q.meta * 100 : 0, falta = Math.max(0, Q.meta - pago);
+  const diasPrazo = daysBetween(todayKey(), Q.prazo);
+  const mar = monthSummary(monthOf(S.settings.switchDate));
+  const marPct = mar.recFix ? mar.fixT / mar.recFix * 100 : 0;
+
+  let alerts = '';
+  const comp = m.comprometido * 100;
+  if (m.recFix) alerts += alertBox(comp >= 70 ? 'err' : comp >= 50 ? 'warn' : '', `${Math.round(comp)}% da renda fixa comprometida com despesas fixas`, `${brl(m.fixT)} de ${brl(m.recFix)} em ${fmtMonth(mk)}.`);
+  alerts += alertBox(marPct >= 70 ? 'err' : 'warn', `A partir de ${fmtMonth(monthOf(S.settings.switchDate))}: ${mar.fix.map(f => f.label.split(' (')[0].toLowerCase()).join(' + ')} = ${brl(mar.fixT)} de ~${brl(mar.recFix)}`,
+    `${Math.round(marPct)}% comprometido. Sobram ${brl(mar.recFix - mar.fixT)} para todo o resto. Freelas deixam de ser opcionais.`);
+  if (!m.cardBudget && m.cardSpent > 0 && mk <= monthOf(Q.prazo)) alerts += alertBox('err', 'Regra quebrada: compra nova no cartão', `${brl(m.cardSpent)} em ${fmtMonth(mk)}. Sem compras no cartão até quitar (${fmtDate(Q.prazo)}).`);
+  if (m.cardBudget && m.cardSpent > m.cardLimit) alerts += alertBox('err', 'Limite do cartão estourado', `${brl(m.cardSpent)} gastos de ${brl(m.cardLimit)} permitidos em ${fmtMonth(mk)}.`);
+
+  // Gráfico: 6 meses até o mês selecionado
+  const months = []; for (let i = 5; i >= 0; i--) months.push(addMonths(mk, -i));
+  const data = months.map(x => ({ mk: x, ...monthSummary(x) }));
+  const max = Math.max(1, ...data.map(d => Math.max(d.entradas, d.saidas)));
+  const chart = `<div class="chart" role="img" aria-label="Entradas e saídas dos últimos 6 meses: ${data.map(d => `${fmtMonth(d.mk)}, entradas ${brl(d.entradas)}, saídas ${brl(d.saidas)}`).join('; ')}">
+    ${data.map(d => `<div class="col ${d.mk === mk ? 'sel' : ''}"><div class="bars"><span class="in" style="height:${d.entradas / max * 100}%" title="Entradas ${brl(d.entradas)}"></span><span class="out" style="height:${d.saidas / max * 100}%" title="Saídas ${brl(d.saidas)}"></span></div><span class="lbl">${fmtMonth(d.mk).split('/')[0]}</span></div>`).join('')}</div>
+    <div class="legend"><span><i style="background:var(--g)"></i>Entradas</span><span><i style="background:#A9C4B4"></i>Saídas</span></div>`;
+
+  const recRow = (r, act) => `<li><div class="grow"><strong>${esc(r.label)}</strong><div class="small muted">${r.de ? 'de ' + fmtMonth(r.de) : ''}${r.ate ? ' até ' + fmtMonth(r.ate) : ' · sem fim'}</div></div><span class="${act === 'recEdit' ? 'money-in' : 'money-out'}">${brl(r.valor)}</span>${iconBtn(act, 'edit', 'Editar', `data-id="${r.id}"`)}</li>`;
+
+  return `<header class="page-head"><div><h1 tabindex="-1">Finanças</h1><p class="muted">Receitas, fixos, lançamentos e a meta do cartão.</p></div>
+    <label class="field" style="margin:0"><span class="small">Mês</span><input type="month" value="${mk}" data-change="finMonth" data-k="finMonth"></label></header>
+  ${alerts}
+  <div class="grid grid-3">
+    <div class="card"><p class="eyebrow">Entradas</p><p class="big money-in" style="font:800 1.5rem var(--f-title)">${brl(m.entradas)}</p><p class="small muted">Fixas ${brl(m.recFix)} + variáveis ${brl(m.lr)}</p></div>
+    <div class="card"><p class="eyebrow">Saídas</p><p style="font:800 1.5rem var(--f-title)" class="money-out">${brl(m.saidas)}</p><p class="small muted">Fixos ${brl(m.fixT)} + lançados ${brl(m.ld)}</p></div>
+    <div class="card hl"><p class="eyebrow">Saldo de ${fmtMonth(mk)}</p><p style="font:800 1.5rem var(--f-title)" class="${m.saldo < 0 ? 'money-out' : 'money-in'}">${brl(m.saldo)}</p><p class="small muted">${m.saldo < 0 ? 'Negativo. Corte agora.' : 'Mantenha positivo.'}</p></div>
+  </div>
+
+  <section class="card section" aria-labelledby="qtTitle"><div class="card-head"><div><h2 id="qtTitle">Meta: cartão zerado</h2><p class="small muted">${brl(Q.meta)} até ${fmtDate(Q.prazo)} · sem compras novas até lá</p></div>${iconBtn('quitEdit', 'edit', 'Editar meta')}</div>
+    <div class="prog-label"><span>${brl(pago)} pagos</span><span>${Math.round(qPct)}%</span></div>${bar(qPct, 'Quitação do cartão', qPct >= 100 ? '' : diasPrazo < 30 ? 'warn' : '')}
+    <p style="margin-top:8px">${falta > 0 ? `Faltam <strong>${brl(falta)}</strong>${diasPrazo >= 0 ? ` em ${diasPrazo} dias` : ' — prazo vencido'}.` : '<strong>Cartão quitado. Agora: limite de R$ 500/mês.</strong>'}</p>
+    <div class="btn-row" style="margin-top:12px">${btn('quitPay', icon('plus') + 'Registrar pagamento')}</div></section>
+
+  <section class="card section" aria-labelledby="chTitle"><h2 id="chTitle">Últimos 6 meses</h2>${chart}</section>
+
+  <section class="card section" aria-labelledby="lcTitle"><div class="card-head"><h2 id="lcTitle">Lançamentos de ${fmtMonth(mk)}</h2>
+    <div class="btn-row">${btn('lancAdd', icon('plus') + 'Receita', 'data-tipo="receita"', 'btn ghost sm')}${btn('lancAdd', icon('plus') + 'Despesa', 'data-tipo="despesa"', 'btn sm')}</div></div>
+    ${m.cardBudget ? '<p class="small muted" style="margin-bottom:6px">Compras em “Cartão de crédito” são controladas contra o limite — o valor já está nos fixos.</p>' : ''}
+    ${m.lanc.length ? `<ul class="list">${m.lanc.map(l => `<li><div class="grow"><strong>${esc(l.desc || l.cat)}</strong><div class="small muted">${fmtDate(l.date)} · ${esc(l.cat)}</div></div><span class="${l.tipo === 'receita' ? 'money-in' : 'money-out'}">${l.tipo === 'receita' ? '+' : '−'} ${brl(l.valor)}</span>${iconBtn('lancEdit', 'edit', 'Editar lançamento', `data-id="${l.id}"`)}</li>`).join('')}</ul>` : empty('Nenhum lançamento neste mês.')}
+  </section>
+
+  <div class="grid grid-2 section">
+    <section class="card"><div class="card-head"><h2>Receitas fixas</h2>${iconBtn('recAdd', 'plus', 'Adicionar receita fixa')}</div>
+      <ul class="list">${F.receitas.map(r => recRow(r, 'recEdit')).join('') || '<li>' + empty('Nenhuma.') + '</li>'}</ul></section>
+    <section class="card"><div class="card-head"><h2>Despesas fixas</h2>${iconBtn('fixAdd', 'plus', 'Adicionar despesa fixa')}</div>
+      <ul class="list">${F.fixos.map(r => recRow(r, 'fixEdit')).join('') || '<li>' + empty('Nenhuma.') + '</li>'}</ul></section>
+  </div>
+  <section class="card section"><div class="card-head"><h2>Categorias</h2>${btn('catsEdit', icon('edit') + 'Editar', '', 'btn ghost sm')}</div>
+    <p class="small"><strong>Receitas:</strong> ${F.catReceita.map(esc).join(', ')}</p><p class="small" style="margin-top:4px"><strong>Despesas:</strong> ${F.catDespesa.map(esc).join(', ')}</p></section>`;
+}
+
+/* ---------- 6.5 DESENVOLVIMENTO ---------- */
+function viewDesenvolvimento() {
+  const D = S.dev, k = todayKey();
+  const dow = fromKey(k).getDay();
+  const nextFri = dow === 5 ? k : addDays(k, (5 - dow + 7) % 7);
+  const draft = D.reviews.find(r => r.date === k) || {};
+  const ta = (key, label) => `<label class="field"><span>${label}</span><textarea id="rv_${key}" rows="3" data-k="rv:${key}">${esc(draft[key] || '')}</textarea></label>`;
+  const evo = m => {
+    const L = [...m.logs].sort((a, b) => a.date.localeCompare(b.date));
+    const last = L.slice(-12);
+    const avg = arr => arr.length ? arr.reduce((a, x) => a + Number(x.nota), 0) / arr.length : 0;
+    const a1 = avg(L.slice(-3)), a0 = avg(L.slice(-6, -3));
+    const trend = L.length < 4 ? '' : a1 > a0 ? ' · subindo ↑' : a1 < a0 ? ' · caindo ↓' : ' · estável';
+    return `${last.length ? `<div class="spark" role="img" aria-label="Notas recentes: ${last.map(x => x.nota).join(', ')} de 5">${last.map(x => `<span style="height:${x.nota / 5 * 100}%" title="${fmtDate(x.date)}: ${x.nota}/5"></span>`).join('')}</div>
+      <p class="small muted" style="margin-top:6px">Média recente ${a1.toFixed(1).replace('.', ',')}/5${trend}</p>` : '<p class="small muted">Sem registros ainda.</p>'}
+      ${L.length ? `<details><summary>Registros (${L.length})</summary><ul class="list">${[...L].reverse().map(x => `<li><div class="grow"><strong>${x.nota}/5</strong> · ${fmtDate(x.date)}${x.texto ? `<div class="small">${esc(x.texto)}</div>` : ''}</div>${iconBtn('impLogDel', 'trash', 'Remover registro', `data-id="${m.id}" data-log="${x.id}"`)}</li>`).join('')}</ul></details>` : ''}`;
+  };
+  return `<header class="page-head"><div><h1 tabindex="-1">Desenvolvimento</h1><p class="muted">Visão, pontos a melhorar e revisão semanal.</p></div></header>
+  <section class="card hl"><div class="card-head"><h2>Visão 3–5 anos</h2>${iconBtn('visaoEdit', 'edit', 'Editar visão')}</div><p>${esc(D.visao)}</p></section>
+  <div class="section"><div class="card-head"><h2>5 pilares</h2>${btn('pilarAdd', icon('plus') + 'Pilar', '', 'btn ghost sm')}</div>
+    <div class="grid grid-3">${D.pilares.map(p => `<div class="card"><div class="card-head" style="margin-bottom:4px"><h3>${esc(p.title)}</h3>${iconBtn('pilarEdit', 'edit', 'Editar pilar ' + p.title, `data-id="${p.id}"`)}</div><p class="muted">${esc(p.desc)}</p></div>`).join('')}</div></div>
+  <section class="card section"><div class="card-head"><h2>Metas materiais</h2>${btn('metaAdd', icon('plus') + 'Meta', '', 'btn ghost sm')}</div>
+    <ul class="clist">${D.metas.map(m => checkRow({ k: 'meta:' + m.id, change: 'metaToggle', attrs: `data-id="${m.id}"`, checked: m.done, title: esc(m.text), extra: iconBtn('metaEdit', 'edit', 'Editar meta', `data-id="${m.id}"`) })).join('')}</ul></section>
+  <div class="section"><div class="card-head"><h2>Pontos a melhorar</h2>${btn('impAdd', icon('plus') + 'Ponto', '', 'btn ghost sm')}</div>
+    <div class="grid grid-3">${D.melhorias.map(m => `<div class="card"><div class="card-head" style="margin-bottom:4px"><h3>${esc(m.title)}</h3>${iconBtn('impEdit', 'edit', 'Editar ' + m.title, `data-id="${m.id}"`)}</div>
+      <p class="small muted" style="margin-bottom:10px">${esc(m.desc)}</p>${evo(m)}<div style="margin-top:10px">${btn('impLog', icon('plus') + 'Registrar evolução', `data-id="${m.id}"`, 'btn ghost sm')}</div></div>`).join('')}</div></div>
+  <section class="card section hl" aria-labelledby="rvTitle"><div class="card-head"><div><h2 id="rvTitle">Revisão semanal</h2><p class="small muted">Toda sexta, 12:00 · próxima: ${fmtDate(nextFri)}</p></div></div>
+    ${ta('learned', 'O que aprendi')}${ta('done', 'O que concluí')}${ta('stuck', 'O que travou')}${ta('next', 'Meta da próxima semana')}
+    <div class="btn-row">${btn('saveReview', icon('check') + 'Salvar revisão de hoje')}${btn('copySummary', icon('copy') + 'Copiar resumo para o Claude', '', 'btn ghost')}</div></section>
+  <section class="card section"><h2 style="margin-bottom:8px">Histórico de revisões</h2>
+    ${D.reviews.length ? [...D.reviews].sort((a, b) => b.date.localeCompare(a.date)).map(r => `<details><summary>Semana de ${fmtDate(r.date)}</summary>
+      <div class="stack small" style="padding-bottom:10px">${[['learned', 'Aprendi'], ['done', 'Concluí'], ['stuck', 'Travou'], ['next', 'Meta']].map(([f, l]) => `<p><strong>${l}:</strong> <span class="pre">${esc(r[f] || '—')}</span></p>`).join('')}
+      <div>${btn('reviewEdit', icon('edit') + 'Editar', `data-id="${r.id}"`, 'btn ghost sm')}</div></div></details>`).join('') : empty('Nenhuma revisão registrada.')}
+  </section>`;
+}
+
+/* ---------- 6.6 LINHA DO TEMPO ---------- */
+function viewLinha() {
+  const L = [...S.timeline].sort((a, b) => a.date.localeCompare(b.date));
+  const nm = nextMilestone(), k = todayKey();
+  return `<header class="page-head"><div><h1 tabindex="-1">Linha do tempo</h1><p class="muted">Marcos em ordem. Marque quando concluir.</p></div>${btn('tlAdd', icon('plus') + 'Marco')}</header>
+  <ol class="tl">${L.map(m => {
+    const late = !m.done && m.date < k;
+    return `<li class="${m.done ? 'done' : ''} ${m === nm ? 'next' : ''}"><span class="dot">${m.done ? icon('check') : ''}</span>
+      <div class="card"><div class="card-head" style="margin-bottom:4px"><div><p class="eyebrow">${esc(m.label)}${m === nm ? ' · próximo' : ''}</p><h3>${esc(m.title)}</h3></div>
+        <span class="actions"><span class="tag ${m.done ? '' : late ? 'err' : 'gray'}">${m.done ? 'concluído' : late ? 'atrasado' : 'pendente'}</span>${iconBtn('tlEdit', 'edit', 'Editar marco', `data-id="${m.id}"`)}</span></div>
+        ${m.desc ? `<p class="muted">${esc(m.desc)}</p>` : ''}
+        <label class="field check" style="margin:10px 0 0"><input type="checkbox" class="chk" data-change="tlToggle" data-id="${m.id}" data-k="tl:${m.id}" ${m.done ? 'checked' : ''}><span>Concluído</span></label></div></li>`;
+  }).join('')}</ol>`;
+}
+
+/* ---------- 6.7 ANOTAÇÕES ---------- */
+const TAGS = ['Estudo', 'Inglês', 'Concurso', 'Finanças', 'Ideias', 'Pessoal'];
+function viewNotas() {
+  return `<header class="page-head"><div><h1 tabindex="-1">Anotações</h1><p class="muted">${S.notes.length} nota(s)</p></div>${btn('noteAdd', icon('plus') + 'Nova nota')}</header>
+  <label class="field"><span class="sr-only">Buscar nas notas</span><input type="search" placeholder="Buscar por título ou texto…" value="${esc(UI.noteQ)}" data-input="noteSearch" data-k="noteSearch"></label>
+  <div class="chips" role="group" aria-label="Filtrar por etiqueta">${['Todas', ...TAGS].map(t => `<button type="button" class="chip" aria-pressed="${UI.noteTag === t}" data-act="noteTag" data-tag="${t}" data-k="nt:${t}">${t}</button>`).join('')}</div>
+  <div id="notesList" class="section">${notesList()}</div>`;
+}
+function notesList() {
+  const q = UI.noteQ.toLowerCase();
+  const N = S.notes.filter(n => (UI.noteTag === 'Todas' || n.tag === UI.noteTag) && (!q || `${n.title} ${n.body}`.toLowerCase().includes(q))).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  if (!N.length) return empty(S.notes.length ? 'Nenhuma nota encontrada.' : 'Nenhuma nota ainda. Toque em “Nova nota”.');
+  return `<div class="grid grid-2">${N.map(n => `<article class="card"><div class="card-head" style="margin-bottom:6px"><div><span class="tag">${esc(n.tag)}</span> <span class="small muted">${fmtDate(n.date)}</span><h3 style="margin-top:6px">${esc(n.title)}</h3></div>${iconBtn('noteEdit', 'edit', 'Editar nota ' + n.title, `data-id="${n.id}"`)}</div><p class="pre">${esc(n.body)}</p></article>`).join('')}</div>`;
+}
+
+/* ---------- 6.8 MEUS DADOS ---------- */
+function viewDados() {
+  const rk = UI.rotRk || routineKey(todayKey()), d = UI.rotDow;
+  const items = S.routines[rk][d] || [];
+  return `<header class="page-head"><div><h1 tabindex="-1">Meus dados</h1><p class="muted">Perfil, rotinas, backup e configurações.</p></div></header>
+  <section class="card"><div class="card-head"><h2>Perfil</h2>${btn('profileAdd', icon('plus') + 'Campo', '', 'btn ghost sm')}</div>
+    <ul class="list">${S.profile.map(p => `<li><div class="grow"><span class="small muted">${esc(p.label)}</span><div><strong>${esc(p.value)}</strong></div></div>${iconBtn('profileEdit', 'edit', 'Editar ' + p.label, `data-id="${p.id}"`)}</li>`).join('')}</ul></section>
+
+  <section class="card section" aria-labelledby="rtTitle"><div class="card-head"><div><h2 id="rtTitle">Rotinas</h2><p class="small muted">Troca automática em ${fmtDate(S.settings.switchDate)}. Hoje vale: ${routineName(routineKey(todayKey()))}.</p></div></div>
+    <div class="chips" role="group" aria-label="Rotina" style="margin-bottom:8px">${[['atual', 'Rotina atual'], ['marco', 'A partir de março']].map(([v, l]) => `<button type="button" class="chip" aria-pressed="${rk === v}" data-act="rotSel" data-rk="${v}" data-k="rk:${v}">${l}</button>`).join('')}</div>
+    <div class="chips" role="group" aria-label="Dia da semana">${[1, 2, 3, 4, 5, 6, 0].map(x => `<button type="button" class="chip" aria-pressed="${x === d}" data-act="rotDay" data-d="${x}" data-k="rd:${x}">${DOW_S[x]}</button>`).join('')}</div>
+    <ul class="list" style="margin-top:8px">${items.map(it => `<li><span class="tag gray">${esc(it.time)}</span><div class="grow">${esc(it.text)}</div><span class="actions">${iconBtn('rotUp', 'up', 'Subir', `data-id="${it.id}"`)}${iconBtn('rotDown', 'down', 'Descer', `data-id="${it.id}"`)}${iconBtn('rotEdit', 'edit', 'Editar', `data-id="${it.id}"`)}</span></li>`).join('') || '<li>' + empty('Sem itens neste dia.') + '</li>'}</ul>
+    <div class="btn-row" style="margin-top:10px">${btn('rotAdd', icon('plus') + 'Item da rotina', '', 'btn ghost sm')}</div></section>
+
+  <section class="card section" aria-labelledby="bkTitle"><h2 id="bkTitle">Backup</h2>
+    <p class="small muted" style="margin:4px 0 12px">Os dados ficam só neste navegador. Exporte com frequência.</p>
+    <div class="btn-row">${btn('export', icon('download') + 'Exportar (JSON)')}${btn('import', icon('upload') + 'Importar (JSON)', '', 'btn ghost')}</div></section>
+
+  <section class="card section" aria-labelledby="cfTitle"><h2 id="cfTitle" style="margin-bottom:12px">Configurações</h2>
+    <label class="field check"><input type="checkbox" class="chk" data-change="toggleGuide" data-k="cfg:guide" ${S.settings.showGuide ? '' : 'checked'}><span>Ocultar guia “Como usar”</span></label>
+    <div class="grid grid-2">
+      <label class="field"><span>Início da rotina de março</span><input type="date" value="${S.settings.switchDate}" data-change="setting" data-key="switchDate" data-k="cfg:sw"></label>
+      <label class="field"><span>Mês de provas (ritmo leve)</span><input type="month" value="${S.settings.provasMes}" data-change="setting" data-key="provasMes" data-k="cfg:pv"></label>
+    </div>
+    <div class="btn-row">${btn('resetAll', icon('trash') + 'Apagar todos os dados', '', 'btn danger sm')}</div></section>`;
+}
+
+/* =========================================================
+   7. GUIA "COMO USAR" — componente isolado.
+   Para remover de vez: apague este bloco, a entrada 'guia' em TABS
+   e a opção "Ocultar guia" em viewDados. Ou só marque "Ocultar guia".
+   ========================================================= */
+const GUIDE = [
+  ['home', 'Painel', 'Sua página inicial. O checklist do dia vem da rotina do dia da semana e zera sozinho todo dia. A rotina muda automaticamente para a “de março” em 01/03/2027. A sequência conta dias com ≥ 80% feitos; sábado não quebra.'],
+  ['book', 'Estudo', 'Um curso por vez: o próximo só libera quando você concluir o atual. Tem cronômetro pomodoro (25/5), a trilha de Administração, o Concurso (estrutura de matérias e tópicos) e o Inglês com roteiro diário.'],
+  ['dumbbell', 'Treino', 'Divisão da semana com checklist, carga e repetições por exercício. O app mostra a última carga usada e guarda o histórico.'],
+  ['wallet', 'Finanças', 'Escolha o mês, lance receitas e despesas, veja o saldo e o gráfico. A meta do cartão avança quando você registra um pagamento na categoria “Quitação do cartão”.'],
+  ['target', 'Desenvolvimento', 'Visão de 3–5 anos, pilares, metas, pontos a melhorar (com notas de evolução) e a revisão semanal de sexta. Use “Copiar resumo” para mandar ao Claude.'],
+  ['flag', 'Linha do tempo', 'Seus marcos em ordem. Marque como concluído e adicione novos.'],
+  ['note', 'Anotações', 'Notas com etiqueta, busca e filtro.'],
+  ['user', 'Meus dados', 'Perfil, edição das rotinas, backup (exportar/importar) e configurações — inclusive ocultar este guia.'],
+];
+function viewGuia() {
+  return `<header class="page-head"><div><h1 tabindex="-1">Como usar</h1><p class="muted">Guia rápido. Tudo é editável pelos ícones de lápis e “+”.</p></div></header>
+  <div class="grid grid-2">${GUIDE.map(([ic, t, d]) => `<div class="card guide-item"><span class="ic-wrap">${icon(ic)}</span><div><h3>${t}</h3><p class="muted small" style="margin-top:4px">${d}</p></div></div>`).join('')}</div>
+  ${alertBox('', 'Dados só neste aparelho', 'Tudo fica salvo no navegador. Faça backup em Meus dados → Exportar.')}
+  <div class="btn-row">${btn('hideGuide', 'Ocultar guia', '', 'btn ghost')}</div>`;
+}
+
+/* =========================================================
+   8. AÇÕES
+   ========================================================= */
+const F_ROT = [{ key: 'time', label: 'Horário', hint: 'Ex.: 05:30–07:20' }, { key: 'text', label: 'Atividade', required: true },
+  { key: 'tag', label: 'Tipo', type: 'select', options: [{ v: '', l: 'Geral' }, { v: 'treino', l: 'Treino' }, { v: 'estudo', l: 'Estudo' }, { v: 'ingles', l: 'Inglês' }, { v: 'trabalho', l: 'Trabalho' }, { v: 'faculdade', l: 'Faculdade' }, { v: 'concurso', l: 'Concurso' }, { v: 'fe', l: 'Fé' }, { v: 'freela', l: 'Freela' }, { v: 'revisao', l: 'Revisão' }] }];
+const F_PERIOD = [{ key: 'label', label: 'Descrição', required: true }, { key: 'valor', label: 'Valor mensal (R$)', type: 'number', required: true },
+  { key: 'de', label: 'A partir de', type: 'month' }, { key: 'ate', label: 'Até (vazio = sem fim)', type: 'month' }];
+const rotList = () => S.routines[UI.rotRk || routineKey(todayKey())][UI.rotDow];
+const lancForm = (item, tipo) => {
+  const cats = tipo === 'receita' ? S.fin.catReceita : S.fin.catDespesa;
+  editItem(S.fin.lancamentos, item, tipo === 'receita' ? 'receita' : 'despesa', [
+    { key: 'date', label: 'Data', type: 'date', required: true, value: monthOf(todayKey()) === (UI.finMonth || monthOf(todayKey())) ? todayKey() : (UI.finMonth + '-01') },
+    { key: 'valor', label: 'Valor (R$)', type: 'number', required: true },
+    { key: 'cat', label: 'Categoria', type: 'select', options: cats, value: cats[0] },
+    { key: 'desc', label: 'Descrição' },
+  ], { tipo });
+};
+
+const ACT = {
+  go: el => { location.hash = el.dataset.tab; },
+  more: () => { paintMore(); $('#moreDialog').showModal(); },
+
+  // Estudo
+  sub: el => { UI.estudoSub = el.dataset.sub; render(); },
+  pomoStart: () => {
+    if (POMO.running) { POMO.remaining = Math.max(0, Math.round((POMO.endAt - Date.now()) / 1000)); pomoStop(); }
+    else { POMO.endAt = Date.now() + POMO.remaining * 1000; POMO.running = true; POMO.timer = setInterval(pomoTick, 500); }
+    render();
+  },
+  pomoReset: () => { pomoStop(); POMO.remaining = POMO_DUR[POMO.mode]; render(); pomoPaint(); },
+  pomoSkip: () => { pomoStop(); POMO.mode = POMO.mode === 'foco' ? 'pausa' : 'foco'; POMO.remaining = POMO_DUR[POMO.mode]; render(); pomoPaint(); },
+  courseDone: el => { const c = find(S.study.trilha, el.dataset.id); if (c && confirm(`Concluir “${c.title}”? O próximo curso será liberado.`)) { c.done = true; c.doneAt = todayKey(); save(); render(); toast('Curso concluído. Próximo liberado.'); } },
+  courseUndo: el => { const c = find(S.study.trilha, el.dataset.id); if (c && confirm('Desfazer a conclusão deste curso?')) { c.done = false; c.doneAt = ''; save(); render(); } },
+  courseEdit: el => editItem(S.study.trilha, find(S.study.trilha, el.dataset.id), 'curso', F_COURSE),
+  courseAdd: () => editItem(S.study.trilha, null, 'curso', F_COURSE, { done: false, doneAt: '', startedAt: '' }),
+  courseUp: el => { const cur = currentCourse(); move(S.study.trilha, el.dataset.id, -1, x => !x.done && x !== cur); save(); render(); },
+  courseDown: el => { const cur = currentCourse(); move(S.study.trilha, el.dataset.id, 1, x => !x.done && x !== cur); save(); render(); },
+  bookEdit: el => editItem(S.study.leituras, find(S.study.leituras, el.dataset.id), 'livro', [{ key: 'title', label: 'Título', required: true }, { key: 'author', label: 'Autor' }]),
+  bookAdd: () => editItem(S.study.leituras, null, 'livro', [{ key: 'title', label: 'Título', required: true }, { key: 'author', label: 'Autor' }], { done: false, doneAt: '' }),
+  subjAdd: () => editItem(S.study.concurso.subjects, null, 'matéria', [{ key: 'name', label: 'Matéria', required: true }], { topics: [], done: false, doneAt: '' }),
+  subjEdit: el => editItem(S.study.concurso.subjects, find(S.study.concurso.subjects, el.dataset.id), 'matéria', [{ key: 'name', label: 'Matéria', required: true }]),
+  subjDone: el => {
+    const s = find(S.study.concurso.subjects, el.dataset.id); if (!s) return;
+    const pend = s.topics.filter(t => !t.done).length;
+    if (confirm(pend ? `Ainda há ${pend} tópico(s) pendente(s). Concluir “${s.name}” mesmo assim?` : `Concluir “${s.name}” e liberar a próxima matéria?`)) { s.done = true; s.doneAt = todayKey(); save(); render(); toast('Matéria concluída.'); }
+  },
+  subjUndo: el => { const s = find(S.study.concurso.subjects, el.dataset.id); if (s) { s.done = false; s.doneAt = ''; save(); render(); } },
+  subjUp: el => { const cur = currentSubject(); move(S.study.concurso.subjects, el.dataset.id, -1, x => !x.done && x !== cur); save(); render(); },
+  subjDown: el => { const cur = currentSubject(); move(S.study.concurso.subjects, el.dataset.id, 1, x => !x.done && x !== cur); save(); render(); },
+  topicAdd: el => {
+    const s = find(S.study.concurso.subjects, el.dataset.sid); if (!s) return;
+    openForm({ title: `Tópicos de ${s.name}`, saveLabel: 'Adicionar', fields: [{ key: 'lines', label: 'Um tópico por linha', type: 'textarea', rows: 8, required: true, hint: 'Cole o sumário da apostila.' }],
+      onSave: v => v.lines.split('\n').map(x => x.trim()).filter(Boolean).forEach(text => s.topics.push({ id: uid(), text, done: false })) });
+  },
+  topicEdit: el => { const s = find(S.study.concurso.subjects, el.dataset.sid); if (s) editItem(s.topics, find(s.topics, el.dataset.id), 'tópico', [{ key: 'text', label: 'Tópico', required: true }]); },
+  nivelEdit: () => openForm({ title: 'Nível de inglês', fields: [{ key: 'nivel', label: 'Descrição do nível', type: 'textarea', value: S.study.ingles.nivel }], onSave: v => { S.study.ingles.nivel = v.nivel; } }),
+  engAdd: el => editItem(S.study.ingles[el.dataset.list], null, 'item', [{ key: 'text', label: 'Atividade', required: true }, { key: 'detail', label: 'Detalhe' }]),
+  engEdit: el => { const L = S.study.ingles[el.dataset.list]; editItem(L, find(L, el.dataset.id), 'item', [{ key: 'text', label: 'Atividade', required: true }, { key: 'detail', label: 'Detalhe' }]); },
+  toolAdd: () => editItem(S.study.ingles.tools, null, 'ferramenta', [{ key: 'name', label: 'Nome', required: true }, { key: 'url', label: 'Link', type: 'url' }, { key: 'when', label: 'Quando usar' }]),
+  toolEdit: el => editItem(S.study.ingles.tools, find(S.study.ingles.tools, el.dataset.id), 'ferramenta', [{ key: 'name', label: 'Nome', required: true }, { key: 'url', label: 'Link', type: 'url' }, { key: 'when', label: 'Quando usar' }]),
+  wordAdd: () => editItem(S.study.ingles.words, null, 'palavra/frase', [{ key: 'term', label: 'Palavra ou frase (inglês)', required: true }, { key: 'meaning', label: 'Significado' }, { key: 'example', label: 'Exemplo de uso' }, { key: 'date', label: 'Data', type: 'date', value: todayKey() }]),
+  wordEdit: el => editItem(S.study.ingles.words, find(S.study.ingles.words, el.dataset.id), 'palavra/frase', [{ key: 'term', label: 'Palavra ou frase (inglês)', required: true }, { key: 'meaning', label: 'Significado' }, { key: 'example', label: 'Exemplo de uso' }, { key: 'date', label: 'Data', type: 'date' }]),
+
+  // Treino
+  treinoDay: el => { UI.treinoDow = Number(el.dataset.d); render(); },
+  exAdd: () => { const d = UI.treinoDow ?? fromKey(UI.treinoDate || todayKey()).getDay(); editItem(S.treino.plan[d].exercises, null, 'exercício', [{ key: 'name', label: 'Exercício', required: true }, { key: 'group', label: 'Grupo muscular' }]); },
+  exEdit: el => { const d = UI.treinoDow ?? fromKey(UI.treinoDate || todayKey()).getDay(); const L = S.treino.plan[d].exercises; editItem(L, find(L, el.dataset.id), 'exercício', [{ key: 'name', label: 'Exercício', required: true }, { key: 'group', label: 'Grupo muscular' }]); },
+  exUp: el => { const d = UI.treinoDow ?? fromKey(UI.treinoDate || todayKey()).getDay(); move(S.treino.plan[d].exercises, el.dataset.id, -1); save(); render(); },
+  exDown: el => { const d = UI.treinoDow ?? fromKey(UI.treinoDate || todayKey()).getDay(); move(S.treino.plan[d].exercises, el.dataset.id, 1); save(); render(); },
+  planTitle: () => { const d = UI.treinoDow ?? fromKey(UI.treinoDate || todayKey()).getDay(); const p = S.treino.plan[d]; openForm({ title: `Treino de ${DOW[d]}`, fields: [{ key: 'title', label: 'Nome do treino', required: true, value: p.title }], onSave: v => { p.title = v.title; } }); },
+
+  // Finanças
+  lancAdd: el => lancForm(null, el.dataset.tipo),
+  lancEdit: el => { const l = find(S.fin.lancamentos, el.dataset.id); if (l) lancForm(l, l.tipo); },
+  recAdd: () => editItem(S.fin.receitas, null, 'receita fixa', F_PERIOD),
+  recEdit: el => editItem(S.fin.receitas, find(S.fin.receitas, el.dataset.id), 'receita fixa', F_PERIOD),
+  fixAdd: () => editItem(S.fin.fixos, null, 'despesa fixa', [...F_PERIOD, { key: 'cartao', label: 'É o limite do cartão de crédito', type: 'checkbox' }]),
+  fixEdit: el => editItem(S.fin.fixos, find(S.fin.fixos, el.dataset.id), 'despesa fixa', [...F_PERIOD, { key: 'cartao', label: 'É o limite do cartão de crédito', type: 'checkbox' }]),
+  quitPay: () => editItem(S.fin.lancamentos, null, 'pagamento do cartão', [
+    { key: 'date', label: 'Data', type: 'date', required: true, value: todayKey() }, { key: 'valor', label: 'Valor pago (R$)', type: 'number', required: true },
+    { key: 'desc', label: 'Origem do dinheiro', value: 'Salário' }], { tipo: 'despesa', cat: S.fin.quitacao.categoria }),
+  quitEdit: () => openForm({ title: 'Meta do cartão', fields: [{ key: 'meta', label: 'Valor da dívida (R$)', type: 'number', required: true, value: S.fin.quitacao.meta }, { key: 'prazo', label: 'Prazo', type: 'date', required: true, value: S.fin.quitacao.prazo }],
+    onSave: v => { S.fin.quitacao.meta = v.meta; S.fin.quitacao.prazo = v.prazo; } }),
+  catsEdit: () => openForm({ title: 'Categorias', fields: [
+    { key: 'r', label: 'Receitas (uma por linha)', type: 'textarea', value: S.fin.catReceita.join('\n') },
+    { key: 'd', label: 'Despesas (uma por linha)', type: 'textarea', rows: 8, value: S.fin.catDespesa.join('\n'), hint: '“Cartão de crédito” e “Quitação do cartão” alimentam os alertas e a meta.' }],
+    onSave: v => { const sp = t => t.split('\n').map(x => x.trim()).filter(Boolean); S.fin.catReceita = sp(v.r).length ? sp(v.r) : ['Outros']; S.fin.catDespesa = sp(v.d).length ? sp(v.d) : ['Outros']; } }),
+
+  // Desenvolvimento
+  visaoEdit: () => openForm({ title: 'Visão 3–5 anos', fields: [{ key: 'visao', label: 'Visão', type: 'textarea', rows: 5, value: S.dev.visao }], onSave: v => { S.dev.visao = v.visao; } }),
+  pilarAdd: () => editItem(S.dev.pilares, null, 'pilar', [{ key: 'title', label: 'Pilar', required: true }, { key: 'desc', label: 'Descrição', type: 'textarea', rows: 3 }]),
+  pilarEdit: el => editItem(S.dev.pilares, find(S.dev.pilares, el.dataset.id), 'pilar', [{ key: 'title', label: 'Pilar', required: true }, { key: 'desc', label: 'Descrição', type: 'textarea', rows: 3 }]),
+  metaAdd: () => editItem(S.dev.metas, null, 'meta', [{ key: 'text', label: 'Meta', required: true }], { done: false }),
+  metaEdit: el => editItem(S.dev.metas, find(S.dev.metas, el.dataset.id), 'meta', [{ key: 'text', label: 'Meta', required: true }]),
+  impAdd: () => editItem(S.dev.melhorias, null, 'ponto a melhorar', [{ key: 'title', label: 'Ponto', required: true }, { key: 'desc', label: 'Como melhorar', type: 'textarea', rows: 3 }], { logs: [] }),
+  impEdit: el => editItem(S.dev.melhorias, find(S.dev.melhorias, el.dataset.id), 'ponto a melhorar', [{ key: 'title', label: 'Ponto', required: true }, { key: 'desc', label: 'Como melhorar', type: 'textarea', rows: 3 }]),
+  impLog: el => { const m = find(S.dev.melhorias, el.dataset.id); if (m) editItem(m.logs, null, `registro — ${m.title}`, [
+    { key: 'date', label: 'Data', type: 'date', required: true, value: todayKey() },
+    { key: 'nota', label: 'Como foi (1 = ruim, 5 = ótimo)', type: 'select', options: ['1', '2', '3', '4', '5'], value: '3' },
+    { key: 'texto', label: 'Observação', type: 'textarea', rows: 3 }]); },
+  impLogDel: el => { const m = find(S.dev.melhorias, el.dataset.id); if (m && confirm('Remover este registro?')) { m.logs = m.logs.filter(x => x.id !== el.dataset.log); save(); render(); } },
+  saveReview: () => {
+    const k = todayKey(), v = {}; ['learned', 'done', 'stuck', 'next'].forEach(f => { v[f] = ($('#rv_' + f)?.value || '').trim(); });
+    if (!Object.values(v).some(Boolean)) { toast('Preencha pelo menos um campo.'); return; }
+    const r = S.dev.reviews.find(x => x.date === k);
+    if (r) Object.assign(r, v); else S.dev.reviews.push({ id: uid(), date: k, ...v });
+    save(); render(); toast('Revisão salva.');
+  },
+  reviewEdit: el => editItem(S.dev.reviews, find(S.dev.reviews, el.dataset.id), 'revisão', [
+    { key: 'date', label: 'Data', type: 'date', required: true }, { key: 'learned', label: 'O que aprendi', type: 'textarea', rows: 3 }, { key: 'done', label: 'O que concluí', type: 'textarea', rows: 3 },
+    { key: 'stuck', label: 'O que travou', type: 'textarea', rows: 3 }, { key: 'next', label: 'Meta da próxima semana', type: 'textarea', rows: 3 }]),
+  copySummary: async () => {
+    const txt = weeklySummary();
+    try { await navigator.clipboard.writeText(txt); toast('Resumo copiado. Cole na conversa com o Claude.'); }
+    catch (e) { openForm({ title: 'Resumo semanal', saveLabel: 'Fechar', fields: [{ key: 'txt', label: 'Copie o texto abaixo', type: 'textarea', rows: 12, value: txt }], onSave: () => {} }); }
+  },
+
+  // Linha do tempo
+  tlAdd: () => editItem(S.timeline, null, 'marco', [{ key: 'title', label: 'Marco', required: true }, { key: 'label', label: 'Quando (texto)', hint: 'Ex.: mar/2027 ou 3–5 anos' }, { key: 'date', label: 'Data de referência (para ordenar)', type: 'date', required: true, value: todayKey() }, { key: 'desc', label: 'Detalhes', type: 'textarea', rows: 3 }], { done: false }),
+  tlEdit: el => editItem(S.timeline, find(S.timeline, el.dataset.id), 'marco', [{ key: 'title', label: 'Marco', required: true }, { key: 'label', label: 'Quando (texto)' }, { key: 'date', label: 'Data de referência (para ordenar)', type: 'date', required: true }, { key: 'desc', label: 'Detalhes', type: 'textarea', rows: 3 }]),
+
+  // Notas
+  noteAdd: () => editItem(S.notes, null, 'nota', [{ key: 'title', label: 'Título', required: true }, { key: 'date', label: 'Data', type: 'date', value: todayKey() }, { key: 'tag', label: 'Etiqueta', type: 'select', options: TAGS, value: UI.noteTag !== 'Todas' ? UI.noteTag : 'Estudo' }, { key: 'body', label: 'Texto', type: 'textarea', rows: 8 }]),
+  noteEdit: el => editItem(S.notes, find(S.notes, el.dataset.id), 'nota', [{ key: 'title', label: 'Título', required: true }, { key: 'date', label: 'Data', type: 'date' }, { key: 'tag', label: 'Etiqueta', type: 'select', options: TAGS }, { key: 'body', label: 'Texto', type: 'textarea', rows: 8 }]),
+  noteTag: el => { UI.noteTag = el.dataset.tag; render(); },
+
+  // Meus dados
+  profileAdd: () => editItem(S.profile, null, 'campo do perfil', [{ key: 'label', label: 'Campo', required: true }, { key: 'value', label: 'Valor' }]),
+  profileEdit: el => editItem(S.profile, find(S.profile, el.dataset.id), 'campo do perfil', [{ key: 'label', label: 'Campo', required: true }, { key: 'value', label: 'Valor', type: 'textarea', rows: 2 }]),
+  rotSel: el => { UI.rotRk = el.dataset.rk; render(); },
+  rotDay: el => { UI.rotDow = Number(el.dataset.d); render(); },
+  rotAdd: () => editItem(rotList(), null, 'item da rotina', F_ROT),
+  rotEdit: el => editItem(rotList(), find(rotList(), el.dataset.id), 'item da rotina', F_ROT),
+  rotUp: el => { move(rotList(), el.dataset.id, -1); save(); render(); },
+  rotDown: el => { move(rotList(), el.dataset.id, 1); save(); render(); },
+  export: () => {
+    const blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `central-youssef-backup-${todayKey()}.json`;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast('Backup exportado.');
+  },
+  import: () => $('#importFile').click(),
+  resetAll: () => {
+    if (!confirm('Apagar TODOS os dados e voltar ao padrão? Exporte um backup antes.')) return;
+    if (!confirm('Tem certeza? Isso não pode ser desfeito.')) return;
+    S = defaults(); save(); render(); toast('Dados reiniciados.');
+  },
+  hideGuide: () => { S.settings.showGuide = false; save(); location.hash = 'painel'; toast('Guia oculto. Reative em Meus dados.'); },
+};
+
+/** Ações disparadas por 'change' (checkboxes, inputs). */
+const CHANGE = {
+  dayToggle: el => {
+    const k = todayKey(), h = ensureDay(k), id = el.dataset.id;
+    h.done = el.checked ? [...new Set([...h.done, id])] : h.done.filter(x => x !== id);
+    save(); render();
+  },
+  freela: el => { const f = S.freela[el.dataset.sk] || (S.freela[el.dataset.sk] = { sab: 0, dom: 0 }); f[el.dataset.f] = Math.max(0, Number(el.value) || 0); save(); render(); },
+  bookToggle: el => { const b = find(S.study.leituras, el.dataset.id); if (b) { b.done = el.checked; b.doneAt = el.checked ? todayKey() : ''; save(); render(); } },
+  topicToggle: el => { const s = find(S.study.concurso.subjects, el.dataset.sid), t = s && find(s.topics, el.dataset.id); if (t) { t.done = el.checked; save(); render(); } },
+  tarde: el => { S.study.concurso.tardes[el.dataset.d] = el.value.trim(); save(); toast('Salvo.'); },
+  engDaily: el => { const L = S.study.ingles.dailyLog, k = todayKey(); const s = new Set(L[k] || []); el.checked ? s.add(el.dataset.id) : s.delete(el.dataset.id); L[k] = [...s]; save(); render(); },
+  engWeekly: el => { const L = S.study.ingles.weeklyLog, k = weekStart(todayKey()); const s = new Set(L[k] || []); el.checked ? s.add(el.dataset.id) : s.delete(el.dataset.id); L[k] = [...s]; save(); render(); },
+  treinoDate: el => { if (el.value) { UI.treinoDate = el.value; UI.treinoDow = fromKey(el.value).getDay(); render(); } },
+  treinoDone: el => { const k = UI.treinoDate || todayKey(); const L = S.treino.log[k] || (S.treino.log[k] = {}); const e = L[el.dataset.id] || (L[el.dataset.id] = {}); e.done = el.checked; save(); render(); },
+  treinoField: el => { const k = UI.treinoDate || todayKey(); const L = S.treino.log[k] || (S.treino.log[k] = {}); const e = L[el.dataset.id] || (L[el.dataset.id] = {}); e[el.dataset.f] = el.value.trim(); save(); toast('Registrado.'); },
+  finMonth: el => { if (el.value) { UI.finMonth = el.value; render(); } },
+  metaToggle: el => { const m = find(S.dev.metas, el.dataset.id); if (m) { m.done = el.checked; save(); render(); } },
+  tlToggle: el => { const m = find(S.timeline, el.dataset.id); if (m) { m.done = el.checked; save(); render(); } },
+  toggleGuide: el => { S.settings.showGuide = !el.checked; save(); render(); },
+  setting: el => { if (el.value) { S.settings[el.dataset.key] = el.value; save(); render(); toast('Configuração salva.'); } },
+};
+
+/** Ações de digitação (busca) — atualizam só a lista, sem perder o foco. */
+const INPUT = {
+  noteSearch: el => { UI.noteQ = el.value; $('#notesList').innerHTML = notesList(); },
+  wordSearch: el => { UI.wordQ = el.value; $('#wordsList').innerHTML = wordsList(); },
+};
+
+/* =========================================================
+   9. NAVEGAÇÃO E INICIALIZAÇÃO
+   ========================================================= */
+const TABS = [
+  { id: 'painel', label: 'Painel', icon: 'home', main: true, view: viewPainel },
+  { id: 'estudo', label: 'Estudo', icon: 'book', main: true, view: viewEstudo },
+  { id: 'treino', label: 'Treino', icon: 'dumbbell', main: true, view: viewTreino },
+  { id: 'financas', label: 'Finanças', icon: 'wallet', main: true, view: viewFinancas },
+  { id: 'desenvolvimento', label: 'Desenvolvimento', icon: 'target', view: viewDesenvolvimento },
+  { id: 'linha', label: 'Linha do tempo', icon: 'flag', view: viewLinha },
+  { id: 'notas', label: 'Anotações', icon: 'note', view: viewNotas },
+  { id: 'dados', label: 'Meus dados', icon: 'user', view: viewDados },
+  { id: 'guia', label: 'Como usar', icon: 'help', view: viewGuia, guide: true },
+];
+const visibleTabs = () => TABS.filter(t => !t.guide || S.settings.showGuide);
+function currentTab() {
+  const h = location.hash.slice(1);
+  return visibleTabs().some(t => t.id === h) ? h : 'painel';
+}
+function paintNav(tab) {
+  const cur = id => (id === tab ? 'aria-current="page"' : '');
+  $('#sideNav').innerHTML = `<div class="brand"><span class="brand-mark" aria-hidden="true">Y</span>Central Youssef</div>` +
+    visibleTabs().map(t => `<button type="button" data-act="go" data-tab="${t.id}" ${cur(t.id)}>${icon(t.icon)}${t.label}</button>`).join('');
+  const isMore = !TABS.find(t => t.id === tab)?.main;
+  $('#bottomNav').innerHTML = TABS.filter(t => t.main).map(t => `<button type="button" data-act="go" data-tab="${t.id}" ${cur(t.id)}>${icon(t.icon)}<span>${t.label}</span></button>`).join('') +
+    `<button type="button" data-act="more" ${isMore ? 'aria-current="page"' : ''} aria-haspopup="dialog">${icon('more')}<span>Mais</span></button>`;
+}
+function paintMore() {
+  const tab = currentTab();
+  $('#moreGrid').innerHTML = visibleTabs().filter(t => !t.main).map(t => `<button type="button" data-act="go" data-tab="${t.id}" ${t.id === tab ? 'aria-current="page"' : ''}>${icon(t.icon)}${t.label}</button>`).join('');
+}
+
+/** Renderiza a aba atual preservando o foco do teclado quando possível. */
+function render() {
+  const fk = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
+  const tab = currentTab();
+  paintNav(tab);
+  $('#view').innerHTML = TABS.find(t => t.id === tab).view();
+  if (fk) { const el = document.querySelector(`[data-k="${CSS.escape(fk)}"]`); if (el) el.focus({ preventScroll: true }); }
+}
+
+/* Eventos globais (delegação) */
+document.addEventListener('click', e => {
+  const close = e.target.closest('[data-close]');
+  if (close) { close.closest('dialog').close(); return; }
+  const el = e.target.closest('[data-act]');
+  if (!el || !ACT[el.dataset.act]) return;
+  if (el.dataset.act === 'go' && $('#moreDialog').open) $('#moreDialog').close();
+  ACT[el.dataset.act](el, e);
+});
+document.addEventListener('change', e => {
+  const el = e.target.closest('[data-change]');
+  if (el && CHANGE[el.dataset.change]) CHANGE[el.dataset.change](el, e);
+});
+document.addEventListener('input', e => {
+  const el = e.target.closest('[data-input]');
+  if (el && INPUT[el.dataset.input]) INPUT[el.dataset.input](el, e);
+});
+$('#formEl').addEventListener('submit', submitForm);
+$('#formDelete').addEventListener('click', () => {
+  if (formCtx && formCtx.onDelete && confirm('Remover este item?')) { formCtx.onDelete(); save(); $('#formDialog').close(); render(); toast('Removido.'); }
+});
+$('#moreDialog').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); }); // toque fora fecha
+$('#importFile').addEventListener('change', e => {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (!isObj(data) || !data.routines || !data.settings) throw new Error('formato');
+      if (!confirm('Importar este backup? Os dados atuais serão substituídos.')) return;
+      S = deepMerge(defaults(), data); save(); render(); toast('Backup importado.');
+    } catch (err) { toast('Arquivo inválido. Use um backup exportado pela Central.'); }
+    finally { e.target.value = ''; }
+  };
+  reader.readAsText(file);
+});
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); const h = $('#view h1'); if (h) h.focus({ preventScroll: true }); });
+
+/* Virada do dia: o checklist zera sozinho; o destaque "agora" acompanha o relógio. */
+let lastDay;
+setInterval(() => {
+  const k = todayKey();
+  if (k !== lastDay) { lastDay = k; if (currentTab() === 'painel' && !document.querySelector('dialog[open]')) render(); return; }
+  document.querySelectorAll('[data-time]').forEach(li => li.classList.toggle('now', isNow(li.dataset.time)));
+}, 30000);
+
+load();
+lastDay = todayKey();
+render();
+</script>
+</body>
+</html>
